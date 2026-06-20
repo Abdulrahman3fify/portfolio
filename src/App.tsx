@@ -147,6 +147,8 @@ function Nav() {
 function Hero() {
   return (
     <section id="top" className="relative mx-auto max-w-6xl px-6 pb-20 pt-36 sm:pt-44">
+      <div className="flex flex-col-reverse items-start gap-10 lg:flex-row lg:items-center lg:justify-between lg:gap-12">
+        <div className="w-full lg:flex-1">
       <p className="reveal in mb-4 inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1 text-xs text-muted">
         <span className="h-2 w-2 rounded-full bg-green-400" /> Available for senior / lead mobile roles
       </p>
@@ -173,6 +175,17 @@ function Hero() {
         >
           Get in touch
         </a>
+      </div>
+        </div>
+        <div className="reveal in mx-auto w-44 shrink-0 sm:w-52 lg:mx-0">
+          <div className="rounded-full bg-gradient-to-br from-accent to-accent-2 p-1.5 shadow-xl shadow-accent/20">
+            <img
+              src="/profile.jpg"
+              alt="Abdulrahman Afify, Senior Mobile Engineer"
+              className="aspect-square w-full rounded-full object-cover ring-4 ring-ink"
+            />
+          </div>
+        </div>
       </div>
 
       <dl className="reveal in mt-16 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-line bg-surface sm:grid-cols-4">
