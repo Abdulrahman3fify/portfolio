@@ -74,7 +74,21 @@ const Icon = {
   calendar: (
     <path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1V3a1 1 0 0 1 1-1Zm13 7H4v10h16V9ZM4 7h16V6H4v1Z" />
   ),
+  apple: (
+    <path d="M17.05 12.04c-.03-2.6 2.12-3.84 2.22-3.9-1.21-1.78-3.09-2.02-3.76-2.05-1.6-.16-3.12.94-3.93.94-.81 0-2.06-.92-3.39-.89-1.74.02-3.35 1.01-4.25 2.57-1.81 3.14-.46 7.79 1.3 10.34.86 1.25 1.89 2.65 3.23 2.6 1.29-.05 1.78-.83 3.34-.83s2 .83 3.37.81c1.39-.03 2.27-1.27 3.12-2.53.98-1.45 1.39-2.85 1.41-2.92-.03-.01-2.7-1.04-2.73-4.13M14.5 4.6c.71-.86 1.19-2.06 1.06-3.25-1.02.04-2.26.68-2.99 1.54-.66.76-1.23 1.98-1.08 3.15 1.14.09 2.3-.58 3.01-1.44" />
+  ),
+  play: <path d="M4 3.5v17a1 1 0 0 0 1.5.87l14.5-8.5a1 1 0 0 0 0-1.74L5.5 2.63A1 1 0 0 0 4 3.5Z" />,
+  globe: (
+    <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm6.93 6h-2.95a15.6 15.6 0 0 0-1.38-3.56A8.03 8.03 0 0 1 18.93 8ZM12 4c.83 1.2 1.48 2.53 1.91 4h-3.82C10.52 6.53 11.17 5.2 12 4ZM4.26 14a7.96 7.96 0 0 1 0-4h3.38a16.6 16.6 0 0 0 0 4H4.26Zm.81 2h2.95c.34 1.27.8 2.46 1.38 3.56A8.03 8.03 0 0 1 5.07 16Zm2.95-8H5.07a8.03 8.03 0 0 1 4.33-3.56A15.6 15.6 0 0 0 8.02 8ZM12 20c-.83-1.2-1.48-2.53-1.91-4h3.82A13.4 13.4 0 0 1 12 20Zm2.36-6H9.64a14.7 14.7 0 0 1 0-4h4.72a14.7 14.7 0 0 1 0 4Zm.27 5.56c.58-1.1 1.04-2.29 1.38-3.56h2.95a8.03 8.03 0 0 1-4.33 3.56ZM16.36 14a16.6 16.6 0 0 0 0-4h3.38a7.96 7.96 0 0 1 0 4h-3.38Z" />
+  ),
 };
+
+function platformIcon(label: string) {
+  const l = label.toLowerCase();
+  if (l.includes("app store")) return Icon.apple;
+  if (l.includes("play")) return Icon.play;
+  return Icon.globe;
+}
 
 function Svg({ children, className = "" }: { children: ReactNode; className?: string }) {
   return (
@@ -308,16 +322,17 @@ function Projects() {
               ))}
             </div>
             {p.links && (
-              <div className="mt-4 flex flex-wrap gap-3 border-t border-line pt-4">
+              <div className="mt-4 flex flex-wrap gap-2 border-t border-line pt-4">
                 {p.links.map((l) => (
                   <a
                     key={l.label}
                     href={l.url}
                     target="_blank"
                     rel="noreferrer"
-                    className="text-xs font-medium text-muted transition-colors hover:text-accent"
+                    className="inline-flex items-center gap-1.5 rounded-lg border border-line bg-surface px-2.5 py-1.5 text-xs font-semibold text-body transition-all hover:-translate-y-0.5 hover:border-accent hover:bg-accent/10 hover:text-accent"
                   >
-                    {l.label} ↗
+                    <Svg className="h-3.5 w-3.5">{platformIcon(l.label)}</Svg>
+                    {l.label}
                   </a>
                 ))}
               </div>
