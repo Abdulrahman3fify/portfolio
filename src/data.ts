@@ -177,7 +177,7 @@ export const experience: Experience[] = [
   {
     company: "Proxify",
     role: "Mobile Engineer (Freelance)",
-    period: "Dec 2019 – Aug 2025",
+    period: "Dec 2019 – Aug 2023",
     location: "Remote",
     highlights: [
       "15+ projects across global clients (300,000+ combined reach); avg. 4.8★ ratings.",
