@@ -160,7 +160,7 @@ Flat. Depth is field vs paper, not shadow. The portrait has no drop shadow. Divi
 
 ## Motion
 
-One authored moment: the tailor’s cut. Name and portrait start already visible, clipped from the hem (`inset(0 0 10–12% 0)` → `inset(0)`), 640–820ms, `cubic-bezier(0.16, 1, 0.3, 1)`. Theme toggle interpolates registered color tokens in 480ms — the room dims, the jacket stays a field. Controls acknowledge hover in 150ms. No section fade-up, no scroll stagger, no card lift.
+One authored moment: the tailor’s cut. Name and portrait start fully visible; the hem clip lives only in keyframes (`from inset(0 0 12% 0)` → `inset(0)`), 640–820ms, `cubic-bezier(0.16, 1, 0.3, 1)`, so a skipped animation never hides type. Theme toggle interpolates registered color tokens in 480ms — the room dims, the jacket stays a field. Controls acknowledge hover in 150ms. No section fade-up, no scroll stagger, no card lift.
 
 `prefers-reduced-motion` drops the clips and the icon turn; color and hover feedback remain at 120ms.
 

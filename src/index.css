@@ -169,21 +169,23 @@ html.dark {
   scrollbar-color: var(--color-field) var(--color-canvas);
 }
 
-/* Tailor's cut: cloth already on the table, the last hem comes into square. */
+/* Tailor's cut: cloth already on the table, the last hem comes into square.
+   Clip lives only in the keyframes so a skipped animation never hides type. */
 .hero-cut {
-  clip-path: inset(0 0 10% 0);
-  animation: hero-cut 0.64s var(--ease-cut) forwards;
+  animation: hero-cut 0.64s var(--ease-cut) backwards;
 }
 .hero-cut-b {
   animation-delay: 0.08s;
 }
 
 .hero-photo img {
-  clip-path: inset(0 0 12% 0);
-  animation: hero-cut 0.82s var(--ease-cut) 0.1s forwards;
+  animation: hero-cut 0.82s var(--ease-cut) 0.1s backwards;
 }
 
 @keyframes hero-cut {
+  from {
+    clip-path: inset(0 0 12% 0);
+  }
   to {
     clip-path: inset(0);
   }
@@ -200,7 +202,6 @@ html.dark {
   .hero-cut,
   .hero-photo img {
     animation: none;
-    clip-path: none;
   }
   .theme-glyph {
     transition: none;
