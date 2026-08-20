@@ -11,11 +11,11 @@ import {
 } from "./data";
 
 const destinations = [
-  { id: "top", label: "Arrivals" },
-  { id: "work", label: "Work" },
-  { id: "experience", label: "Experience" },
-  { id: "skills", label: "Systems" },
-  { id: "contact", label: "Board" },
+  { id: "top", label: "Arrivals", mark: "arrivals" },
+  { id: "work", label: "Work", mark: "work" },
+  { id: "experience", label: "Experience", mark: "path" },
+  { id: "skills", label: "Systems", mark: "systems" },
+  { id: "contact", label: "Board", mark: "board" },
 ] as const;
 
 function useTheme() {
@@ -89,6 +89,22 @@ const Icon = {
   globe: (
     <path d="M12 3.2a8.8 8.8 0 1 0 0 17.6 8.8 8.8 0 0 0 0-17.6Zm0 0c2 2.6 3.1 5.5 3.3 8.8H8.7C8.9 8.7 10 5.8 12 3.2Zm0 17.6c-2-2.6-3.1-5.5-3.3-8.8h6.6c-.2 3.3-1.3 6.2-3.3 8.8ZM3.5 12h3.3m10.4 0h3.3" />
   ),
+  arrow: <path d="M2.5 10.2h11.2V6.4L21.5 12l-7.8 5.6v-3.8H2.5z" />,
+  arrivals: (
+    <path d="M12 3.2 4.8 10h4.2v6.5h6V10h4.2L12 3.2ZM5 20.2h14v1.6H5z" />
+  ),
+  work: (
+    <path d="M8.2 6.2h7.6l1.2 2.2H21v11.4H3V8.4h4l1.2-2.2Zm.9 1.6 1-1.6h3.8l1 1.6H9.1ZM4.6 9.9v8.3h14.8V9.9H4.6Z" />
+  ),
+  path: (
+    <path d="M6.2 4.5h3.2v6.2h5.2V4.5h3.2v15h-3.2v-6.3H9.4v6.3H6.2z" />
+  ),
+  systems: (
+    <path d="M4 4h6.2v6.2H4V4Zm9.8 0H20v6.2h-6.2V4ZM4 13.8h6.2V20H4v-6.2Zm9.8 0H20V20h-6.2v-6.2Z" />
+  ),
+  board: (
+    <path d="M4 5.2h9.2v13.6H4V5.2Zm2 2v9.6h5.2V7.2H6Zm11.4 2.2 5.2 2.6-5.2 2.6V9.4Z" />
+  ),
 };
 
 function platformIcon(label: string) {
@@ -126,22 +142,25 @@ function Plate({
   href,
   children,
   active,
+  mark,
   className = "",
 }: {
   href: string;
   children: ReactNode;
   active?: boolean;
+  mark: keyof typeof Icon;
   className?: string;
 }) {
   return (
     <a
       href={href}
-      className={`here-mark block px-3 py-2 font-display text-lg font-bold uppercase tracking-wide ${
+      className={`here-mark flex items-center gap-2 px-3 py-2 font-display text-sm font-bold uppercase tracking-wide lg:text-lg ${
         active
           ? "bg-plate text-plate-ink"
           : "bg-idle text-ink hover:bg-plate hover:text-plate-ink"
       } ${className}`}
     >
+      <Svg className="h-4 w-4 shrink-0">{Icon[mark]}</Svg>
       {children}
     </a>
   );
@@ -172,7 +191,7 @@ function Nav({ here, theme, toggle }: { here: string; theme: "light" | "dark"; t
           AA
         </a>
         <p className="hidden font-display text-xs font-semibold uppercase tracking-[0.18em] text-plate-ink/80 lg:mt-2 lg:block">
-          Line EM
+          Muscat
         </p>
         <div className="flex items-center gap-2 lg:hidden">
           <button
@@ -199,7 +218,7 @@ function Nav({ here, theme, toggle }: { here: string; theme: "light" | "dark"; t
         <ul className="flex min-w-max lg:min-w-0 lg:flex-1 lg:flex-col lg:gap-1 lg:p-3">
           {destinations.map((d) => (
             <li key={d.id} className="shrink-0">
-              <Plate href={`#${d.id}`} active={here === d.id} className="lg:w-full">
+              <Plate href={`#${d.id}`} active={here === d.id} mark={d.mark} className="lg:w-full">
                 {d.label}
               </Plate>
             </li>
@@ -222,8 +241,9 @@ function Nav({ here, theme, toggle }: { here: string; theme: "light" | "dark"; t
           href={profile.calendly}
           target="_blank"
           rel="noreferrer"
-          className="flex w-full items-center justify-center bg-plate-ink px-3 py-3 font-display text-sm font-bold uppercase tracking-wide text-plate hover:bg-ink"
+          className="flex w-full items-center justify-center gap-2 bg-plate-ink px-3 py-3 font-display text-sm font-bold uppercase tracking-wide text-plate hover:bg-ink"
         >
+          <Svg className="h-4 w-4">{Icon.board}</Svg>
           Proceed to gate
         </a>
       </div>
@@ -244,7 +264,7 @@ function GateBlade() {
             Available
           </p>
         </div>
-        <div className="grid gap-8 px-5 py-8 sm:px-8 lg:grid-cols-[minmax(0,1fr)_13rem] lg:items-end lg:gap-12 lg:py-12">
+        <div className="grid gap-8 px-5 py-8 sm:px-8 lg:grid-cols-[minmax(0,1.4fr)_16rem] lg:items-start lg:gap-12 lg:py-12">
           <div>
             <h1 className="font-display text-[clamp(3.4rem,12vw,6rem)] font-extrabold leading-[0.82] tracking-tight">
               Abdulrahman
@@ -264,7 +284,7 @@ function GateBlade() {
                 rel="noreferrer"
                 className="inline-flex items-center gap-2 bg-plate-ink px-5 py-3 font-display text-sm font-bold uppercase tracking-wide text-plate hover:brightness-110"
               >
-                <Svg className="h-4 w-4">{Icon.calendar}</Svg>
+                <Svg className="h-4 w-4">{Icon.board}</Svg>
                 Proceed to gate · 30 min
               </a>
               <a
@@ -275,8 +295,8 @@ function GateBlade() {
               </a>
             </div>
           </div>
-          <figure className="justify-self-start lg:justify-self-end">
-            <div className="relative w-44 shadow-[4px_12px_28px_rgba(14,17,20,0.22)] sm:w-52">
+          <figure className="order-first justify-self-start lg:order-none lg:justify-self-end">
+            <div className="relative w-36 shadow-[4px_12px_28px_rgba(14,17,20,0.22)] sm:w-44 lg:w-full">
               <img
                 src="/profile.jpg"
                 alt="Abdulrahman Afify, Engineering Manager for frontend and mobile"
@@ -296,9 +316,8 @@ function GateBlade() {
           <caption className="sr-only">Delivery proof</caption>
           <thead>
             <tr className="font-display text-[11px] font-semibold uppercase tracking-[0.18em] text-hall/55">
-              <th className="px-5 py-3 sm:px-8">Std</th>
-              <th className="px-5 py-3 sm:px-8">Destination</th>
-              <th className="px-5 py-3 sm:px-8">Status</th>
+              <th className="px-5 py-3 sm:px-8">Proof</th>
+              <th className="px-5 py-3 sm:px-8">What it measures</th>
             </tr>
           </thead>
           <tbody>
@@ -309,9 +328,6 @@ function GateBlade() {
                 </td>
                 <td className="px-5 py-4 font-display text-lg font-semibold uppercase tracking-wide sm:px-8">
                   {s.label}
-                </td>
-                <td className="px-5 py-4 font-display text-sm font-bold uppercase tracking-[0.16em] text-plate sm:px-8">
-                  On time
                 </td>
               </tr>
             ))}
@@ -336,47 +352,89 @@ function Work() {
         </p>
       </header>
       <div>
-        {featured.map((p, i) => (
-          <article
-            key={p.name}
-            className={`grid gap-6 border-t border-line px-5 py-10 sm:px-8 lg:grid-cols-[8rem_minmax(0,1fr)_14rem] lg:items-end ${
-              i % 2 === 0 ? "bg-paper" : "bg-hall"
-            }`}
-          >
-            <p className="font-display text-sm font-bold uppercase tracking-[0.2em] text-steel">
-              Bay {String(i + 1).padStart(2, "0")}
-              <span className="mt-2 block text-ink">{p.category}</span>
+        {featured[0] && (
+          <article className="bg-plate px-5 py-12 text-plate-ink sm:px-8">
+            <p className="font-display text-sm font-bold uppercase tracking-[0.2em]">
+              {featured[0].category}
             </p>
-            <div>
-              <h3 className="font-display text-4xl font-extrabold uppercase leading-[0.9] tracking-tight sm:text-5xl">
-                {p.name}
+            <div className="mt-4 flex flex-wrap items-end justify-between gap-6">
+              <h3 className="font-display text-[clamp(2.6rem,7vw,5.5rem)] font-extrabold uppercase leading-[0.82] tracking-tight">
+                {featured[0].name}
               </h3>
-              <p className="mt-4 max-w-[62ch] text-base leading-relaxed">{p.blurb}</p>
-              <ul className="mt-4 flex flex-wrap gap-1.5">
-                {p.tags.map((t) => (
-                  <li
-                    key={t}
-                    className="bg-idle px-2 py-1 font-display text-xs font-semibold uppercase tracking-wide text-ink"
-                  >
-                    {t}
-                  </li>
-                ))}
-              </ul>
-              {p.links && (
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {p.links.map((l) => (
-                    <Ticket key={l.label} href={l.url} icon={platformIcon(l.label)}>
-                      {l.label}
-                    </Ticket>
-                  ))}
-                </div>
-              )}
+              <p className="font-display text-4xl font-extrabold uppercase leading-none">
+                {featured[0].metric}
+              </p>
             </div>
-            <p className="font-display text-3xl font-extrabold uppercase leading-none tracking-tight lg:text-right">
-              {p.metric}
+            <p className="mt-6 max-w-[62ch] text-base leading-relaxed text-plate-ink/80">
+              {featured[0].blurb}
             </p>
+            {featured[0].links && (
+              <div className="mt-6 flex flex-wrap gap-2">
+                {featured[0].links.map((l) => (
+                  <a
+                    key={l.label}
+                    href={l.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 bg-plate-ink px-3 py-2 font-display text-sm font-bold uppercase tracking-wide text-plate hover:brightness-110"
+                  >
+                    <Svg className="h-3.5 w-3.5">{platformIcon(l.label)}</Svg>
+                    {l.label}
+                  </a>
+                ))}
+              </div>
+            )}
           </article>
-        ))}
+        )}
+        {featured[1] && (
+          <article className="bg-ink px-5 py-10 text-hall sm:px-8">
+            <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
+              <div>
+                <h3 className="font-display text-5xl font-extrabold uppercase leading-[0.85] tracking-tight text-plate sm:text-6xl">
+                  {featured[1].name}
+                </h3>
+                <p className="mt-4 max-w-[62ch] text-sm leading-relaxed text-hall/80 sm:text-base">
+                  {featured[1].blurb}
+                </p>
+                {featured[1].links && (
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    {featured[1].links.map((l) => (
+                      <Ticket key={l.label} href={l.url} icon={platformIcon(l.label)}>
+                        {l.label}
+                      </Ticket>
+                    ))}
+                  </div>
+                )}
+              </div>
+              <p className="font-display text-5xl font-extrabold uppercase leading-none tracking-tight text-plate lg:text-right">
+                {featured[1].metric}
+              </p>
+            </div>
+          </article>
+        )}
+        {featured[2] && (
+          <article className="border-y border-line bg-hall px-5 py-12 sm:px-8">
+            <div className="inline-flex items-center gap-3 bg-plate px-4 py-2 text-plate-ink">
+              <Svg className="h-4 w-4">{Icon.arrow}</Svg>
+              <h3 className="font-display text-3xl font-extrabold uppercase leading-none tracking-tight sm:text-4xl">
+                {featured[2].name}
+              </h3>
+            </div>
+            <p className="mt-6 max-w-[62ch] text-base leading-relaxed">{featured[2].blurb}</p>
+            <p className="mt-4 font-display text-2xl font-extrabold uppercase tracking-tight">
+              {featured[2].metric}
+            </p>
+            {featured[2].links && (
+              <div className="mt-5 flex flex-wrap gap-2">
+                {featured[2].links.map((l) => (
+                  <Ticket key={l.label} href={l.url} icon={platformIcon(l.label)}>
+                    {l.label}
+                  </Ticket>
+                ))}
+              </div>
+            )}
+          </article>
+        )}
       </div>
       <div className="overflow-x-auto">
         <table className="min-w-full text-left">
@@ -432,12 +490,13 @@ function ExperienceSection() {
       <p className="mt-4 max-w-[62ch] text-sm leading-relaxed text-steel">
         Concourse order: current gates first, as recorded. Titles, dates, and metrics are the source of truth in the data file — not slogans.
       </p>
-      <ol className="relative mt-10 border-l-4 border-plate">
+      <ol className="relative mt-10">
+        <span aria-hidden="true" className="pointer-events-none absolute bottom-2 left-0 top-2 w-1 bg-plate" />
         {experience.map((e) => {
           const live = e.period.includes("Present");
           return (
-            <li key={e.company + e.period} className="relative py-8 pl-8">
-              <span className="absolute -left-[9px] top-10 h-3.5 w-3.5 bg-plate ring-4 ring-hall" aria-hidden />
+            <li key={e.company + e.period} className="relative py-8 pl-9">
+              <span className="absolute left-[-5px] top-10 h-3.5 w-3.5 bg-plate ring-4 ring-hall" aria-hidden />
               <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                 <h3 className="font-display text-3xl font-extrabold uppercase leading-none tracking-tight">
                   {e.company}
@@ -549,8 +608,7 @@ function Contact() {
   return (
     <section id="contact" className="scroll-mt-20 lg:scroll-mt-0">
       <div className="bg-plate px-5 py-16 text-plate-ink sm:px-8 sm:py-24">
-        <p className="font-display text-sm font-bold uppercase tracking-[0.22em]">Final call</p>
-        <h2 className="mt-4 font-display text-[clamp(2.8rem,8vw,5.5rem)] font-extrabold uppercase leading-[0.85] tracking-tight">
+        <h2 className="mt-0 font-display text-[clamp(2.8rem,8vw,5.5rem)] font-extrabold uppercase leading-[0.85] tracking-tight">
           Proceed
           <br />
           to gate
@@ -565,7 +623,7 @@ function Contact() {
             rel="noreferrer"
             className="inline-flex items-center gap-2 bg-plate-ink px-6 py-3.5 font-display text-sm font-bold uppercase tracking-wide text-plate hover:brightness-110"
           >
-            <Svg className="h-4 w-4">{Icon.calendar}</Svg>
+            <Svg className="h-4 w-4">{Icon.board}</Svg>
             Book a 30-min call
           </a>
           {links.map((l) => (
