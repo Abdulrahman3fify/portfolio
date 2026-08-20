@@ -145,33 +145,29 @@ function Hero() {
   const [first, last] = profile.name.split(" ");
   return (
     <section id="top" className="bg-field text-on-field">
-      <div className="mx-auto grid max-w-6xl grid-cols-1 items-start gap-x-4 gap-y-5 px-5 py-8 min-[380px]:grid-cols-[auto_minmax(0,1fr)] sm:gap-x-6 sm:px-10 sm:py-10 md:grid-cols-[minmax(0,1fr)_auto] md:gap-x-10 lg:px-16 lg:py-12">
-        <figure className="hero-photo w-[7.75rem] sm:w-[10.5rem] md:col-start-2 md:row-span-2 md:w-[14.5rem] lg:w-[16.5rem]">
+      <div className="grid md:grid-cols-[minmax(0,1fr)_minmax(17rem,36%)] md:items-stretch">
+        <figure className="hero-photo relative order-first min-h-[17.5rem] overflow-hidden sm:min-h-[20rem] md:order-none md:col-start-2 md:row-start-1 md:min-h-[28rem]">
           <img
             src="/profile.jpg"
             alt="Abdulrahman Afify, Senior Mobile Engineer"
-            width={264}
-            height={330}
-            className="aspect-[4/5] w-full object-cover object-top"
+            width={480}
+            height={480}
+            fetchPriority="high"
+            className="absolute inset-0 h-full w-full object-cover object-[center_12%]"
           />
         </figure>
-        <div className="min-w-0 md:col-start-1 md:row-start-1">
+        <div className="flex flex-col justify-center px-5 py-8 sm:px-10 sm:py-10 md:col-start-1 md:row-start-1 lg:px-16 lg:py-12">
           <h1 className="max-w-full text-[clamp(1.75rem,7vw,2.35rem)] font-extrabold leading-[0.95] tracking-[-0.035em] md:text-[clamp(2.25rem,5.2vw,3.5rem)]">
-            <span className="hero-cut hero-cut-a block">{first}</span>
-            <span className="hero-cut hero-cut-b block">{last}</span>
+            <span className="block">{first}</span>
+            <span className="block">{last}</span>
           </h1>
           <p className="mt-3 text-base font-medium leading-snug text-field-mute sm:text-lg md:mt-4 md:text-xl">
             {profile.title}
           </p>
-          <p className="mt-2 hidden text-sm leading-relaxed text-field-mute sm:block md:text-base">
+          <p className="mt-2 text-sm leading-relaxed text-field-mute md:text-base">
             {profile.tagline}. {profile.location}.
           </p>
-        </div>
-        <div className="col-span-2 md:col-span-1 md:col-start-1 md:row-start-2">
-          <p className="text-sm leading-relaxed text-field-mute sm:hidden">
-            {profile.tagline}. {profile.location}.
-          </p>
-          <p className="mt-3 max-w-[58ch] text-sm leading-relaxed text-field-mute sm:mt-0 md:text-base">
+          <p className="mt-3 max-w-[58ch] text-sm leading-relaxed text-field-mute md:text-base">
             {profile.summary}
           </p>
           <p className="mt-3 hidden text-sm font-medium tabular-nums text-field-mute sm:block">
