@@ -143,8 +143,8 @@ function Hero() {
   const [first, last] = profile.name.split(" ");
   return (
     <section id="top" className="bg-field text-on-field">
-      <div className="mx-auto grid max-w-6xl items-start gap-8 px-5 py-8 sm:px-10 sm:py-10 md:grid-cols-[minmax(0,1fr)_auto] md:gap-10 lg:px-16 lg:py-12">
-        <figure className="hero-photo order-1 w-[9.5rem] sm:w-[11.5rem] md:order-2 md:w-[14.5rem] lg:w-[16.5rem]">
+      <div className="mx-auto grid max-w-6xl grid-cols-[auto_minmax(0,1fr)] items-start gap-x-4 gap-y-5 px-5 py-8 sm:gap-x-6 sm:px-10 sm:py-10 md:grid-cols-[minmax(0,1fr)_auto] md:gap-x-10 lg:px-16 lg:py-12">
+        <figure className="hero-photo w-[7.75rem] sm:w-[10.5rem] md:col-start-2 md:row-span-2 md:w-[14.5rem] lg:w-[16.5rem]">
           <img
             src="/profile.jpg"
             alt="Abdulrahman Afify, Senior Mobile Engineer"
@@ -153,24 +153,29 @@ function Hero() {
             className="aspect-[4/5] w-full object-cover object-top"
           />
         </figure>
-        <div className="order-2 md:order-1">
-          <h1 className="text-[clamp(2.15rem,6.2vw,3.75rem)] font-extrabold leading-[0.95] tracking-[-0.035em]">
+        <div className="min-w-0 md:col-start-1 md:row-start-1">
+          <h1 className="text-[clamp(1.75rem,7vw,2.35rem)] font-extrabold leading-[0.95] tracking-[-0.035em] md:text-[clamp(2.25rem,5.2vw,3.5rem)]">
             <span className="block">{first}</span>
             <span className="block">{last}</span>
           </h1>
-          <p className="mt-4 max-w-[36ch] text-lg font-medium leading-snug text-field-mute sm:text-xl">
+          <p className="mt-3 text-base font-medium leading-snug text-field-mute sm:text-lg md:mt-4 md:text-xl">
             {profile.title}
           </p>
-          <p className="mt-2 max-w-[48ch] text-sm leading-relaxed text-field-mute sm:text-base">
+          <p className="mt-2 hidden text-sm leading-relaxed text-field-mute sm:block md:text-base">
             {profile.tagline}. {profile.location}.
           </p>
-          <p className="mt-4 max-w-[58ch] text-sm leading-relaxed text-field-mute sm:text-base">
+        </div>
+        <div className="col-span-2 md:col-span-1 md:col-start-1 md:row-start-2">
+          <p className="text-sm leading-relaxed text-field-mute sm:hidden">
+            {profile.tagline}. {profile.location}.
+          </p>
+          <p className="mt-3 max-w-[58ch] text-sm leading-relaxed text-field-mute sm:mt-0 md:text-base">
             {profile.summary}
           </p>
-          <p className="mt-4 text-sm font-medium tabular-nums text-field-mute">
+          <p className="mt-3 hidden text-sm font-medium tabular-nums text-field-mute sm:block">
             {stats.map((s) => `${s.value} ${s.label.toLowerCase()}`).join("  ·  ")}
           </p>
-          <div className="mt-6 flex flex-wrap gap-3">
+          <div className="mt-5 flex flex-wrap gap-3 md:mt-6">
             <a
               href="#work"
               className="rounded-[4px] bg-on-field px-5 py-3 text-sm font-semibold text-field hover:ring-2 hover:ring-field-mute"
