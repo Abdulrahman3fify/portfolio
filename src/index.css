@@ -15,16 +15,73 @@
     white on button #082B60              13.77
     field on white button                13.77
 
-  Dark
-    white on field #082B60               13.77
-    field-mute on field                  7.97
-    ink #F2EFE8 on canvas #05080E        16.63+
-    mute #B8C4D6 on canvas               11.36
-    faint #9AABC0 on canvas              8.55
-    accent #8AADDE on canvas             8.70
-    field #082B60 as button + white      13.77
+  Dark  (room dimmed, jacket lit — field is ramp step #1B4F9C, not link-blue)
+    white on field #1B4F9C               7.94
+    field-mute #C9D4E6 on field          5.31
+    ink #F2EFE8 on canvas #100F0C        16.69
+    mute #B8C4D6 on canvas               10.87
+    faint #9AABC0 on canvas              8.18
+    accent #8AADDE on canvas             8.32
+    field #1B4F9C on canvas              2.41  (region vs warm night)
+    field on white button                7.94
     Do not put white on accent #8AADDE   2.30 fail
 */
+
+@property --color-canvas {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #f2efe8;
+}
+@property --color-paper {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #ffffff;
+}
+@property --color-ink {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #0e1220;
+}
+@property --color-mute {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #3a4a62;
+}
+@property --color-faint {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #4a5668;
+}
+@property --color-field {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #082b60;
+}
+@property --color-field-mute {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #b7c6de;
+}
+@property --color-accent {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #082b60;
+}
+@property --color-on-accent {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #ffffff;
+}
+@property --color-on-field {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #ffffff;
+}
+@property --color-line {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: rgb(8 43 96 / 0.14);
+}
 
 @theme {
   --color-canvas: #f2efe8;
@@ -41,21 +98,36 @@
   --font-sans: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
 }
 
+html {
+  --ease-cut: cubic-bezier(0.16, 1, 0.3, 1);
+  transition:
+    --color-canvas 480ms var(--ease-cut),
+    --color-paper 480ms var(--ease-cut),
+    --color-ink 480ms var(--ease-cut),
+    --color-mute 480ms var(--ease-cut),
+    --color-faint 480ms var(--ease-cut),
+    --color-field 480ms var(--ease-cut),
+    --color-field-mute 480ms var(--ease-cut),
+    --color-accent 480ms var(--ease-cut),
+    --color-on-accent 480ms var(--ease-cut),
+    --color-line 480ms var(--ease-cut);
+}
+
 html.light {
   color-scheme: light;
 }
 
 html.dark {
   color-scheme: dark;
-  --color-canvas: #05080e;
-  --color-paper: #0a1220;
+  --color-canvas: #100f0c;
+  --color-paper: #18170f;
   --color-ink: #f2efe8;
   --color-mute: #b8c4d6;
   --color-faint: #9aabc0;
-  --color-field: #082b60;
-  --color-field-mute: #b7c6de;
+  --color-field: #1b4f9c;
+  --color-field-mute: #c9d4e6;
   --color-accent: #8aadde;
-  --color-on-accent: #05080e;
+  --color-on-accent: #100f0c;
   --color-on-field: #ffffff;
   --color-line: rgb(242 239 232 / 0.12);
 }
@@ -88,6 +160,7 @@ html.dark {
   }
   a {
     text-underline-offset: 3px;
+    transition: text-decoration-color 150ms var(--ease-cut), color 150ms var(--ease-cut);
   }
 }
 
@@ -96,20 +169,40 @@ html.dark {
   scrollbar-color: var(--color-field) var(--color-canvas);
 }
 
-.hero-photo img {
-  clip-path: inset(6% 0 0 0);
-  animation: hero-photo-reveal 1.05s cubic-bezier(0.16, 1, 0.3, 1) 0.05s forwards;
+/* Tailor's cut: cloth already on the table, the last hem comes into square. */
+.hero-cut {
+  clip-path: inset(0 0 10% 0);
+  animation: hero-cut 0.64s var(--ease-cut) forwards;
+}
+.hero-cut-b {
+  animation-delay: 0.08s;
 }
 
-@keyframes hero-photo-reveal {
+.hero-photo img {
+  clip-path: inset(0 0 12% 0);
+  animation: hero-cut 0.82s var(--ease-cut) 0.1s forwards;
+}
+
+@keyframes hero-cut {
   to {
-    clip-path: inset(0 0 0 0);
+    clip-path: inset(0);
   }
 }
 
+.theme-glyph {
+  transition: transform 480ms var(--ease-cut);
+}
+
 @media (prefers-reduced-motion: reduce) {
+  html {
+    transition-duration: 120ms;
+  }
+  .hero-cut,
   .hero-photo img {
     animation: none;
     clip-path: none;
+  }
+  .theme-glyph {
+    transition: none;
   }
 }

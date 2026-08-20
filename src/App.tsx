@@ -20,6 +20,11 @@ function useTheme() {
     const root = document.documentElement;
     root.classList.remove("light", "dark");
     root.classList.add(theme);
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) {
+      const field = getComputedStyle(root).getPropertyValue("--color-field").trim();
+      meta.setAttribute("content", field || (theme === "dark" ? "#1B4F9C" : "#082B60"));
+    }
     try {
       localStorage.setItem("theme", theme);
     } catch {
@@ -80,6 +85,27 @@ const sections = [
   { id: "contact", label: "Contact" },
 ];
 
+const invertBtn =
+  "rounded-[4px] bg-on-field font-semibold text-field transition-[box-shadow,background-color,color] duration-150 ease-out hover:ring-2 hover:ring-field-mute";
+const ghostBtn =
+  "rounded-[4px] font-semibold text-on-field ring-1 ring-on-field/40 transition-[background-color,box-shadow] duration-150 ease-out hover:bg-on-field/10";
+
+function ThemeToggle({ theme, toggle }: { theme: "light" | "dark"; toggle: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={toggle}
+      aria-pressed={theme === "dark"}
+      aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+      className="rounded-[4px] p-2 text-field-mute transition-[background-color,color] duration-150 ease-out hover:bg-on-field/10 hover:text-on-field"
+    >
+      <Svg className={`theme-glyph h-4 w-4 ${theme === "dark" ? "-rotate-90" : ""}`}>
+        {theme === "dark" ? Icon.sun : Icon.moon}
+      </Svg>
+    </button>
+  );
+}
+
 function Nav({ theme, toggle }: { theme: "light" | "dark"; toggle: () => void }) {
   return (
     <header className="sticky top-0 z-50 bg-field text-on-field">
@@ -89,20 +115,8 @@ function Nav({ theme, toggle }: { theme: "light" | "dark"; toggle: () => void })
             {profile.name.split(" ")[0]}
           </a>
           <div className="flex items-center gap-2 sm:hidden">
-            <button
-              type="button"
-              onClick={toggle}
-              aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
-              className="rounded-[4px] p-2 text-field-mute hover:bg-on-field/10 hover:text-on-field"
-            >
-              <Svg className="h-4 w-4">{theme === "dark" ? Icon.sun : Icon.moon}</Svg>
-            </button>
-            <a
-              href={profile.calendly}
-              target="_blank"
-              rel="noreferrer"
-              className="rounded-[4px] bg-on-field px-3 py-2 text-xs font-semibold text-field hover:ring-2 hover:ring-field-mute"
-            >
+            <ThemeToggle theme={theme} toggle={toggle} />
+            <a href={profile.calendly} target="_blank" rel="noreferrer" className={`${invertBtn} px-3 py-2 text-xs`}>
               Book a call
             </a>
           </div>
@@ -110,27 +124,15 @@ function Nav({ theme, toggle }: { theme: "light" | "dark"; toggle: () => void })
         <ul className="flex items-center gap-5 overflow-x-auto text-sm text-field-mute sm:ml-auto">
           {sections.map((s) => (
             <li key={s.id} className="shrink-0">
-              <a href={`#${s.id}`} className="hover:text-on-field">
+              <a href={`#${s.id}`} className="transition-colors duration-150 ease-out hover:text-on-field">
                 {s.label}
               </a>
             </li>
           ))}
         </ul>
         <div className="hidden items-center gap-2 sm:flex">
-          <button
-            type="button"
-            onClick={toggle}
-            aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
-            className="rounded-[4px] p-2 text-field-mute hover:bg-on-field/10 hover:text-on-field"
-          >
-            <Svg className="h-4 w-4">{theme === "dark" ? Icon.sun : Icon.moon}</Svg>
-          </button>
-          <a
-            href={profile.calendly}
-            target="_blank"
-            rel="noreferrer"
-            className="rounded-[4px] bg-on-field px-3 py-2 text-xs font-semibold text-field hover:ring-2 hover:ring-field-mute"
-          >
+          <ThemeToggle theme={theme} toggle={toggle} />
+          <a href={profile.calendly} target="_blank" rel="noreferrer" className={`${invertBtn} px-3 py-2 text-xs`}>
             Book a call
           </a>
         </div>
@@ -155,8 +157,8 @@ function Hero() {
         </figure>
         <div className="min-w-0 md:col-start-1 md:row-start-1">
           <h1 className="max-w-full text-[clamp(1.75rem,7vw,2.35rem)] font-extrabold leading-[0.95] tracking-[-0.035em] md:text-[clamp(2.25rem,5.2vw,3.5rem)]">
-            <span className="block">{first}</span>
-            <span className="block">{last}</span>
+            <span className="hero-cut hero-cut-a block">{first}</span>
+            <span className="hero-cut hero-cut-b block">{last}</span>
           </h1>
           <p className="mt-3 text-base font-medium leading-snug text-field-mute sm:text-lg md:mt-4 md:text-xl">
             {profile.title}
@@ -176,16 +178,10 @@ function Hero() {
             {stats.map((s) => `${s.value} ${s.label.toLowerCase()}`).join("  ·  ")}
           </p>
           <div className="mt-5 flex flex-wrap gap-3 md:mt-6">
-            <a
-              href="#work"
-              className="rounded-[4px] bg-on-field px-5 py-3 text-sm font-semibold text-field hover:ring-2 hover:ring-field-mute"
-            >
+            <a href="#work" className={`${invertBtn} px-5 py-3 text-sm`}>
               Selected work
             </a>
-            <a
-              href={`mailto:${profile.email}`}
-              className="rounded-[4px] px-5 py-3 text-sm font-semibold text-on-field ring-1 ring-on-field/40 hover:bg-on-field/10"
-            >
+            <a href={`mailto:${profile.email}`} className={`${ghostBtn} px-5 py-3 text-sm`}>
               Email
             </a>
           </div>
@@ -371,7 +367,7 @@ function Contact() {
           href={profile.calendly}
           target="_blank"
           rel="noreferrer"
-          className="rounded-[4px] bg-on-field px-5 py-3 text-sm font-semibold text-field hover:ring-2 hover:ring-field-mute"
+          className={`${invertBtn} px-5 py-3 text-sm`}
         >
           Book a 30-min call
         </a>
@@ -381,7 +377,7 @@ function Contact() {
             href={l.href}
             target={l.href.startsWith("http") ? "_blank" : undefined}
             rel={l.href.startsWith("http") ? "noreferrer" : undefined}
-            className="inline-flex items-center gap-2 rounded-[4px] px-4 py-3 text-sm font-medium text-on-field ring-1 ring-on-field/35 hover:bg-on-field/10"
+            className={`${ghostBtn} inline-flex items-center gap-2 px-4 py-3 text-sm`}
           >
             <Svg className="h-4 w-4">{l.icon}</Svg>
             {l.label}
@@ -402,7 +398,7 @@ export default function App() {
     <>
       <a
         href="#top"
-        className="absolute left-4 top-4 z-[60] -translate-y-24 rounded-[4px] bg-on-field px-3 py-2 text-sm font-semibold text-field focus:translate-y-0"
+        className="absolute left-4 top-4 z-[60] -translate-y-24 rounded-[4px] bg-on-field px-3 py-2 text-sm font-semibold text-field transition-transform duration-150 ease-out focus:translate-y-0"
       >
         Skip to content
       </a>
