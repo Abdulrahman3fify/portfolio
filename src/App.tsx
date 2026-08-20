@@ -143,7 +143,7 @@ function Hero() {
   const [first, last] = profile.name.split(" ");
   return (
     <section id="top" className="bg-field text-on-field">
-      <div className="mx-auto grid max-w-6xl grid-cols-[auto_minmax(0,1fr)] items-start gap-x-4 gap-y-5 px-5 py-8 sm:gap-x-6 sm:px-10 sm:py-10 md:grid-cols-[minmax(0,1fr)_auto] md:gap-x-10 lg:px-16 lg:py-12">
+      <div className="mx-auto grid max-w-6xl grid-cols-1 items-start gap-x-4 gap-y-5 px-5 py-8 min-[380px]:grid-cols-[auto_minmax(0,1fr)] sm:gap-x-6 sm:px-10 sm:py-10 md:grid-cols-[minmax(0,1fr)_auto] md:gap-x-10 lg:px-16 lg:py-12">
         <figure className="hero-photo w-[7.75rem] sm:w-[10.5rem] md:col-start-2 md:row-span-2 md:w-[14.5rem] lg:w-[16.5rem]">
           <img
             src="/profile.jpg"
@@ -154,7 +154,7 @@ function Hero() {
           />
         </figure>
         <div className="min-w-0 md:col-start-1 md:row-start-1">
-          <h1 className="text-[clamp(1.75rem,7vw,2.35rem)] font-extrabold leading-[0.95] tracking-[-0.035em] md:text-[clamp(2.25rem,5.2vw,3.5rem)]">
+          <h1 className="max-w-full text-[clamp(1.75rem,7vw,2.35rem)] font-extrabold leading-[0.95] tracking-[-0.035em] md:text-[clamp(2.25rem,5.2vw,3.5rem)]">
             <span className="block">{first}</span>
             <span className="block">{last}</span>
           </h1>
