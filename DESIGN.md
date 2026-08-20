@@ -148,7 +148,7 @@ The sampled mean `#082B60` on that canvas is 1.4:1 — the field vanishes. Dark 
 
 ## Layout
 
-Full-bleed navy mast and close; paper sections share the same page padding (`px-5` / `sm:px-10` / `lg:px-16`). Hero is content-sized, not a full viewport: type plus a capped 4:5 portrait (`7.75rem`–`16.5rem`). From `md` the portrait sits on the right; from 380px it sits beside the name; below 380px it stacks. Work is a ruled list, featured then compact. Experience is a vertical sequence, not a timeline graphic. Skills are a definition list in two or three columns. Sticky navy nav: name + invert CTA on the first mobile row, section links on the second; one row from `sm`.
+Full-bleed navy mast and close; paper sections share the same page padding (`px-5` / `sm:px-10` / `lg:px-16`). Hero is content-sized, not a full viewport. The portrait is a window cut in the field: full-bleed on mobile (face first, ~17.5–20rem tall), and from `md` a right-edge column (~36% / min 17rem) that stretches to the type block’s height. Square source, `object-cover`, no radius. Work is a ruled list, featured then compact. Experience is a vertical sequence, not a timeline graphic. Skills are a definition list in two or three columns. Sticky navy nav: name + invert CTA on the first mobile row, section links on the second; one row from `sm`.
 
 ## Elevation & Depth
 
@@ -160,7 +160,7 @@ Flat. Depth is field vs paper, not shadow. The portrait has no drop shadow. Divi
 
 ## Motion
 
-One authored moment: the tailor’s cut. Name and portrait start fully visible; the hem clip lives only in keyframes (`from inset(0 0 12% 0)` → `inset(0)`), 640–820ms, `cubic-bezier(0.16, 1, 0.3, 1)`, so a skipped animation never hides type. Theme toggle interpolates registered color tokens in 480ms — the room dims, the jacket stays a field. Controls acknowledge hover in 150ms. No section fade-up, no scroll stagger, no card lift.
+One authored moment: the portrait window. On mobile the jacket fills in from the chest (`from inset(0 0 36% 0)`); from `md` it opens toward the page edge (`from inset(0 42% 0 0)`). Face stays visible the whole time. 900ms, `cubic-bezier(0.16, 1, 0.3, 1)`. Clip lives only in keyframes. Theme toggle interpolates registered color tokens in 480ms — the room dims, the jacket stays a field. Controls acknowledge hover in 150ms. No name-clip, no section fade-up, no scroll stagger.
 
 `prefers-reduced-motion` drops the clips and the icon turn; color and hover feedback remain at 120ms.
 

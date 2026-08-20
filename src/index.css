@@ -169,25 +169,33 @@ html.dark {
   scrollbar-color: var(--color-field) var(--color-canvas);
 }
 
-/* Tailor's cut: cloth already on the table, the last hem comes into square.
-   Clip lives only in the keyframes so a skipped animation never hides type. */
-.hero-cut {
-  animation: hero-cut 0.64s var(--ease-cut) backwards;
-}
-.hero-cut-b {
-  animation-delay: 0.08s;
-}
-
+/* Window in the field: the jacket opens onto the room.
+   Clip lives only in keyframes so a skipped animation never hides the face. */
 .hero-photo img {
-  animation: hero-cut 0.82s var(--ease-cut) 0.1s backwards;
+  animation: hero-window-mobile 0.9s var(--ease-cut) backwards;
 }
 
-@keyframes hero-cut {
+@keyframes hero-window-mobile {
   from {
-    clip-path: inset(0 0 12% 0);
+    clip-path: inset(0 0 36% 0);
   }
   to {
     clip-path: inset(0);
+  }
+}
+
+@keyframes hero-window-desk {
+  from {
+    clip-path: inset(0 42% 0 0);
+  }
+  to {
+    clip-path: inset(0);
+  }
+}
+
+@media (min-width: 768px) {
+  .hero-photo img {
+    animation-name: hero-window-desk;
   }
 }
 
@@ -199,7 +207,6 @@ html.dark {
   html {
     transition-duration: 120ms;
   }
-  .hero-cut,
   .hero-photo img {
     animation: none;
   }
