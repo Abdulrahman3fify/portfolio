@@ -1,67 +1,115 @@
+@import "./fonts.css";
 @import "tailwindcss";
 
+/*
+  Palette measured from public/profile.jpg (blazer mean #082B60, room #F2EFE8).
+  WCAG 2.2 contrast, relative luminance. AA body ≥ 4.5, large/UI ≥ 3.
+
+  Light
+    white #FFF on field #082B60          13.77
+    field-mute #B7C6DE on field          7.97
+    ink #0E1220 on canvas #F2EFE8        16.24
+    mute #3A4A62 on canvas               7.83
+    faint #4A5668 on canvas              6.48
+    field #082B60 on canvas              11.99
+    white on button #082B60              13.77
+    field on white button                13.77
+
+  Dark
+    white on field #082B60               13.77
+    field-mute on field                  7.97
+    ink #F2EFE8 on canvas #05080E        16.63+
+    mute #B8C4D6 on canvas               11.36
+    faint #9AABC0 on canvas              8.55
+    accent #8AADDE on canvas             8.70
+    field #082B60 as button + white      13.77
+    Do not put white on accent #8AADDE   2.30 fail
+*/
+
 @theme {
-  /* Dark palette = defaults */
-  --color-ink: #0a0a0f;
-  --color-ink-2: #101018;
-  --color-card: #15151f;
-  --color-accent: #ff2d55;
-  --color-accent-2: #ff6a3d;
-  --color-heading: #ffffff;
-  --color-body: #d4d4d8;
-  --color-muted: #a1a1aa;
-  --color-faint: #71717a;
-  --color-line: rgba(255, 255, 255, 0.1);
-  --color-surface: rgba(255, 255, 255, 0.05);
-  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --color-canvas: #f2efe8;
+  --color-paper: #ffffff;
+  --color-ink: #0e1220;
+  --color-mute: #3a4a62;
+  --color-faint: #4a5668;
+  --color-field: #082b60;
+  --color-field-mute: #b7c6de;
+  --color-accent: #082b60;
+  --color-on-accent: #ffffff;
+  --color-on-field: #ffffff;
+  --color-line: rgb(8 43 96 / 0.14);
+  --font-sans: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
 }
 
-/* Light palette — overrides the same custom properties at runtime */
 html.light {
-  --color-ink: #f6f7fb;
-  --color-ink-2: #ffffff;
-  --color-card: #ffffff;
-  --color-heading: #0b0b12;
-  --color-body: #3f3f46;
-  --color-muted: #52525b;
-  --color-faint: #71717a;
-  --color-line: rgba(10, 10, 20, 0.1);
-  --color-surface: rgba(10, 10, 20, 0.045);
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
+  --color-canvas: #05080e;
+  --color-paper: #0a1220;
+  --color-ink: #f2efe8;
+  --color-mute: #b8c4d6;
+  --color-faint: #9aabc0;
+  --color-field: #082b60;
+  --color-field-mute: #b7c6de;
+  --color-accent: #8aadde;
+  --color-on-accent: #05080e;
+  --color-on-field: #ffffff;
+  --color-line: rgb(242 239 232 / 0.12);
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
   }
-  body {
-    @apply bg-ink text-body antialiased;
-    background-image:
-      radial-gradient(60rem 60rem at 80% -10%, rgba(255, 45, 85, 0.12), transparent 60%),
-      radial-gradient(50rem 50rem at -10% 20%, rgba(255, 106, 61, 0.08), transparent 55%);
-    background-attachment: fixed;
-    transition: background-color 0.3s ease, color 0.3s ease;
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
   }
-  html.light body {
-    background-image:
-      radial-gradient(60rem 60rem at 80% -10%, rgba(255, 45, 85, 0.1), transparent 60%),
-      radial-gradient(50rem 50rem at -10% 20%, rgba(255, 106, 61, 0.08), transparent 55%);
+  body {
+    @apply bg-canvas font-sans text-ink antialiased;
+    font-optical-sizing: auto;
+    font-feature-settings: "tnum" 1;
+    caret-color: var(--color-field);
   }
   ::selection {
-    @apply bg-accent/30 text-white;
+    background: var(--color-field);
+    color: var(--color-on-field);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+  .bg-field :focus-visible {
+    outline-color: var(--color-on-field);
+  }
+  a {
+    text-underline-offset: 3px;
   }
 }
 
-@layer utilities {
-  .gradient-text {
-    @apply bg-gradient-to-r from-accent to-accent-2 bg-clip-text text-transparent;
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-field) var(--color-canvas);
+}
+
+.hero-photo img {
+  clip-path: inset(6% 0 0 0);
+  animation: hero-photo-reveal 1.05s cubic-bezier(0.16, 1, 0.3, 1) 0.05s forwards;
+}
+
+@keyframes hero-photo-reveal {
+  to {
+    clip-path: inset(0 0 0 0);
   }
-  .reveal {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-  .reveal.in {
-    opacity: 1;
-    transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-photo img {
+    animation: none;
+    clip-path: none;
   }
 }
