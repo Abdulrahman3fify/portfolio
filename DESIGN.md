@@ -22,13 +22,13 @@ colors:
 typography:
   display:
     fontFamily: "Bricolage Grotesque, ui-sans-serif, system-ui, sans-serif"
-    fontSize: "clamp(3.25rem, 11vw, 7.25rem)"
+    fontSize: "clamp(2.15rem, 6.2vw, 3.75rem)"
     fontWeight: 800
     lineHeight: 0.88
     letterSpacing: "-0.04em"
   headline:
     fontFamily: "Bricolage Grotesque, ui-sans-serif, system-ui, sans-serif"
-    fontSize: "3rem"
+    fontSize: "2.25rem"
     fontWeight: 700
     lineHeight: 1.05
     letterSpacing: "-0.02em"
@@ -130,7 +130,7 @@ Committed strategy. One sampled navy as a field, warm paper as the reading groun
 
 ### Hierarchy
 
-- **Display** (800, `clamp(3.25rem, 11vw, 7.25rem)`, 0.88, tracking −0.04em): stacked given name and family name in the hero. White on navy.
+- **Display** (800, `clamp(2.15rem, 6.2vw, 3.75rem)`, 0.95, tracking −0.035em): stacked given name and family name in the hero. White on navy.
 - **Headline** (700, `text-3xl` / `sm:text-5xl`–`6xl`): section titles Work, Experience, Skills, Contact.
 - **Title** (600, `text-2xl` / `sm:text-4xl` work names; `text-xl` / `sm:text-3xl` companies): list headings.
 - **Body** (400, `text-sm` / `sm:text-base`, leading-relaxed, max ~62–70ch): blurbs and highlights.
@@ -144,7 +144,7 @@ Committed strategy. One sampled navy as a field, warm paper as the reading groun
 
 ## Layout
 
-Full-bleed navy mast and close; paper sections share the same page padding (`px-5` / `sm:px-10` / `lg:px-16`). Hero is a two-column split from `lg` up (type left, photo right, min-height one viewport). Below `lg`, photo stacks first at `min-h-[40vh]`, then type. Work is a ruled list, featured then compact. Experience is a vertical sequence, not a timeline graphic. Skills are a definition list in two or three columns. Sticky navy nav: name + invert CTA on the first mobile row, section links on the second; one row from `sm`.
+Full-bleed navy mast and close; paper sections share the same page padding (`px-5` / `sm:px-10` / `lg:px-16`). Hero is content-sized, not a full viewport: type plus a capped 4:5 portrait (`9.5rem`–`16.5rem`). From `md` the portrait sits on the right; below that it stacks above the name. Work is a ruled list, featured then compact. Experience is a vertical sequence, not a timeline graphic. Skills are a definition list in two or three columns. Sticky navy nav: name + invert CTA on the first mobile row, section links on the second; one row from `sm`.
 
 ## Elevation & Depth
 
