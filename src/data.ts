@@ -177,7 +177,7 @@ export const experience: Experience[] = [
   {
     company: "Proxify",
     role: "Mobile Engineer (Freelance)",
-    period: "Dec 2019 – Aug 2025",
+    period: "Dec 2019 – Aug 2023",
     location: "Remote",
     highlights: [
       "15+ projects across global clients (300,000+ combined reach); avg. 4.8★ ratings.",
@@ -263,17 +263,6 @@ export const projects: Project[] = [
     ],
   },
   {
-    name: "Musaned",
-    category: "GovTech / Workforce",
-    blurb: "Nationwide workforce & compliance mobile experience for Tamkeen, scaled ~300% while holding 99.5% crash-free.",
-    metric: "200,000+ downloads",
-    tags: ["React Native", "Redux Toolkit", "CodePush", "App Center"],
-    links: [
-      { label: "App Store", url: "https://apps.apple.com/sa/app/musaned-domestic-labor/id1659263483" },
-      { label: "Google Play", url: "https://play.google.com/store/apps/details?id=sa.tamkeen.musaned" },
-    ],
-  },
-  {
     name: "Calo",
     category: "Health / Food",
     blurb: "Healthy meal-subscription platform serving the GCC, kept at a 4.7★ rating with sub-second key flows.",
@@ -285,15 +274,14 @@ export const projects: Project[] = [
     ],
   },
   {
-    name: "TokenEyes",
-    category: "Fintech / Crypto",
-    blurb: "Crypto onboarding & on-chain intelligence app for Blockchain Intelligence Group, with address-hash validation and IAP.",
-    metric: "50K+ daily interactions",
-    tags: ["React Native", "monorepo", "RxJS", "IAP"],
+    name: "Canoo",
+    category: "Freelance · Automotive",
+    blurb: "Consumer app for the Canoo EV ecosystem, delivered as a freelance engagement.",
+    metric: "4.8★ avg rating",
+    tags: ["React Native", "TypeScript", "REST"],
     links: [
-      { label: "App Store", url: "https://apps.apple.com/vn/app/tokeneyes/id6450926645" },
-      { label: "Google Play", url: "https://play.google.com/store/apps/details?id=com.tokeneyes" },
-      { label: "Web portal", url: "https://portal.tokeneyes.app" },
+      { label: "App Store", url: "https://apps.apple.com/eg/app/canoo/id1458141380" },
+      { label: "Google Play", url: "https://play.google.com/store/apps/details?id=com.icc.canoo" },
     ],
   },
   {
@@ -306,6 +294,29 @@ export const projects: Project[] = [
       { label: "App Store", url: "https://apps.apple.com/eg/app/faheem/id1363295457" },
       { label: "Google Play", url: "https://play.google.com/store/apps/details?id=com.faheemapp.android" },
       { label: "Web", url: "https://www.faheemapp.com" },
+    ],
+  },
+  {
+    name: "Musaned",
+    category: "GovTech / Workforce",
+    blurb: "Nationwide workforce & compliance mobile experience for Tamkeen, scaled ~300% while holding 99.5% crash-free.",
+    metric: "200,000+ downloads",
+    tags: ["React Native", "Redux Toolkit", "CodePush", "App Center"],
+    links: [
+      { label: "App Store", url: "https://apps.apple.com/sa/app/musaned-domestic-labor/id1659263483" },
+      { label: "Google Play", url: "https://play.google.com/store/apps/details?id=sa.tamkeen.musaned" },
+    ],
+  },
+  {
+    name: "TokenEyes",
+    category: "Fintech / Crypto",
+    blurb: "Crypto onboarding & on-chain intelligence app for Blockchain Intelligence Group, with address-hash validation and IAP.",
+    metric: "50K+ daily interactions",
+    tags: ["React Native", "monorepo", "RxJS", "IAP"],
+    links: [
+      { label: "App Store", url: "https://apps.apple.com/vn/app/tokeneyes/id6450926645" },
+      { label: "Google Play", url: "https://play.google.com/store/apps/details?id=com.tokeneyes" },
+      { label: "Web portal", url: "https://portal.tokeneyes.app" },
     ],
   },
   {
@@ -359,17 +370,6 @@ export const projects: Project[] = [
     links: [
       { label: "App Store", url: "https://apps.apple.com/id/app/jewelers/id6753931655" },
       { label: "Google Play", url: "https://play.google.com/store/apps/details?id=com.ra3d.jewelers" },
-    ],
-  },
-  {
-    name: "Canoo",
-    category: "Freelance · Automotive",
-    blurb: "Consumer app for the Canoo EV ecosystem, delivered as a freelance engagement.",
-    metric: "4.8★ avg rating",
-    tags: ["React Native", "TypeScript", "REST"],
-    links: [
-      { label: "App Store", url: "https://apps.apple.com/eg/app/canoo/id1458141380" },
-      { label: "Google Play", url: "https://play.google.com/store/apps/details?id=com.icc.canoo" },
     ],
   },
   {
