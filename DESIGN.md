@@ -12,13 +12,15 @@ colors:
   faint: "#4A5668"
   accent: "#082B60"
   on-accent: "#FFFFFF"
-  canvas-dark: "#05080E"
-  paper-dark: "#0A1220"
+  canvas-dark: "#100F0C"
+  paper-dark: "#18170F"
   ink-dark: "#F2EFE8"
   mute-dark: "#B8C4D6"
   faint-dark: "#9AABC0"
+  field-dark: "#1B4F9C"
+  field-mute-dark: "#C9D4E6"
   accent-dark: "#8AADDE"
-  on-accent-dark: "#05080E"
+  on-accent-dark: "#100F0C"
 typography:
   display:
     fontFamily: "Bricolage Grotesque, ui-sans-serif, system-ui, sans-serif"
@@ -79,21 +81,22 @@ components:
 
 **Creative North Star: "The Blazer Field"**
 
-The hiring site is the jacket in the headshot: a sampled navy field that owns whole regions, not a gray page with blue buttons. Recruiters open it in office daylight, so the default theme is light paper; dark mode keeps the same navy mast and lifts only the in-flow links.
+The hiring site is the jacket in the headshot: a sampled navy field that owns whole regions, not a gray page with blue buttons. Recruiters open it in office daylight, so the default theme is light paper. Dark mode dims that same room and lights the jacket (ramp navy `#1B4F9C`) so the field still reads as a region; in-flow links lift to `#8AADDE`.
 
 Type is one self-hosted variable face at extreme scale. Proof is a sentence and a ruled list, not metric cards. Confirmed rejections: Inter-as-display, gradient type, pill chrome, circular avatars, yellow/airport costume, and unmeasured accent-on-white.
 
 **Key Characteristics:**
 
-- Navy `#082B60` owns nav, hero, and close
-- Warm paper `#F2EFE8` from the headshot room owns work, experience, and skills
+- Navy `#082B60` owns nav, hero, and close in daylight; `#1B4F9C` is the same garment under lamp
+- Warm paper `#F2EFE8` from the headshot room owns work, experience, and skills; night is that room dimmed to `#100F0C`
 - Bricolage Grotesque, extra-bold stacked name, body at a readable measure
 - Flush rectangular portrait; 4px controls
+- Motion is a tailor’s cut from already-visible cloth, plus a 480ms token morph on theme
 - Every shipped text pair meets WCAG AA
 
 ## Colors
 
-Committed strategy. One sampled navy as a field, warm paper as the reading ground. Light and dark are composed separately; dark does not invert the mast to a light blue.
+Committed strategy. One sampled navy as a field, warm paper as the reading ground. Light and dark are composed separately; dark does not invert the mast to the link-blue `#8AADDE`.
 
 ### Primary
 
@@ -111,8 +114,9 @@ Committed strategy. One sampled navy as a field, warm paper as the reading groun
 
 ### Dark remap
 
-- Canvas `#05080E`, paper `#0A1220`, ink `#F2EFE8`, mute `#B8C4D6`, faint `#9AABC0`.
-- Field stays `#082B60`. Links on dark canvas use **accent** `#8AADDE` (8.70:1). Do not put white on `#8AADDE` (2.30:1, fail). Filled buttons stay navy-plus-white, never light-blue-plus-white.
+Night is the same room with the lights down, not a cool void. Canvas `#100F0C` (dimmed `#F2EFE8`), paper `#18170F`, ink `#F2EFE8`, mute `#B8C4D6`, faint `#9AABC0`.
+
+The sampled mean `#082B60` on that canvas is 1.4:1 — the field vanishes. Dark field is the next ramp step **`#1B4F9C`** (blazer under a desk lamp): white 7.94:1, field-mute `#C9D4E6` 5.31:1. Links on dark canvas use **accent** `#8AADDE` (8.32:1). Do not put white on `#8AADDE` (2.30:1, fail). Filled buttons stay navy-plus-white (`#1B4F9C`), never the link-blue.
 
 ### Named Rules
 
@@ -154,9 +158,19 @@ Flat. Depth is field vs paper, not shadow. The portrait has no drop shadow. Divi
 
 **The Flat Field Rule.** No halo, glow ring, or offset shadow. If it needs lift, it is on the wrong field.
 
+## Motion
+
+One authored moment: the tailor’s cut. Name and portrait start already visible, clipped from the hem (`inset(0 0 10–12% 0)` → `inset(0)`), 640–820ms, `cubic-bezier(0.16, 1, 0.3, 1)`. Theme toggle interpolates registered color tokens in 480ms — the room dims, the jacket stays a field. Controls acknowledge hover in 150ms. No section fade-up, no scroll stagger, no card lift.
+
+`prefers-reduced-motion` drops the clips and the icon turn; color and hover feedback remain at 120ms.
+
+### Named Rules
+
+**The Cut Rule.** Motion is a clip from cloth that is already on the table, or a light change in the room. A generic fade-and-rise is off-system.
+
 ## Shapes
 
-Controls are 4px — square-ish, not pills. The portrait is a flush rectangle with no radius. Photo motion is a clip-path inset that starts already visible (`inset(6% 0 0 0)` → `inset(0)`), skipped under `prefers-reduced-motion`.
+Controls are 4px — square-ish, not pills. The portrait is a flush rectangle with no radius.
 
 ## Components
 
@@ -177,7 +191,7 @@ No form fields on this surface. Caret is themed anyway: `caret-color: var(--colo
 
 ### Navigation
 
-Sticky navy bar. Wordmark is the given name. Links are field-mute, hover to on-field. Invert “Book a call” is always present. Theme toggle is an icon button with a 10% white hover wash.
+Sticky navy bar. Wordmark is the given name. Links are field-mute, hover to on-field. Invert “Book a call” is always present. Theme toggle is an icon button with a 10% white hover wash; it interpolates the room colors rather than swapping the page in a flash.
 
 ### Work row
 
