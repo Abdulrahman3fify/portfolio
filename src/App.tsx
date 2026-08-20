@@ -10,32 +10,11 @@ import {
   awards,
 } from "./data";
 
-/* ---------- reveal-on-scroll hook ---------- */
-function useReveal() {
-  useEffect(() => {
-    const els = document.querySelectorAll(".reveal");
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.classList.add("in");
-            io.unobserve(e.target);
-          }
-        });
-      },
-      { threshold: 0.12 }
-    );
-    els.forEach((el) => io.observe(el));
-    return () => io.disconnect();
-  }, []);
-}
-
-/* ---------- theme (light / dark) ---------- */
 function useTheme() {
   const [theme, setTheme] = useState<"light" | "dark">(() =>
-    typeof document !== "undefined" && document.documentElement.classList.contains("light")
-      ? "light"
-      : "dark"
+    typeof document !== "undefined" && document.documentElement.classList.contains("dark")
+      ? "dark"
+      : "light"
   );
   useEffect(() => {
     const root = document.documentElement;
@@ -50,7 +29,6 @@ function useTheme() {
   return { theme, toggle: () => setTheme((t) => (t === "dark" ? "light" : "dark")) };
 }
 
-/* ---------- small inline icons ---------- */
 const Icon = {
   mail: (
     <path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Zm1.4 2L12 12l7.6-5H4.4Z" />
@@ -71,9 +49,6 @@ const Icon = {
     <path d="M12 17a5 5 0 1 1 0-10 5 5 0 0 1 0 10Zm0-13a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0V5a1 1 0 0 1 1-1Zm0 14a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0v-1a1 1 0 0 1 1-1ZM4 11a1 1 0 1 1 0 2H3a1 1 0 1 1 0-2h1Zm17 0a1 1 0 1 1 0 2h-1a1 1 0 1 1 0-2h1ZM5.64 5.64a1 1 0 0 1 1.42 0l.7.7a1 1 0 0 1-1.41 1.42l-.71-.71a1 1 0 0 1 0-1.41Zm11.3 11.3a1 1 0 0 1 1.41 0l.71.71a1 1 0 0 1-1.41 1.41l-.71-.7a1 1 0 0 1 0-1.42ZM18.36 5.64a1 1 0 0 1 0 1.41l-.71.71a1 1 0 0 1-1.41-1.42l.7-.7a1 1 0 0 1 1.42 0ZM7.05 16.95a1 1 0 0 1 0 1.41l-.71.71a1 1 0 0 1-1.41-1.41l.7-.71a1 1 0 0 1 1.42 0Z" />
   ),
   moon: <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z" />,
-  calendar: (
-    <path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1V3a1 1 0 0 1 1-1Zm13 7H4v10h16V9ZM4 7h16V6H4v1Z" />
-  ),
   apple: (
     <path d="M17.05 12.04c-.03-2.6 2.12-3.84 2.22-3.9-1.21-1.78-3.09-2.02-3.76-2.05-1.6-.16-3.12.94-3.93.94-.81 0-2.06-.92-3.39-.89-1.74.02-3.35 1.01-4.25 2.57-1.81 3.14-.46 7.79 1.3 10.34.86 1.25 1.89 2.65 3.23 2.6 1.29-.05 1.78-.83 3.34-.83s2 .83 3.37.81c1.39-.03 2.27-1.27 3.12-2.53.98-1.45 1.39-2.85 1.41-2.92-.03-.01-2.7-1.04-2.73-4.13M14.5 4.6c.71-.86 1.19-2.06 1.06-3.25-1.02.04-2.26.68-2.99 1.54-.66.76-1.23 1.98-1.08 3.15 1.14.09 2.3-.58 3.01-1.44" />
   ),
@@ -98,48 +73,55 @@ function Svg({ children, className = "" }: { children: ReactNode; className?: st
   );
 }
 
-/* ---------- Nav ---------- */
 const sections = [
-  { id: "about", label: "About" },
-  { id: "skills", label: "Skills" },
+  { id: "work", label: "Work" },
   { id: "experience", label: "Experience" },
-  { id: "projects", label: "Projects" },
+  { id: "skills", label: "Skills" },
   { id: "contact", label: "Contact" },
 ];
 
-function Nav() {
-  const [scrolled, setScrolled] = useState(false);
-  const { theme, toggle } = useTheme();
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+function Nav({ theme, toggle }: { theme: "light" | "dark"; toggle: () => void }) {
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
-        scrolled ? "bg-ink/80 backdrop-blur-md border-b border-line" : ""
-      }`}
-    >
-      <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <a href="#top" className="text-sm font-bold tracking-wide text-heading">
-          AA<span className="gradient-text">.</span>
-        </a>
-        <ul className="hidden gap-7 text-sm sm:flex">
+    <header className="sticky top-0 z-50 bg-field text-on-field">
+      <nav className="flex flex-col gap-3 px-5 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:px-10 sm:py-4 lg:px-16">
+        <div className="flex items-center justify-between gap-3">
+          <a href="#top" className="text-sm font-semibold tracking-tight">
+            {profile.name.split(" ")[0]}
+          </a>
+          <div className="flex items-center gap-2 sm:hidden">
+            <button
+              type="button"
+              onClick={toggle}
+              aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+              className="rounded-[4px] p-2 text-field-mute hover:bg-on-field/10 hover:text-on-field"
+            >
+              <Svg className="h-4 w-4">{theme === "dark" ? Icon.sun : Icon.moon}</Svg>
+            </button>
+            <a
+              href={profile.calendly}
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-[4px] bg-on-field px-3 py-2 text-xs font-semibold text-field hover:ring-2 hover:ring-field-mute"
+            >
+              Book a call
+            </a>
+          </div>
+        </div>
+        <ul className="flex items-center gap-5 overflow-x-auto text-sm text-field-mute sm:ml-auto">
           {sections.map((s) => (
-            <li key={s.id}>
-              <a href={`#${s.id}`} className="text-muted transition-colors hover:text-heading">
+            <li key={s.id} className="shrink-0">
+              <a href={`#${s.id}`} className="hover:text-on-field">
                 {s.label}
               </a>
             </li>
           ))}
         </ul>
-        <div className="flex items-center gap-2">
+        <div className="hidden items-center gap-2 sm:flex">
           <button
             type="button"
             onClick={toggle}
             aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
-            className="rounded-full border border-line p-2 text-muted transition-colors hover:border-accent hover:text-accent"
+            className="rounded-[4px] p-2 text-field-mute hover:bg-on-field/10 hover:text-on-field"
           >
             <Svg className="h-4 w-4">{theme === "dark" ? Icon.sun : Icon.moon}</Svg>
           </button>
@@ -147,9 +129,9 @@ function Nav() {
             href={profile.calendly}
             target="_blank"
             rel="noreferrer"
-            className="rounded-full border border-line px-4 py-1.5 text-xs font-medium text-heading transition-colors hover:border-accent hover:bg-accent/10"
+            className="rounded-[4px] bg-on-field px-3 py-2 text-xs font-semibold text-field hover:ring-2 hover:ring-field-mute"
           >
-            Let's talk
+            Book a call
           </a>
         </div>
       </nav>
@@ -157,226 +139,204 @@ function Nav() {
   );
 }
 
-/* ---------- Hero ---------- */
 function Hero() {
+  const [first, last] = profile.name.split(" ");
   return (
-    <section id="top" className="relative mx-auto max-w-6xl px-6 pb-20 pt-36 sm:pt-44">
-      <div className="flex flex-col-reverse items-start gap-10 lg:flex-row lg:items-center lg:justify-between lg:gap-12">
-        <div className="w-full lg:flex-1">
-      <p className="reveal in mb-4 inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1 text-xs text-muted">
-        <span className="h-2 w-2 rounded-full bg-green-400" /> Available for senior / lead mobile roles
-      </p>
-      <h1 className="reveal in max-w-3xl text-4xl font-extrabold leading-tight tracking-tight text-heading sm:text-6xl">
-        {profile.name}
-      </h1>
-      <p className="reveal in mt-4 text-xl font-medium sm:text-2xl">
-        <span className="gradient-text">{profile.title}</span>
-        <span className="text-faint"> · {profile.tagline}</span>
-      </p>
-      <p className="reveal in mt-6 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
-        {profile.summary}
-      </p>
-      <div className="reveal in mt-8 flex flex-wrap gap-3">
-        <a
-          href="#projects"
-          className="rounded-full bg-gradient-to-r from-accent to-accent-2 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-accent/20 transition-transform hover:-translate-y-0.5"
-        >
-          View selected work
-        </a>
-        <a
-          href={`mailto:${profile.email}`}
-          className="rounded-full border border-line px-6 py-3 text-sm font-semibold text-heading transition-colors hover:border-accent hover:bg-accent/10"
-        >
-          Get in touch
-        </a>
-      </div>
-        </div>
-        <div className="reveal in mx-auto w-44 shrink-0 sm:w-52 lg:mx-0">
-          <div className="rounded-full bg-gradient-to-br from-accent to-accent-2 p-1.5 shadow-xl shadow-accent/20">
-            <img
-              src="/profile.jpg"
-              alt="Abdulrahman Afify, Senior Mobile Engineer"
-              className="aspect-square w-full rounded-full object-cover ring-4 ring-ink"
-            />
+    <section id="top" className="bg-field text-on-field">
+      <div className="grid min-h-[calc(100svh-3.75rem)] lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
+        <div className="order-2 flex flex-col justify-end px-5 py-12 sm:px-10 sm:py-16 lg:order-1 lg:px-16 lg:pb-20">
+          <h1 className="max-w-[9ch] text-[clamp(3.25rem,11vw,7.25rem)] font-extrabold leading-[0.88] tracking-[-0.04em]">
+            <span className="block">{first}</span>
+            <span className="block">{last}</span>
+          </h1>
+          <p className="mt-8 max-w-[36ch] text-xl font-medium leading-snug text-field-mute sm:text-2xl">
+            {profile.title}
+          </p>
+          <p className="mt-3 max-w-[42ch] text-base leading-relaxed text-field-mute sm:text-lg">
+            {profile.tagline}. {profile.location}.
+          </p>
+          <p className="mt-6 max-w-[58ch] text-base leading-relaxed text-field-mute">
+            {profile.summary}
+          </p>
+          <p className="mt-6 text-sm font-medium tabular-nums text-field-mute">
+            {stats.map((s) => `${s.value} ${s.label.toLowerCase()}`).join("  ·  ")}
+          </p>
+          <div className="mt-10 flex flex-wrap gap-3">
+            <a
+              href="#work"
+              className="rounded-[4px] bg-on-field px-5 py-3 text-sm font-semibold text-field hover:ring-2 hover:ring-field-mute"
+            >
+              Selected work
+            </a>
+            <a
+              href={`mailto:${profile.email}`}
+              className="rounded-[4px] px-5 py-3 text-sm font-semibold text-on-field ring-1 ring-on-field/40 hover:bg-on-field/10"
+            >
+              Email
+            </a>
           </div>
         </div>
+        <figure className="hero-photo order-1 min-h-[40vh] lg:order-2 lg:min-h-0">
+          <img
+            src="/profile.jpg"
+            alt="Abdulrahman Afify, Senior Mobile Engineer"
+            width={480}
+            height={480}
+            className="h-full w-full object-cover object-[center_12%]"
+          />
+        </figure>
       </div>
-
-      <dl className="reveal in mt-16 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-line bg-surface sm:grid-cols-4">
-        {stats.map((s) => (
-          <div key={s.label} className="bg-ink/40 px-6 py-7 text-center">
-            <dt className="text-3xl font-extrabold text-heading sm:text-4xl">
-              <span className="gradient-text">{s.value}</span>
-            </dt>
-            <dd className="mt-1 text-xs uppercase tracking-wider text-faint">{s.label}</dd>
-          </div>
-        ))}
-      </dl>
     </section>
   );
 }
 
-/* ---------- Section heading ---------- */
-function Heading({ kicker, title }: { kicker: string; title: string }) {
+function Work() {
+  const lead = projects.slice(0, 6);
+  const rest = projects.slice(6);
   return (
-    <div className="reveal mb-10">
-      <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-accent">{kicker}</p>
-      <h2 className="text-3xl font-bold tracking-tight text-heading sm:text-4xl">{title}</h2>
-    </div>
+    <section id="work" className="scroll-mt-20 px-5 py-20 sm:px-10 lg:px-16">
+      <h2 className="text-3xl font-bold tracking-tight sm:text-5xl">Work</h2>
+      <p className="mt-4 max-w-[62ch] text-base leading-relaxed text-mute">
+        Shipped products with live store links. Metrics are from the engagement, not invented case
+        studies.
+      </p>
+      <ul className="mt-14 border-t border-line">
+        {lead.map((p) => (
+          <li
+            key={p.name}
+            className="grid gap-3 border-b border-line py-9 sm:grid-cols-[minmax(0,1fr)_9rem] sm:items-end"
+          >
+            <div>
+              <h3 className="text-2xl font-semibold tracking-tight sm:text-4xl">{p.name}</h3>
+              <p className="mt-2 text-sm text-mute">
+                {p.category}
+                {p.links ? (
+                  <>
+                    {" · "}
+                    {p.links.map((l, i) => (
+                      <a
+                        key={l.label}
+                        href={l.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="font-medium text-accent underline decoration-transparent hover:decoration-accent"
+                      >
+                        {i > 0 ? " · " : ""}
+                        {l.label}
+                      </a>
+                    ))}
+                  </>
+                ) : null}
+              </p>
+              <p className="mt-3 max-w-[62ch] text-sm leading-relaxed text-mute sm:text-base">
+                {p.blurb}
+              </p>
+            </div>
+            <p className="text-base font-semibold tabular-nums sm:text-right sm:text-lg">{p.metric}</p>
+          </li>
+        ))}
+      </ul>
+      <ul className="mt-2">
+        {rest.map((p) => (
+          <li
+            key={p.name}
+            className="grid gap-1 border-b border-line py-4 sm:grid-cols-[11rem_minmax(0,1fr)_9rem] sm:items-baseline sm:gap-8"
+          >
+            <h3 className="font-semibold">{p.name}</h3>
+            <p className="text-sm leading-relaxed text-mute">
+              {p.blurb}
+              {p.links ? (
+                <>
+                  {" "}
+                  {p.links.map((l, i) => (
+                    <a
+                      key={l.label}
+                      href={l.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-1 font-medium text-accent underline decoration-transparent hover:decoration-accent"
+                    >
+                      {i > 0 ? <span aria-hidden="true">·</span> : null}
+                      <Svg className="h-3 w-3">{platformIcon(l.label)}</Svg>
+                      {l.label}
+                    </a>
+                  ))}
+                </>
+              ) : null}
+            </p>
+            <p className="text-sm tabular-nums text-faint sm:text-right">{p.metric}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
   );
 }
 
-/* ---------- Skills ---------- */
-function Skills() {
+function ExperienceSection() {
   return (
-    <section id="skills" className="mx-auto max-w-6xl px-6 py-20">
-      <Heading kicker="Toolbox" title="Skills & technologies" />
-      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {skills.map((s) => (
-          <div
-            key={s.group}
-            className="reveal rounded-2xl border border-line bg-card/60 p-6 transition-colors hover:border-accent/40"
-          >
-            <h3 className="mb-4 text-sm font-semibold text-heading">{s.group}</h3>
-            <ul className="flex flex-wrap gap-2">
-              {s.items.map((i) => (
-                <li
-                  key={i}
-                  className="rounded-lg border border-line bg-surface px-2.5 py-1 text-xs text-body"
-                >
-                  {i}
+    <section id="experience" className="scroll-mt-20 px-5 py-20 sm:px-10 lg:px-16">
+      <h2 className="text-3xl font-bold tracking-tight sm:text-5xl">Experience</h2>
+      <ol className="mt-14 space-y-14">
+        {experience.map((e) => (
+          <li key={e.company + e.period}>
+            <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+              <h3 className="text-xl font-semibold tracking-tight sm:text-3xl">{e.company}</h3>
+              <p className="text-sm tabular-nums text-faint">{e.period}</p>
+            </div>
+            <p className="mt-2 text-sm text-mute sm:text-base">
+              {e.role} · {e.location}
+            </p>
+            <ul className="mt-5 max-w-[70ch] space-y-2">
+              {e.highlights.map((h) => (
+                <li key={h} className="text-sm leading-relaxed sm:text-base">
+                  {h}
                 </li>
               ))}
             </ul>
+            <p className="mt-4 max-w-[70ch] text-xs leading-relaxed text-faint">{e.stack.join(" · ")}</p>
+          </li>
+        ))}
+      </ol>
+    </section>
+  );
+}
+
+function Skills() {
+  return (
+    <section id="skills" className="scroll-mt-20 px-5 py-20 sm:px-10 lg:px-16">
+      <h2 className="text-3xl font-bold tracking-tight sm:text-5xl">Skills</h2>
+      <dl className="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+        {skills.map((s) => (
+          <div key={s.group}>
+            <dt className="text-sm font-semibold">{s.group}</dt>
+            <dd className="mt-2 text-sm leading-relaxed text-mute">{s.items.join(", ")}</dd>
           </div>
         ))}
-      </div>
-    </section>
-  );
-}
-
-/* ---------- Experience timeline ---------- */
-function ExperienceSection() {
-  return (
-    <section id="experience" className="mx-auto max-w-6xl px-6 py-20">
-      <Heading kicker="Journey" title="Where I've worked" />
-      <div className="relative border-l border-line pl-6 sm:pl-8">
-        {experience.map((e) => (
-          <div key={e.company + e.period} className="reveal relative mb-10 last:mb-0">
-            <span className="absolute -left-[31px] top-1.5 h-3.5 w-3.5 rounded-full border-2 border-accent bg-ink sm:-left-[39px]" />
-            <div className="rounded-2xl border border-line bg-card/60 p-6 transition-colors hover:border-accent/40">
-              <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                <h3 className="text-lg font-semibold text-heading">{e.company}</h3>
-                <span className="text-xs font-medium text-accent">{e.period}</span>
-              </div>
-              <p className="mt-0.5 text-sm text-muted">
-                {e.role} · {e.location}
-              </p>
-              <ul className="mt-4 space-y-2">
-                {e.highlights.map((h, i) => (
-                  <li key={i} className="flex gap-2.5 text-sm leading-relaxed text-body">
-                    <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent" />
-                    {h}
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-4 flex flex-wrap gap-1.5">
-                {e.stack.map((t) => (
-                  <span key={t} className="rounded-md bg-surface px-2 py-0.5 text-[11px] text-muted">
-                    {t}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-/* ---------- Projects ---------- */
-function Projects() {
-  return (
-    <section id="projects" className="mx-auto max-w-6xl px-6 py-20">
-      <Heading kicker="Selected work" title="Products I've shipped" />
-      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {projects.map((p) => (
-          <article
-            key={p.name}
-            className="reveal group flex flex-col rounded-2xl border border-line bg-card/60 p-6 transition-all hover:-translate-y-1 hover:border-accent/50 hover:shadow-xl hover:shadow-accent/5"
-          >
-            <div className="mb-3 flex items-center justify-between">
-              <span className="rounded-full bg-accent/10 px-2.5 py-1 text-[11px] font-medium text-accent">
-                {p.category}
-              </span>
-              <span className="text-[11px] font-semibold text-faint">{p.metric}</span>
-            </div>
-            <h3 className="text-lg font-semibold text-heading">{p.name}</h3>
-            <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">{p.blurb}</p>
-            <div className="mt-4 flex flex-wrap gap-1.5">
-              {p.tags.map((t) => (
-                <span key={t} className="rounded-md bg-surface px-2 py-0.5 text-[11px] text-muted">
-                  {t}
-                </span>
-              ))}
-            </div>
-            {p.links && (
-              <div className="mt-4 flex flex-wrap gap-2 border-t border-line pt-4">
-                {p.links.map((l) => (
-                  <a
-                    key={l.label}
-                    href={l.url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-1.5 rounded-lg border border-line bg-surface px-2.5 py-1.5 text-xs font-semibold text-body transition-all hover:-translate-y-0.5 hover:border-accent hover:bg-accent/10 hover:text-accent"
-                  >
-                    <Svg className="h-3.5 w-3.5">{platformIcon(l.label)}</Svg>
-                    {l.label}
-                  </a>
-                ))}
-              </div>
-            )}
-          </article>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-/* ---------- Education / extras ---------- */
-function Education() {
-  return (
-    <section className="mx-auto max-w-6xl px-6 py-20">
-      <div className="grid gap-5 lg:grid-cols-3">
-        <div className="reveal rounded-2xl border border-line bg-card/60 p-6">
-          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-accent">Education</p>
-          <h3 className="text-lg font-semibold text-heading">{education.school}</h3>
-          <p className="mt-1 text-sm text-body">{education.degree}</p>
-          <p className="mt-1 text-xs text-faint">
+      </dl>
+      <div className="mt-16 grid gap-10 border-t border-line pt-12 sm:grid-cols-3">
+        <div>
+          <h3 className="text-sm font-semibold">Education</h3>
+          <p className="mt-2 text-sm leading-relaxed text-mute">
+            {education.school}
+            <br />
+            {education.degree}
+            <br />
             {education.period} · {education.location}
           </p>
-          <p className="mt-3 text-xs leading-relaxed text-muted">{education.coursework}</p>
         </div>
-        <div className="reveal rounded-2xl border border-line bg-card/60 p-6">
-          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-accent">Certifications</p>
-          <ul className="space-y-2">
+        <div>
+          <h3 className="text-sm font-semibold">Certifications</h3>
+          <ul className="mt-2 space-y-1 text-sm text-mute">
             {certifications.map((c) => (
-              <li key={c} className="flex gap-2.5 text-sm text-body">
-                <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent" />
-                {c}
-              </li>
+              <li key={c}>{c}</li>
             ))}
           </ul>
         </div>
-        <div className="reveal rounded-2xl border border-line bg-card/60 p-6">
-          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-accent">Awards</p>
-          <ul className="space-y-2">
+        <div>
+          <h3 className="text-sm font-semibold">Awards</h3>
+          <ul className="mt-2 space-y-1 text-sm text-mute">
             {awards.map((a) => (
-              <li key={a} className="flex gap-2.5 text-sm text-body">
-                <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent" />
-                {a}
-              </li>
+              <li key={a}>{a}</li>
             ))}
           </ul>
         </div>
@@ -385,7 +345,6 @@ function Education() {
   );
 }
 
-/* ---------- Contact / footer ---------- */
 function Contact() {
   const links = [
     { icon: Icon.mail, label: profile.email, href: `mailto:${profile.email}` },
@@ -394,41 +353,37 @@ function Contact() {
     { icon: Icon.github, label: "GitHub", href: profile.github },
   ];
   return (
-    <section id="contact" className="mx-auto max-w-6xl px-6 py-24">
-      <div className="reveal overflow-hidden rounded-3xl border border-line bg-gradient-to-br from-card to-ink p-10 text-center sm:p-16">
-        <h2 className="text-3xl font-bold tracking-tight text-heading sm:text-4xl">
-          Let's build something <span className="gradient-text">great</span>.
-        </h2>
-        <p className="mx-auto mt-4 max-w-xl text-muted">
-          Open to senior and lead mobile engineering roles, and selected freelance work. Based in {profile.location}.
-        </p>
-        <div className="mt-8">
+    <section id="contact" className="scroll-mt-20 bg-field px-5 py-24 text-on-field sm:px-10 lg:px-16">
+      <h2 className="max-w-[14ch] text-3xl font-bold tracking-tight sm:text-6xl sm:leading-[0.95]">
+        Let’s talk about the next app you need in market.
+      </h2>
+      <p className="mt-6 max-w-[48ch] text-field-mute">
+        Open to senior and lead mobile engineering roles, and selected freelance work. Based in{" "}
+        {profile.location}.
+      </p>
+      <div className="mt-10 flex flex-wrap gap-3">
+        <a
+          href={profile.calendly}
+          target="_blank"
+          rel="noreferrer"
+          className="rounded-[4px] bg-on-field px-5 py-3 text-sm font-semibold text-field hover:ring-2 hover:ring-field-mute"
+        >
+          Book a 30-min call
+        </a>
+        {links.map((l) => (
           <a
-            href={profile.calendly}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-accent to-accent-2 px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-accent/20 transition-transform hover:-translate-y-0.5"
+            key={l.label}
+            href={l.href}
+            target={l.href.startsWith("http") ? "_blank" : undefined}
+            rel={l.href.startsWith("http") ? "noreferrer" : undefined}
+            className="inline-flex items-center gap-2 rounded-[4px] px-4 py-3 text-sm font-medium text-on-field ring-1 ring-on-field/35 hover:bg-on-field/10"
           >
-            <Svg className="h-4 w-4">{Icon.calendar}</Svg>
-            Book a 30-min call
+            <Svg className="h-4 w-4">{l.icon}</Svg>
+            {l.label}
           </a>
-        </div>
-        <div className="mt-5 flex flex-wrap justify-center gap-3">
-          {links.map((l) => (
-            <a
-              key={l.label}
-              href={l.href}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-line px-5 py-2.5 text-sm font-medium text-heading transition-colors hover:border-accent hover:bg-accent/10"
-            >
-              <Svg className="h-4 w-4">{l.icon}</Svg>
-              {l.label}
-            </a>
-          ))}
-        </div>
+        ))}
       </div>
-      <p className="mt-10 flex flex-wrap items-center justify-center gap-1.5 text-center text-xs text-faint">
+      <p className="mt-20 flex items-center gap-2 text-xs text-field-mute">
         <Svg className="h-3.5 w-3.5">{Icon.pin}</Svg>
         {profile.location} · {profile.nationality} · © {new Date().getFullYear()} {profile.name}
       </p>
@@ -437,16 +392,21 @@ function Contact() {
 }
 
 export default function App() {
-  useReveal();
+  const { theme, toggle } = useTheme();
   return (
     <>
-      <Nav />
+      <a
+        href="#top"
+        className="absolute left-4 top-4 z-[60] -translate-y-24 rounded-[4px] bg-on-field px-3 py-2 text-sm font-semibold text-field focus:translate-y-0"
+      >
+        Skip to content
+      </a>
+      <Nav theme={theme} toggle={toggle} />
       <main>
         <Hero />
-        <Skills />
+        <Work />
         <ExperienceSection />
-        <Projects />
-        <Education />
+        <Skills />
         <Contact />
       </main>
     </>
