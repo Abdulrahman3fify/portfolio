@@ -143,25 +143,39 @@ function Hero() {
   const [first, last] = profile.name.split(" ");
   return (
     <section id="top" className="bg-field text-on-field">
-      <div className="grid min-h-[calc(100svh-3.75rem)] lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
-        <div className="order-2 flex flex-col justify-end px-5 py-12 sm:px-10 sm:py-16 lg:order-1 lg:px-16 lg:pb-20">
-          <h1 className="max-w-[9ch] text-[clamp(3.25rem,11vw,7.25rem)] font-extrabold leading-[0.88] tracking-[-0.04em]">
+      <div className="mx-auto grid max-w-6xl grid-cols-1 items-start gap-x-4 gap-y-5 px-5 py-8 min-[380px]:grid-cols-[auto_minmax(0,1fr)] sm:gap-x-6 sm:px-10 sm:py-10 md:grid-cols-[minmax(0,1fr)_auto] md:gap-x-10 lg:px-16 lg:py-12">
+        <figure className="hero-photo w-[7.75rem] sm:w-[10.5rem] md:col-start-2 md:row-span-2 md:w-[14.5rem] lg:w-[16.5rem]">
+          <img
+            src="/profile.jpg"
+            alt="Abdulrahman Afify, Senior Mobile Engineer"
+            width={264}
+            height={330}
+            className="aspect-[4/5] w-full object-cover object-top"
+          />
+        </figure>
+        <div className="min-w-0 md:col-start-1 md:row-start-1">
+          <h1 className="max-w-full text-[clamp(1.75rem,7vw,2.35rem)] font-extrabold leading-[0.95] tracking-[-0.035em] md:text-[clamp(2.25rem,5.2vw,3.5rem)]">
             <span className="block">{first}</span>
             <span className="block">{last}</span>
           </h1>
-          <p className="mt-8 max-w-[36ch] text-xl font-medium leading-snug text-field-mute sm:text-2xl">
+          <p className="mt-3 text-base font-medium leading-snug text-field-mute sm:text-lg md:mt-4 md:text-xl">
             {profile.title}
           </p>
-          <p className="mt-3 max-w-[42ch] text-base leading-relaxed text-field-mute sm:text-lg">
+          <p className="mt-2 hidden text-sm leading-relaxed text-field-mute sm:block md:text-base">
             {profile.tagline}. {profile.location}.
           </p>
-          <p className="mt-6 max-w-[58ch] text-base leading-relaxed text-field-mute">
+        </div>
+        <div className="col-span-2 md:col-span-1 md:col-start-1 md:row-start-2">
+          <p className="text-sm leading-relaxed text-field-mute sm:hidden">
+            {profile.tagline}. {profile.location}.
+          </p>
+          <p className="mt-3 max-w-[58ch] text-sm leading-relaxed text-field-mute sm:mt-0 md:text-base">
             {profile.summary}
           </p>
-          <p className="mt-6 text-sm font-medium tabular-nums text-field-mute">
+          <p className="mt-3 hidden text-sm font-medium tabular-nums text-field-mute sm:block">
             {stats.map((s) => `${s.value} ${s.label.toLowerCase()}`).join("  ·  ")}
           </p>
-          <div className="mt-10 flex flex-wrap gap-3">
+          <div className="mt-5 flex flex-wrap gap-3 md:mt-6">
             <a
               href="#work"
               className="rounded-[4px] bg-on-field px-5 py-3 text-sm font-semibold text-field hover:ring-2 hover:ring-field-mute"
@@ -176,15 +190,6 @@ function Hero() {
             </a>
           </div>
         </div>
-        <figure className="hero-photo order-1 min-h-[40vh] lg:order-2 lg:min-h-0">
-          <img
-            src="/profile.jpg"
-            alt="Abdulrahman Afify, Senior Mobile Engineer"
-            width={480}
-            height={480}
-            className="h-full w-full object-cover object-[center_12%]"
-          />
-        </figure>
       </div>
     </section>
   );
@@ -194,8 +199,8 @@ function Work() {
   const lead = projects.slice(0, 6);
   const rest = projects.slice(6);
   return (
-    <section id="work" className="scroll-mt-20 px-5 py-20 sm:px-10 lg:px-16">
-      <h2 className="text-3xl font-bold tracking-tight sm:text-5xl">Work</h2>
+    <section id="work" className="scroll-mt-20 px-5 py-12 sm:px-10 sm:py-16 lg:px-16 lg:py-20">
+      <h2 className="text-2xl font-bold tracking-tight sm:text-4xl">Work</h2>
       <p className="mt-4 max-w-[62ch] text-base leading-relaxed text-mute">
         Shipped products with live store links. Metrics are from the engagement, not invented case
         studies.
@@ -207,7 +212,7 @@ function Work() {
             className="grid gap-3 border-b border-line py-9 sm:grid-cols-[minmax(0,1fr)_9rem] sm:items-end"
           >
             <div>
-              <h3 className="text-2xl font-semibold tracking-tight sm:text-4xl">{p.name}</h3>
+              <h3 className="text-xl font-semibold tracking-tight sm:text-3xl">{p.name}</h3>
               <p className="mt-2 text-sm text-mute">
                 {p.category}
                 {p.links ? (
@@ -240,7 +245,7 @@ function Work() {
         {rest.map((p) => (
           <li
             key={p.name}
-            className="grid gap-1 border-b border-line py-4 sm:grid-cols-[11rem_minmax(0,1fr)_9rem] sm:items-baseline sm:gap-8"
+            className="grid gap-1 border-b border-line py-4 md:grid-cols-[11rem_minmax(0,1fr)_9rem] md:items-baseline md:gap-8"
           >
             <h3 className="font-semibold">{p.name}</h3>
             <p className="text-sm leading-relaxed text-mute">
@@ -264,7 +269,7 @@ function Work() {
                 </>
               ) : null}
             </p>
-            <p className="text-sm tabular-nums text-faint sm:text-right">{p.metric}</p>
+            <p className="text-sm tabular-nums text-faint md:text-right">{p.metric}</p>
           </li>
         ))}
       </ul>
@@ -274,13 +279,13 @@ function Work() {
 
 function ExperienceSection() {
   return (
-    <section id="experience" className="scroll-mt-20 px-5 py-20 sm:px-10 lg:px-16">
-      <h2 className="text-3xl font-bold tracking-tight sm:text-5xl">Experience</h2>
+    <section id="experience" className="scroll-mt-20 px-5 py-12 sm:px-10 sm:py-16 lg:px-16 lg:py-20">
+      <h2 className="text-2xl font-bold tracking-tight sm:text-4xl">Experience</h2>
       <ol className="mt-14 space-y-14">
         {experience.map((e) => (
           <li key={e.company + e.period}>
             <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-              <h3 className="text-xl font-semibold tracking-tight sm:text-3xl">{e.company}</h3>
+              <h3 className="text-lg font-semibold tracking-tight sm:text-2xl">{e.company}</h3>
               <p className="text-sm tabular-nums text-faint">{e.period}</p>
             </div>
             <p className="mt-2 text-sm text-mute sm:text-base">
@@ -303,8 +308,8 @@ function ExperienceSection() {
 
 function Skills() {
   return (
-    <section id="skills" className="scroll-mt-20 px-5 py-20 sm:px-10 lg:px-16">
-      <h2 className="text-3xl font-bold tracking-tight sm:text-5xl">Skills</h2>
+    <section id="skills" className="scroll-mt-20 px-5 py-12 sm:px-10 sm:py-16 lg:px-16 lg:py-20">
+      <h2 className="text-2xl font-bold tracking-tight sm:text-4xl">Skills</h2>
       <dl className="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
         {skills.map((s) => (
           <div key={s.group}>
@@ -353,8 +358,8 @@ function Contact() {
     { icon: Icon.github, label: "GitHub", href: profile.github },
   ];
   return (
-    <section id="contact" className="scroll-mt-20 bg-field px-5 py-24 text-on-field sm:px-10 lg:px-16">
-      <h2 className="max-w-[14ch] text-3xl font-bold tracking-tight sm:text-6xl sm:leading-[0.95]">
+    <section id="contact" className="scroll-mt-20 bg-field px-5 py-14 text-on-field sm:px-10 sm:py-20 lg:px-16">
+      <h2 className="max-w-[16ch] text-2xl font-bold tracking-tight sm:text-4xl sm:leading-[1.05]">
         Let’s talk about the next app you need in market.
       </h2>
       <p className="mt-6 max-w-[48ch] text-field-mute">
