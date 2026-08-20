@@ -1,9 +1,9 @@
 export const profile = {
   name: "Abdulrahman Afify",
-  title: "Engineering Manager, Frontend & Mobile",
-  tagline: "React Native · React · TypeScript — 9+ years leading delivery",
+  title: "Senior Mobile Engineer",
+  tagline: "React Native · React · TypeScript — 9+ years",
   summary:
-    "I lead frontend and mobile engineering: architecture, delivery, and the teams that ship it. Nine years of iOS and Android products that reached 2M+ users, held 99.5% crash-free sessions, and went to market across telco, commerce, health, and fintech — including a current CTO seat.",
+    "Senior Mobile Engineer with 9+ years building high-performance iOS and Android apps. Scaled products to 2M+ users, sustained up to 99.5% crash-free sessions, and shipped 50+ apps across fintech, e-commerce, healthcare, and telecom.",
   location: "Muscat, Oman (Al Khoudh)",
   nationality: "Egyptian",
   email: "Abdelrahman3fify@gmail.com",
@@ -224,7 +224,6 @@ export type Project = {
   blurb: string;
   metric: string;
   tags: string[];
-  featured?: boolean;
   links?: { label: string; url: string }[];
 };
 
@@ -232,7 +231,6 @@ export const projects: Project[] = [
   {
     name: "Ooredoo Qatar",
     category: "Telecom",
-    featured: true,
     blurb: "Flagship consumer telecom app for Ooredoo Qatar — account management, recharge, bundles, and self-service across iOS and Android.",
     metric: "2.5M+ users",
     tags: ["React Native", "TypeScript", "Redux", "React Query", "REST"],
@@ -255,7 +253,6 @@ export const projects: Project[] = [
   {
     name: "Homzmart",
     category: "E-commerce",
-    featured: true,
     blurb: "Omni-channel furniture & home marketplace built from scratch and scaled across iOS, Android, and Huawei AppGallery.",
     metric: "2,000,000+ users",
     tags: ["React Native", "GraphQL", "Magento", "Detox"],
@@ -279,7 +276,6 @@ export const projects: Project[] = [
   {
     name: "Calo",
     category: "Health / Food",
-    featured: true,
     blurb: "Healthy meal-subscription platform serving the GCC, kept at a 4.7★ rating with sub-second key flows.",
     metric: "500,000+ MAU",
     tags: ["React Native", "Zustand", "GraphQL", "CodePush"],
