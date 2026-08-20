@@ -35,8 +35,6 @@ npm-debug.log*
 .impeccable/config.local.json
 .impeccable/hook.cache.json
 .impeccable/hook.pending.json
-.impeccable/questions/
-.impeccable/review/
 .impeccable/*.png
 .impeccable/live/server.json
 .impeccable/live/sessions/

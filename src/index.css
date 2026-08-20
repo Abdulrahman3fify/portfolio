@@ -1,30 +1,32 @@
-@import "./fonts.css";
 @import "tailwindcss";
 
 @theme {
-  --color-hall: #e8eaed;
-  --color-ink: #0e1114;
-  --color-plate: #ffcc00;
-  --color-plate-ink: #0e1114;
-  --color-steel: #3d454d;
-  --color-paper: #f4f5f7;
-  --color-alert: #c8102e;
-  --color-line: #c5cad1;
-  --color-idle: #d5d9de;
-  --font-sans: "Barlow", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Barlow Condensed", "Barlow", ui-sans-serif, sans-serif;
+  /* Dark palette = defaults */
+  --color-ink: #0a0a0f;
+  --color-ink-2: #101018;
+  --color-card: #15151f;
+  --color-accent: #ff2d55;
+  --color-accent-2: #ff6a3d;
+  --color-heading: #ffffff;
+  --color-body: #d4d4d8;
+  --color-muted: #a1a1aa;
+  --color-faint: #71717a;
+  --color-line: rgba(255, 255, 255, 0.1);
+  --color-surface: rgba(255, 255, 255, 0.05);
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
-html.dark {
-  --color-hall: #12151a;
-  --color-ink: #eef0f3;
-  --color-plate: #ffcc00;
-  --color-plate-ink: #0e1114;
-  --color-steel: #9aa3ad;
-  --color-paper: #1c2128;
-  --color-alert: #ff4d4f;
-  --color-line: #2c343e;
-  --color-idle: #252b33;
+/* Light palette — overrides the same custom properties at runtime */
+html.light {
+  --color-ink: #f6f7fb;
+  --color-ink-2: #ffffff;
+  --color-card: #ffffff;
+  --color-heading: #0b0b12;
+  --color-body: #3f3f46;
+  --color-muted: #52525b;
+  --color-faint: #71717a;
+  --color-line: rgba(10, 10, 20, 0.1);
+  --color-surface: rgba(10, 10, 20, 0.045);
 }
 
 @layer base {
@@ -32,63 +34,34 @@ html.dark {
     scroll-behavior: smooth;
   }
   body {
-    @apply bg-hall font-sans text-ink antialiased;
-    font-feature-settings: "tnum" 1, "ss01" 0;
-    transition: background-color 0.25s ease, color 0.25s ease;
+    @apply bg-ink text-body antialiased;
+    background-image:
+      radial-gradient(60rem 60rem at 80% -10%, rgba(255, 45, 85, 0.12), transparent 60%),
+      radial-gradient(50rem 50rem at -10% 20%, rgba(255, 106, 61, 0.08), transparent 55%);
+    background-attachment: fixed;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  html.light body {
+    background-image:
+      radial-gradient(60rem 60rem at 80% -10%, rgba(255, 45, 85, 0.1), transparent 60%),
+      radial-gradient(50rem 50rem at -10% 20%, rgba(255, 106, 61, 0.08), transparent 55%);
   }
   ::selection {
-    background: var(--color-plate);
-    color: var(--color-plate-ink);
-  }
-  :focus-visible {
-    outline: 2px solid var(--color-plate-ink);
-    outline-offset: 3px;
-    box-shadow: 0 0 0 5px var(--color-plate);
-  }
-  a:focus-visible,
-  button:focus-visible {
-    outline: 2px solid var(--color-plate-ink);
-    outline-offset: 3px;
-    box-shadow: 0 0 0 5px var(--color-plate);
+    @apply bg-accent/30 text-white;
   }
 }
 
-@layer components {
-  .blade {
-    clip-path: inset(0 0 0 0);
+@layer utilities {
+  .gradient-text {
+    @apply bg-gradient-to-r from-accent to-accent-2 bg-clip-text text-transparent;
   }
-  @media (prefers-reduced-motion: no-preference) {
-    .blade {
-      animation: blade-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
-    }
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
   }
-  @keyframes blade-in {
-    from {
-      clip-path: inset(0 100% 0 0);
-    }
-    to {
-      clip-path: inset(0 0 0 0);
-    }
+  .reveal.in {
+    opacity: 1;
+    transform: none;
   }
-
-  .here-mark {
-    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease,
-      color 0.2s ease;
-  }
-}
-
-/* Night-terminal scrollbars and form chrome */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: var(--color-steel) var(--color-hall);
-}
-*::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
-*::-webkit-scrollbar-thumb {
-  background: var(--color-steel);
-}
-*::-webkit-scrollbar-track {
-  background: var(--color-hall);
 }
