@@ -144,7 +144,7 @@ Committed strategy. One sampled navy as a field, warm paper as the reading groun
 
 ## Layout
 
-Full-bleed navy mast and close; paper sections share the same page padding (`px-5` / `sm:px-10` / `lg:px-16`). Hero is content-sized, not a full viewport: type plus a capped 4:5 portrait (`9.5rem`–`16.5rem`). From `md` the portrait sits on the right; below that it stacks above the name. Work is a ruled list, featured then compact. Experience is a vertical sequence, not a timeline graphic. Skills are a definition list in two or three columns. Sticky navy nav: name + invert CTA on the first mobile row, section links on the second; one row from `sm`.
+Full-bleed navy mast and close; paper sections share the same page padding (`px-5` / `sm:px-10` / `lg:px-16`). Hero is content-sized, not a full viewport: type plus a capped 4:5 portrait (`7.75rem`–`16.5rem`). From `md` the portrait sits on the right; from 380px it sits beside the name; below 380px it stacks. Work is a ruled list, featured then compact. Experience is a vertical sequence, not a timeline graphic. Skills are a definition list in two or three columns. Sticky navy nav: name + invert CTA on the first mobile row, section links on the second; one row from `sm`.
 
 ## Elevation & Depth
 
