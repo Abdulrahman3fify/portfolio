@@ -101,7 +101,7 @@ function Nav({ theme, toggle }: { theme: "light" | "dark"; toggle: () => void })
               href={profile.calendly}
               target="_blank"
               rel="noreferrer"
-              className="rounded-[4px] bg-on-field px-3 py-2 text-xs font-semibold text-field hover:bg-field-mute"
+              className="rounded-[4px] bg-on-field px-3 py-2 text-xs font-semibold text-field hover:ring-2 hover:ring-field-mute"
             >
               Book a call
             </a>
@@ -129,7 +129,7 @@ function Nav({ theme, toggle }: { theme: "light" | "dark"; toggle: () => void })
             href={profile.calendly}
             target="_blank"
             rel="noreferrer"
-            className="rounded-[4px] bg-on-field px-3 py-2 text-xs font-semibold text-field hover:bg-field-mute"
+            className="rounded-[4px] bg-on-field px-3 py-2 text-xs font-semibold text-field hover:ring-2 hover:ring-field-mute"
           >
             Book a call
           </a>
@@ -144,12 +144,12 @@ function Hero() {
   return (
     <section id="top" className="bg-field text-on-field">
       <div className="grid min-h-[calc(100svh-3.75rem)] lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
-        <div className="flex flex-col justify-end px-5 py-12 sm:px-10 sm:py-16 lg:px-16 lg:pb-20">
+        <div className="order-2 flex flex-col justify-end px-5 py-12 sm:px-10 sm:py-16 lg:order-1 lg:px-16 lg:pb-20">
           <h1 className="max-w-[9ch] text-[clamp(3.25rem,11vw,7.25rem)] font-extrabold leading-[0.88] tracking-[-0.04em]">
             <span className="block">{first}</span>
             <span className="block">{last}</span>
           </h1>
-          <p className="mt-8 max-w-[36ch] text-xl font-medium leading-snug sm:text-2xl">
+          <p className="mt-8 max-w-[36ch] text-xl font-medium leading-snug text-field-mute sm:text-2xl">
             {profile.title}
           </p>
           <p className="mt-3 max-w-[42ch] text-base leading-relaxed text-field-mute sm:text-lg">
@@ -158,13 +158,13 @@ function Hero() {
           <p className="mt-6 max-w-[58ch] text-base leading-relaxed text-field-mute">
             {profile.summary}
           </p>
-          <p className="mt-6 text-sm font-medium tabular-nums text-on-field">
+          <p className="mt-6 text-sm font-medium tabular-nums text-field-mute">
             {stats.map((s) => `${s.value} ${s.label.toLowerCase()}`).join("  ·  ")}
           </p>
           <div className="mt-10 flex flex-wrap gap-3">
             <a
               href="#work"
-              className="rounded-[4px] bg-on-field px-5 py-3 text-sm font-semibold text-field hover:bg-field-mute"
+              className="rounded-[4px] bg-on-field px-5 py-3 text-sm font-semibold text-field hover:ring-2 hover:ring-field-mute"
             >
               Selected work
             </a>
@@ -176,7 +176,7 @@ function Hero() {
             </a>
           </div>
         </div>
-        <figure className="hero-photo min-h-[22rem] lg:min-h-0">
+        <figure className="hero-photo order-1 min-h-[40vh] lg:order-2 lg:min-h-0">
           <img
             src="/profile.jpg"
             alt="Abdulrahman Afify, Senior Mobile Engineer"
@@ -366,7 +366,7 @@ function Contact() {
           href={profile.calendly}
           target="_blank"
           rel="noreferrer"
-          className="rounded-[4px] bg-on-field px-5 py-3 text-sm font-semibold text-field hover:bg-field-mute"
+          className="rounded-[4px] bg-on-field px-5 py-3 text-sm font-semibold text-field hover:ring-2 hover:ring-field-mute"
         >
           Book a 30-min call
         </a>
