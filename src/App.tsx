@@ -83,20 +83,40 @@ const sections = [
 function Nav({ theme, toggle }: { theme: "light" | "dark"; toggle: () => void }) {
   return (
     <header className="sticky top-0 z-50 bg-field text-on-field">
-      <nav className="flex items-center justify-between gap-4 px-5 py-4 sm:px-10 lg:px-16">
-        <a href="#top" className="text-sm font-semibold tracking-tight">
-          {profile.name.split(" ")[0]}
-        </a>
-        <ul className="flex flex-wrap items-center justify-end gap-x-5 gap-y-1 text-sm text-field-mute">
+      <nav className="flex flex-col gap-3 px-5 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:px-10 sm:py-4 lg:px-16">
+        <div className="flex items-center justify-between gap-3">
+          <a href="#top" className="text-sm font-semibold tracking-tight">
+            {profile.name.split(" ")[0]}
+          </a>
+          <div className="flex items-center gap-2 sm:hidden">
+            <button
+              type="button"
+              onClick={toggle}
+              aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+              className="rounded-[4px] p-2 text-field-mute hover:bg-on-field/10 hover:text-on-field"
+            >
+              <Svg className="h-4 w-4">{theme === "dark" ? Icon.sun : Icon.moon}</Svg>
+            </button>
+            <a
+              href={profile.calendly}
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-[4px] bg-on-field px-3 py-2 text-xs font-semibold text-field hover:bg-field-mute"
+            >
+              Book a call
+            </a>
+          </div>
+        </div>
+        <ul className="flex items-center gap-5 overflow-x-auto text-sm text-field-mute sm:ml-auto">
           {sections.map((s) => (
-            <li key={s.id}>
+            <li key={s.id} className="shrink-0">
               <a href={`#${s.id}`} className="hover:text-on-field">
                 {s.label}
               </a>
             </li>
           ))}
         </ul>
-        <div className="flex items-center gap-2">
+        <div className="hidden items-center gap-2 sm:flex">
           <button
             type="button"
             onClick={toggle}
@@ -109,7 +129,7 @@ function Nav({ theme, toggle }: { theme: "light" | "dark"; toggle: () => void })
             href={profile.calendly}
             target="_blank"
             rel="noreferrer"
-            className="hidden rounded-[4px] bg-on-field px-3 py-2 text-xs font-semibold text-field hover:bg-field-mute sm:inline"
+            className="rounded-[4px] bg-on-field px-3 py-2 text-xs font-semibold text-field hover:bg-field-mute"
           >
             Book a call
           </a>
