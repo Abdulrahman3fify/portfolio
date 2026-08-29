@@ -107,7 +107,7 @@ export const experience: Experience[] = [
   },
   {
     company: "Blockchain Intelligence Group",
-    type: "Full-time",
+    type: "Contract",
     role: "Senior Mobile Engineer",
     period: "Jun 2022 – Mar 2025",
     location: "Canada · Remote",
@@ -133,7 +133,7 @@ export const experience: Experience[] = [
   },
   {
     company: "Calo Inc",
-    type: "Full-time",
+    type: "Contract",
     role: "Senior Mobile Engineer",
     period: "Jun 2022 – Nov 2022",
     location: "Bahrain · Remote",
@@ -145,7 +145,7 @@ export const experience: Experience[] = [
   },
   {
     company: "Faheem",
-    type: "Full-time",
+    type: "Contract",
     role: "Mobile Team Lead",
     period: "Jul 2021 – Apr 2022",
     location: "Saudi Arabia · Remote",
@@ -157,6 +157,7 @@ export const experience: Experience[] = [
   },
   {
     company: "Tamkeen Technology",
+    type: "Contract",
     role: "Mobile Architect",
     period: "Jan 2023 – Present",
     location: "Saudi Arabia · Remote",
@@ -182,8 +183,8 @@ export const experience: Experience[] = [
   {
     company: "Proxify",
     type: "Freelance",
-    role: "Mobile Engineer",
-    period: "Dec 2019 – Aug 2025",
+    role: "Mobile Engineer · Project-based",
+    period: "Dec 2019 – Present",
     location: "Remote",
     highlights: [
       "15+ projects on React Native/TypeScript across global clients (300,000+ combined reach); avg. 4.8★ ratings; routinely 15%+ faster than projected timelines.",
@@ -357,7 +358,7 @@ export const projects: Project[] = [
     shot: "/shots/vodafone-oman.webp",
     category: "Telecom",
     blurb: "Led the migration of the live national telco app from native iOS/Android to React Native and Expo, with a new marketplace hub, Supabase-backed engagement tooling, and EAS OTA.",
-    metric: "National telco app",
+    metric: "Native → React Native migration",
     tags: ["React Native", "Expo", "Supabase", "EAS"],
     links: [
       { label: "App Store", url: "https://apps.apple.com/om/app/my-vodafone-oman/id1589071343" },

@@ -5,11 +5,9 @@ import {
   skills,
   experience,
   projects,
-  domains,
   education,
   certifications,
   awards,
-  type Domain,
   type Project,
 } from "./data";
 
@@ -32,7 +30,7 @@ function useReveal() {
         .querySelectorAll(".reveal:not(.in):not([data-in])")
         .forEach((el) => io.observe(el));
     observe();
-    // Re-observe nodes added by filtering / "show more" toggles.
+    // Re-observe nodes added by the "show more" toggles.
     const mo = new MutationObserver(observe);
     mo.observe(document.body, { childList: true, subtree: true });
     return () => {
@@ -234,18 +232,17 @@ function Hero() {
   );
 }
 
-/* ---------- CV download (prints the page via the print stylesheet) ---------- */
+/* ---------- CV download (the typeset PDF, not a print of this page) ---------- */
 function ResumeButton() {
   return (
-    <button
-      type="button"
-      onClick={() => window.print()}
-      data-print-hide
+    <a
+      href="/cv.pdf"
+      download="Abdulrahman-Afify-CV.pdf"
       className="inline-flex items-center gap-2 rounded-full border border-line px-6 py-3 text-sm font-semibold text-heading transition-colors hover:border-accent hover:bg-accent/10"
     >
       <Svg className="h-4 w-4">{Icon.download}</Svg>
-      Download CV
-    </button>
+      Download CV (PDF)
+    </a>
   );
 }
 
@@ -315,7 +312,7 @@ function About() {
         <div className="reveal rounded-2xl border border-line bg-card/60 p-7">
           <p className="mb-1 text-sm font-semibold text-heading">Currently</p>
           <p className="mb-5 text-xs leading-relaxed text-faint">
-            Three engagements running in parallel.
+            {current.length} engagements running in parallel.
           </p>
           <ul className="space-y-4">
             {current.map((e) => (
@@ -415,7 +412,7 @@ function ExperienceSection() {
       {!expanded && hidden > 0 && (
         <button
           type="button"
-          data-print-hide
+         
           onClick={() => setExpanded(true)}
           className="mt-8 rounded-full border border-line px-5 py-2.5 text-sm font-medium text-heading transition-colors hover:border-accent hover:bg-accent/10"
         >
@@ -442,7 +439,7 @@ function Shot({
       {hasImage ? (
         <img
           src={project.shot}
-          alt={`${project.name} app screenshot`}
+          alt={`${project.name} — App Store listing image`}
           loading="lazy"
           onError={() => setFailed(true)}
           className="h-full w-full object-cover"
@@ -464,7 +461,7 @@ function Shot({
 function StoreLinks({ project }: { project: Project }) {
   if (!project.links) return null;
   return (
-    <div className="mt-4 flex flex-wrap gap-2 border-t border-line pt-4" data-print-hide>
+    <div className="mt-4 flex flex-wrap gap-2 border-t border-line pt-4">
       {project.links.map((l) => (
         <a
           key={l.label}
@@ -483,31 +480,20 @@ function StoreLinks({ project }: { project: Project }) {
 
 /* ---------- Projects ---------- */
 function Projects() {
-  const [filter, setFilter] = useState<Domain | "All">("All");
   const [showAll, setShowAll] = useState(false);
 
   const featured = useMemo(() => projects.filter((p) => p.featured), []);
   const rest = useMemo(() => projects.filter((p) => !p.featured), []);
 
-  const filtered = useMemo(
-    () => (filter === "All" ? rest : rest.filter((p) => p.domain === filter)),
-    [filter, rest]
-  );
-  const visible = showAll || filter !== "All" ? filtered : filtered.slice(0, 6);
-  const remaining = filtered.length - visible.length;
-
-  const counts = useMemo(() => {
-    const c: Record<string, number> = { All: rest.length };
-    rest.forEach((p) => (c[p.domain] = (c[p.domain] ?? 0) + 1));
-    return c;
-  }, [rest]);
+  const visible = showAll ? rest : rest.slice(0, 6);
+  const remaining = rest.length - visible.length;
 
   return (
     <section id="projects" className="mx-auto max-w-6xl px-6 py-20">
       <Heading
         kicker="Selected work"
         title="Products I've shipped"
-        sub={`${projects.length} shipped products across telecom, commerce, fintech, health, and mobility. The six below carry the most scale.`}
+        sub={`${projects.length} selected products from 50+ apps shipped across telecom, commerce, fintech, health, and mobility. The six below are the ones I can say the most about.`}
       />
 
       {/* Featured */}
@@ -517,7 +503,7 @@ function Projects() {
             key={p.name}
             className="reveal group flex gap-5 rounded-2xl border border-line bg-card/60 p-6 transition-all hover:-translate-y-1 hover:border-accent/50 hover:shadow-xl hover:shadow-accent/5"
           >
-            <Shot project={p} className="hidden aspect-[9/16] w-32 shrink-0 self-start sm:block" data-print-hide />
+            <Shot project={p} className="hidden aspect-[9/16] w-32 shrink-0 self-start sm:block" />
             <div className="flex min-w-0 flex-1 flex-col">
               <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
                 <span className="rounded-full bg-accent/10 px-2.5 py-1 text-[11px] font-medium text-accent">
@@ -540,30 +526,11 @@ function Projects() {
         ))}
       </div>
 
-      {/* Filter + the rest */}
+      {/* Everything else */}
       <div className="mt-16">
-        <div className="reveal mb-6 flex flex-wrap items-center gap-2" data-print-hide>
-          <span className="mr-1 text-xs uppercase tracking-wider text-faint">More work</span>
-          {(["All", ...domains] as const).map((d) => (
-            <button
-              key={d}
-              type="button"
-              onClick={() => {
-                setFilter(d);
-                setShowAll(false);
-              }}
-              aria-pressed={filter === d}
-              className={`rounded-full border px-3.5 py-1.5 text-xs font-medium transition-colors ${
-                filter === d
-                  ? "border-accent bg-accent/10 text-accent"
-                  : "border-line text-muted hover:border-accent/50 hover:text-heading"
-              }`}
-            >
-              {d}
-              <span className="ml-1.5 text-[10px] opacity-60">{counts[d] ?? 0}</span>
-            </button>
-          ))}
-        </div>
+        <h3 className="reveal mb-6 text-xs uppercase tracking-wider text-faint">
+          More work <span className="opacity-60">({rest.length})</span>
+        </h3>
 
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {visible.map((p) => (
@@ -594,11 +561,11 @@ function Projects() {
         {remaining > 0 && (
           <button
             type="button"
-            data-print-hide
+           
             onClick={() => setShowAll(true)}
             className="mt-8 rounded-full border border-line px-5 py-2.5 text-sm font-medium text-heading transition-colors hover:border-accent hover:bg-accent/10"
           >
-            Show {remaining} more {remaining === 1 ? "project" : "projects"}
+            Show all {rest.length} projects
           </button>
         )}
       </div>
