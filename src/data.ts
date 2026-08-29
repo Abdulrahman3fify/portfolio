@@ -55,12 +55,7 @@ export const skills: { group: string; items: string[] }[] = [
   },
 ];
 
-export type EmploymentType =
-  | "Full-time"
-  | "Part-time"
-  | "Contract"
-  | "Freelance"
-  | "Founder · CTO";
+export type EmploymentType = "Full-time" | "Part-time" | "Contract" | "Freelance";
 
 export type Experience = {
   company: string;
@@ -74,96 +69,53 @@ export type Experience = {
 
 export const experience: Experience[] = [
   {
-    company: "Al-Manarh",
-    type: "Founder · CTO",
-    role: "Chief Technology Officer (CTO)",
-    period: "Jun 2024 – Present",
-    location: "Remote",
+    company: "iHorizons (Ooredoo Qatar)",
+    type: "Full-time",
+    role: "Senior React Native Developer",
+    period: "Jun 2026 – Present",
+    location: "Qatar · Remote",
     highlights: [
-      "Lead technology and engineering as CTO — owning architecture, delivery, and team management across the company's product portfolio and client engagements.",
-      "Provide and manage dedicated engineering resources for client companies including Ra3d, Twerlo, and others.",
-      "Shipped products end-to-end across React Native apps and React/Supabase dashboards — SoloGusto (food delivery) and CarVentru (car-investment platform), plus client apps Wujhat and Jewelers (Ra3d).",
+      "Drive React Native delivery and production ownership across Ooredoo Qatar's consumer app (2.5M+ users) and Ooredoo Business (10,000+ enterprise users).",
     ],
-    stack: ["React Native", "Expo", "React", "TypeScript", "Supabase", "Firebase", "Zustand", "TanStack Query"],
+    stack: ["React Native", "React.js", "TypeScript", "Redux", "React Query", "REST", "Firebase"],
   },
   {
     company: "Vodafone Oman",
-    type: "Full-time",
-    role: "Senior Mobile Engineer",
-    period: "Jun 2025 – Present",
-    location: "Muscat, Oman · On-site",
+    type: "Contract",
+    role: "Senior Mobile Engineer / Mobile Technical Lead",
+    period: "Jun 2025 – Jun 2026",
+    location: "Muscat, Oman",
     highlights: [
-      "Leading migration of the live Vodafone Oman app from native to React Native (iOS & Android) with improved performance and UX.",
-      "Built marketplace hub (categories, bundles, checkout), Supabase auth, push notifications, and cart-reminder flows.",
-      "Shipped OTA updates via EAS for faster rollout without waiting on store releases.",
+      "Led the migration of Vodafone Oman's live iOS and Android application from native stacks to React Native and Expo, providing technical direction across architecture, implementation, code quality, and release delivery.",
+      "Built marketplace hub (categories, bundles, checkout) on TypeScript, Zustand, and TanStack Query; added Supabase auth, EAS OTA updates, Expo notifications, and cart-reminder flows.",
     ],
-    stack: ["React Native", "Expo", "TypeScript", "Zustand", "TanStack Query", "Supabase", "REST", "React Navigation", "React Hook Form", "Zod", "Expo Notifications", "EAS Build & Update", "Google Services"],
+    stack: ["React Native", "Expo", "TypeScript", "Zustand", "TanStack Query", "Supabase", "REST", "React Navigation", "React Hook Form", "Zod", "Expo Notifications", "EAS Build & Update"],
   },
   {
     company: "iHorizons (Ooredoo Qatar)",
-    type: "Contract",
-    role: "Senior Mobile Engineer",
+    type: "Full-time",
+    role: "Senior React Native Developer",
     period: "Jun 2024 – Jul 2025",
     location: "Qatar · Remote",
     highlights: [
-      "Delivered and managed in production across Ooredoo Qatar's flagship consumer app (2.5M+ users) and Ooredoo Business (10,000+ enterprise users); improved performance by 35%.",
-      "Built CI/CD pipelines on Azure DevOps with a self-hosted build machine; integrated Liferay and maintained shared libraries across apps.",
-      "Implemented in-app payments — Apple Pay, Google Pay, and Ooredoo Money — plus hardened auth and REST integrations.",
+      "Improved app performance by 35% across the Ooredoo Qatar consumer and business apps.",
+      "Built Azure DevOps CI/CD on self-hosted runners; integrated Liferay and maintained shared packages across consumer & business apps.",
+      "Implemented Apple Pay, Google Pay, and Ooredoo Money with hardened REST integrations and Firebase analytics.",
     ],
-    stack: [
-      "React Native",
-      "React.js",
-      "TypeScript",
-      "Redux",
-      "React Query",
-      "REST",
-      "Firebase",
-      "Azure DevOps CI/CD",
-      "Self-hosted runners",
-      "Liferay",
-      "Shared libraries",
-      "Apple Pay",
-      "Google Pay",
-      "Ooredoo Money",
-    ],
+    stack: ["React Native", "React.js", "TypeScript", "Redux", "React Query", "REST", "Firebase", "Azure DevOps CI/CD", "Self-hosted runners", "Liferay", "Apple Pay", "Google Pay", "Ooredoo Money"],
   },
   {
     company: "Blockchain Intelligence Group",
-    type: "Contract",
+    type: "Full-time",
     role: "Senior Mobile Engineer",
     period: "Jun 2022 – Mar 2025",
     location: "Canada · Remote",
     highlights: [
-      "Architected mobile systems supporting 50,000+ daily on-chain interactions; 99.5% crash-free for 15,000+ MAU.",
-      "Reduced bundle size 42% (85MB → 49MB) via code splitting and build optimization.",
-      "Cut deployment time from 90 min → 25 min via CI/CD.",
-      "Built native camera flows and an on-chain Address Hash Validator; integrated Stripe, in-app purchases (Apple & Google Play), Segment, and 8+ services.",
+      "Architected React Native/React.js mobile systems supporting 50,000+ daily on-chain interactions; sustained 99.5% crash-free for 15,000+ MAU with Sentry and Firebase.",
+      "Built a monorepo with shared business logic and centralized Redux Toolkit store management across web and mobile.",
+      "Integrated Stripe, Segment, camera/IAP flows, and CI/CD pipelines for TokenEyes across iOS, Android, and web.",
     ],
-    stack: ["React Native", "React.js", "monorepo", "TypeScript", "Redux Toolkit", "REST", "RxJS", "Unit testing", "Native camera", "Address Hash Validator", "Stripe", "IAP (Apple & Google)", "Segment", "Firebase", "CI/CD"],
-  },
-  {
-    company: "Tamkeen Technology",
-    type: "Part-time",
-    role: "Mobile Architect",
-    period: "Jan 2023 – Present",
-    location: "Saudi Arabia · Remote",
-    highlights: [
-      "Scaled Musaned from 50,000 to 200,000+ downloads (~300% growth) at 99.5% crash-free.",
-      "Led a 5-person cross-functional pod; cut bug resolution time by 40%; improved cold start by 28%.",
-    ],
-    stack: ["React Native", "TypeScript", "ES6", "REST", "Redux Toolkit", "Redux Thunk", "CI/CD", "App Center", "CodePush", "Firebase Analytics", "FCM", "Crashlytics"],
-  },
-  {
-    company: "Calo Inc",
-    type: "Contract",
-    role: "Senior Mobile Engineer",
-    period: "Jun 2022 – Nov 2022",
-    location: "Bahrain · Remote",
-    highlights: [
-      "500,000+ MAU healthy meal delivery; preserved 4.7★ store rating across iOS & Android.",
-      "Reduced API latency 35% via GraphQL query optimization; 12 major releases in 6 months.",
-    ],
-    stack: ["React Native", "TypeScript", "Zustand", "GraphQL", "CodePush", "Payments", "Sentry", "CleverTap", "Segment", "Firebase"],
+    stack: ["React Native", "React.js", "monorepo", "TypeScript", "Redux Toolkit", "REST", "RxJS", "Stripe", "IAP (Apple & Google)", "Segment", "Firebase", "Sentry", "CI/CD"],
   },
   {
     company: "Homzmart",
@@ -172,23 +124,60 @@ export const experience: Experience[] = [
     period: "Jun 2020 – Jan 2023",
     location: "Cairo, Egypt · On-site",
     highlights: [
-      "Built RN app from scratch; scaled to 2,000,000+ users; 40+ shipped features/year; +40% screen performance.",
-      "Raised crash-free sessions to 98.7%; -15% cart abandonment via UX and checkout improvements.",
-      "Integrated multiple payment gateways — Payfort, Paymob, Vodafone Cash/Wallet, and NBE — with analytics across AppsFlyer, Adjust, Mixpanel, Sentry, and Instabug.",
+      "Built React Native app from scratch on GraphQL, Redux Toolkit, and Magento API; scaled to 2,000,000+ users with 40+ features/year and +40% screen performance.",
+      "Raised crash-free sessions to 98.7% with Detox/Jest; -15% cart abandonment via checkout UX and Payfort/Paymob/Vodafone Cash payment integrations.",
+      "Owned growth and ops stack — AppsFlyer, Adjust, Mixpanel, Instabug/Sentry, and HMS Push Kit — plus CodePush and CI/CD release pipelines.",
     ],
-    stack: ["React Native", "GraphQL", "Redux", "Redux Thunk & Toolkit", "Detox", "Jest", "Magento API", "Firebase", "CodePush", "CI/CD", "Payfort", "Paymob", "Vodafone Cash", "NBE Payments", "AppsFlyer", "Adjust", "Mixpanel", "Sentry", "Instabug", "HMS Push Kit"],
+    stack: ["React Native", "GraphQL", "Redux Toolkit", "Detox", "Jest", "Magento API", "Firebase", "CodePush", "CI/CD", "Payfort", "Paymob", "Vodafone Cash", "AppsFlyer", "Adjust", "Mixpanel", "Sentry", "Instabug", "HMS Push Kit"],
+  },
+  {
+    company: "Calo Inc",
+    type: "Full-time",
+    role: "Senior Mobile Engineer",
+    period: "Jun 2022 – Nov 2022",
+    location: "Bahrain · Remote",
+    highlights: [
+      "500,000+ MAU healthy meal delivery on React Native and Zustand.",
+      "-35% API latency via GraphQL query optimization; 12 major releases in 6 months with CodePush, Firebase, and CleverTap/Segment analytics.",
+    ],
+    stack: ["React Native", "TypeScript", "Zustand", "GraphQL", "CodePush", "Sentry", "CleverTap", "Segment", "Firebase"],
   },
   {
     company: "Faheem",
-    type: "Part-time",
+    type: "Full-time",
     role: "Mobile Team Lead",
     period: "Jul 2021 – Apr 2022",
     location: "Saudi Arabia · Remote",
     highlights: [
-      "Managed 4 engineers; 8 major releases in 10 months; feature cycle 3wk → 2.4wk avg.",
-      "Elevated team quality score 65% → 88%; mentored juniors (+45% productivity).",
+      "Managed 4 engineers shipping 8 releases in 10 months on React Native, Next.js, and Redux Toolkit; cut feature cycle 3wk → 2.4wk avg.",
+      "Elevated team quality score 65% → 88% and junior productivity +45% via Fastlane, CodePush, and App Center CI/CD.",
     ],
-    stack: ["React Native", "React.js", "Next.js", "TypeScript", "Redux Toolkit", "REST", "Firebase", "OneSignal", "CodePush", "CI/CD", "Fastlane", "AppsFlyer", "Adjust", "Datadog", "Agora", "Sentry", "App Center"],
+    stack: ["React Native", "React.js", "Next.js", "TypeScript", "Redux Toolkit", "REST", "Firebase", "CodePush", "CI/CD", "Fastlane", "AppsFlyer", "Adjust", "Datadog", "Agora", "App Center"],
+  },
+  {
+    company: "Tamkeen Technology",
+    type: "Part-time",
+    role: "Mobile Architect",
+    period: "Jan 2023 – Present",
+    location: "Saudi Arabia · Remote",
+    highlights: [
+      "Scaled Musaned from 50,000 to 200,000+ downloads (~300% growth) at 99.5% crash-free on React Native, TypeScript, and Redux Toolkit.",
+      "Led a 5-person pod; cut bug resolution time by 40% and improved cold start by 28% using App Center, CodePush OTA, and Firebase analytics/messaging.",
+    ],
+    stack: ["React Native", "TypeScript", "ES6", "REST", "Redux Toolkit", "CI/CD", "App Center", "CodePush", "Firebase Analytics", "FCM", "Crashlytics"],
+  },
+  {
+    company: "Al-Manarh",
+    type: "Part-time",
+    role: "Chief Technology Officer (CTO) · Advisory",
+    period: "Jun 2024 – Present",
+    location: "Remote",
+    highlights: [
+      "Lead technology and engineering — architecture, delivery, and team management across the product portfolio and client engagements (Ra3d, Twerlo, and others).",
+      "Shipped end-to-end React Native/Expo apps and React/Supabase dashboards (SoloGusto, CarVentru) on TypeScript, Zustand, and TanStack Query.",
+      "Managed dedicated mobile squads for Ra3d and Twerlo; integrated Firebase, Google Sign-In, maps/geolocation, payments (MyFatoorah), and Amplitude/Adjust analytics.",
+    ],
+    stack: ["React Native", "Expo", "React", "TypeScript", "Supabase", "Firebase", "Zustand", "TanStack Query", "MyFatoorah", "Amplitude"],
   },
   {
     company: "Proxify",
@@ -197,10 +186,10 @@ export const experience: Experience[] = [
     period: "Dec 2019 – Aug 2025",
     location: "Remote",
     highlights: [
-      "15+ projects across global clients (300,000+ combined reach); avg. 4.8★ ratings.",
-      "Routinely 15%+ faster than projected timelines. Representative work: Canoo and TrustYou.",
+      "15+ projects on React Native/TypeScript across global clients (300,000+ combined reach); avg. 4.8★ ratings; routinely 15%+ faster than projected timelines.",
+      "Representative engagements — Canoo, Speetar Health, Tawal (Sufara), PikaDo, Alfaris Rent A Car.",
     ],
-    stack: ["React Native", "TypeScript", "Zustand", "GraphQL", "CodePush", "Contentful", "Payments", "Sentry", "CleverTap", "Firebase"],
+    stack: ["React Native", "TypeScript", "Zustand", "GraphQL", "CodePush", "Contentful", "Firebase"],
   },
   {
     company: "UpperMedic",
@@ -209,9 +198,9 @@ export const experience: Experience[] = [
     period: "Oct 2019 – Jun 2020",
     location: "Cairo, Egypt · On-site",
     highlights: [
-      "Delivered healthcare app 0 → 5,000+ downloads in 3 months; 500+ hrs/mo streamed video infra.",
+      "Delivered healthcare app 0 → 5,000+ downloads in 3 months on React Native, Redux Toolkit, and Firebase; built custom video streaming pipeline (500+ hrs/mo).",
     ],
-    stack: ["React Native", "TypeScript", "Redux Toolkit", "REST", "Firebase", "Push notifications", "Custom video tooling", "Video streaming"],
+    stack: ["React Native", "TypeScript", "Redux Toolkit", "REST", "Firebase", "Push notifications", "Video streaming"],
   },
   {
     company: "Sahl Solution",
@@ -220,9 +209,9 @@ export const experience: Experience[] = [
     period: "Jan 2019 – Dec 2019",
     location: "Cairo, Egypt · On-site",
     highlights: [
-      "Shipped 7 apps across health, marketplaces, and commerce; -68% API failure rate via offline-first design.",
+      "Shipped 7 apps on React Native/Redux with REST/GraphQL backends (WooCommerce, Magento); integrated CodePush, OneSignal, and Firebase analytics.",
     ],
-    stack: ["React Native", "JavaScript", "Redux", "Context API", "REST", "GraphQL", "WooCommerce", "Magento", "CodePush", "Firebase", "Sentry", "OneSignal", "Payments"],
+    stack: ["React Native", "JavaScript", "Redux", "REST", "GraphQL", "WooCommerce", "Magento", "CodePush", "Firebase", "OneSignal"],
   },
   {
     company: "RedApp",
@@ -231,8 +220,7 @@ export const experience: Experience[] = [
     period: "Sep 2017 – Dec 2018",
     location: "Bahrain · Remote",
     highlights: [
-      "Built full-stack platform (2,000+ users); admin UI with 10,000+ realtime records.",
-      "RN downloads 15,000+; -55% server latency by tuning Node/SQL backends.",
+      "Built full-stack MERN platform (React Native, Node.js, SQL) with admin UI and client REST/payment integrations; reduced server latency via backend tuning.",
     ],
     stack: ["React Native", "React.js", "Node.js", "SQL", "REST", "Push notifications", "Payment gateways"],
   },
@@ -368,9 +356,12 @@ export const projects: Project[] = [
     featured: true,
     shot: "/shots/vodafone-oman.webp",
     category: "Telecom",
-    blurb: "Live native→React Native migration with a new marketplace hub, Supabase-backed engagement tooling, and EAS OTA.",
+    blurb: "Led the migration of the live national telco app from native iOS/Android to React Native and Expo, with a new marketplace hub, Supabase-backed engagement tooling, and EAS OTA.",
     metric: "National telco app",
     tags: ["React Native", "Expo", "Supabase", "EAS"],
+    links: [
+      { label: "App Store", url: "https://apps.apple.com/om/app/my-vodafone-oman/id1589071343" },
+    ],
   },
   {
     name: "SoloGusto",

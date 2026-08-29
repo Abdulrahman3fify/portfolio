@@ -262,7 +262,7 @@ function Heading({ kicker, title, sub }: { kicker: string; title: string; sub?: 
 
 /* ---------- Employment-type badge ---------- */
 function TypeBadge({ type }: { type: string }) {
-  const strong = type === "Full-time" || type === "Founder · CTO";
+  const strong = type === "Full-time";
   return (
     <span
       className={`rounded-full border px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider ${
@@ -314,8 +314,7 @@ function About() {
         <div className="reveal rounded-2xl border border-line bg-card/60 p-7">
           <p className="mb-1 text-sm font-semibold text-heading">Currently</p>
           <p className="mb-5 text-xs leading-relaxed text-faint">
-            Three concurrent engagements — one full-time, one company I lead, one part-time
-            advisory.
+            One full-time role alongside two part-time advisory engagements.
           </p>
           <ul className="space-y-4">
             {current.map((e) => (
