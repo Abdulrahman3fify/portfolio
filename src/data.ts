@@ -73,12 +73,15 @@ export const experience: Experience[] = [
     company: "iHorizons (Ooredoo Qatar)",
     type: "Full-time",
     role: "Senior React Native Developer",
-    period: "Jun 2026 – Present",
+    period: "Jun 2024 – Present",
     location: "Qatar · Remote",
     highlights: [
       "Drive React Native delivery and production ownership across Ooredoo Qatar's consumer app (2.5M+ users) and Ooredoo Business (10,000+ enterprise users).",
+      "Improved app performance by 35% across the Ooredoo Qatar consumer and business apps.",
+      "Built Azure DevOps CI/CD on self-hosted runners; integrated Liferay and maintained shared packages across consumer & business apps.",
+      "Implemented Apple Pay, Google Pay, and Ooredoo Money with hardened REST integrations and Firebase analytics.",
     ],
-    stack: ["React Native", "React.js", "TypeScript", "Redux", "React Query", "REST", "Firebase"],
+    stack: ["React Native", "React.js", "TypeScript", "Redux", "React Query", "REST", "Firebase", "Azure DevOps CI/CD", "Self-hosted runners", "Liferay", "Apple Pay", "Google Pay", "Ooredoo Money"],
   },
   {
     company: "Vodafone Oman",
@@ -91,19 +94,6 @@ export const experience: Experience[] = [
       "Built marketplace hub (categories, bundles, checkout) on TypeScript, Zustand, and TanStack Query; added Supabase auth, EAS OTA updates, Expo notifications, and cart-reminder flows.",
     ],
     stack: ["React Native", "Expo", "TypeScript", "Zustand", "TanStack Query", "Supabase", "REST", "React Navigation", "React Hook Form", "Zod", "Expo Notifications", "EAS Build & Update"],
-  },
-  {
-    company: "iHorizons (Ooredoo Qatar)",
-    type: "Full-time",
-    role: "Senior React Native Developer",
-    period: "Jun 2024 – Jul 2025",
-    location: "Qatar · Remote",
-    highlights: [
-      "Improved app performance by 35% across the Ooredoo Qatar consumer and business apps.",
-      "Built Azure DevOps CI/CD on self-hosted runners; integrated Liferay and maintained shared packages across consumer & business apps.",
-      "Implemented Apple Pay, Google Pay, and Ooredoo Money with hardened REST integrations and Firebase analytics.",
-    ],
-    stack: ["React Native", "React.js", "TypeScript", "Redux", "React Query", "REST", "Firebase", "Azure DevOps CI/CD", "Self-hosted runners", "Liferay", "Apple Pay", "Google Pay", "Ooredoo Money"],
   },
   {
     company: "Blockchain Intelligence Group",
