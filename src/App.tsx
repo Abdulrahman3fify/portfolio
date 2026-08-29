@@ -261,7 +261,8 @@ function Heading({ kicker, title, sub }: { kicker: string; title: string; sub?: 
 }
 
 /* ---------- Employment-type badge ---------- */
-function TypeBadge({ type }: { type: string }) {
+function TypeBadge({ type }: { type?: string }) {
+  if (!type) return null;
   const strong = type === "Full-time";
   return (
     <span
@@ -314,7 +315,7 @@ function About() {
         <div className="reveal rounded-2xl border border-line bg-card/60 p-7">
           <p className="mb-1 text-sm font-semibold text-heading">Currently</p>
           <p className="mb-5 text-xs leading-relaxed text-faint">
-            One full-time role alongside two part-time advisory engagements.
+            Three engagements running in parallel.
           </p>
           <ul className="space-y-4">
             {current.map((e) => (
@@ -375,7 +376,7 @@ function ExperienceSection() {
       <Heading
         kicker="Journey"
         title="Where I've worked"
-        sub="Several engagements run in parallel — full-time roles alongside part-time advisory and freelance work. Each is labelled below."
+        sub="Several engagements run in parallel. Contract, advisory, and freelance work is labelled where it applies."
       />
       <div className="relative border-l border-line pl-6 sm:pl-8">
         {shown.map((e) => (

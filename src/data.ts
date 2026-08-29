@@ -60,7 +60,8 @@ export type EmploymentType = "Full-time" | "Part-time" | "Contract" | "Freelance
 export type Experience = {
   company: string;
   role: string;
-  type: EmploymentType;
+  /** Omitted where the CV leaves the title untagged. */
+  type?: EmploymentType;
   period: string;
   location: string;
   highlights: string[];
@@ -156,7 +157,6 @@ export const experience: Experience[] = [
   },
   {
     company: "Tamkeen Technology",
-    type: "Part-time",
     role: "Mobile Architect",
     period: "Jan 2023 – Present",
     location: "Saudi Arabia · Remote",
