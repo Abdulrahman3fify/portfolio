@@ -197,7 +197,7 @@ export const experience: Experience[] = [
     company: "Sahl Solution",
     type: "Full-time",
     role: "React Native Developer",
-    period: "Jan 2019 – Dec 2019",
+    period: "Jan 2019 – Sep 2019",
     location: "Cairo, Egypt · On-site",
     highlights: [
       "Shipped 7 apps on React Native/Redux with REST/GraphQL backends (WooCommerce, Magento); integrated CodePush, OneSignal, and Firebase analytics.",
