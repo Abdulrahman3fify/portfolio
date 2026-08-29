@@ -254,7 +254,7 @@ export type Project = {
   category: string;
   /** Highlighted at the top of the work section. */
   featured?: boolean;
-  /** Screenshot in /public/shots — falls back to a generated tile when absent. */
+  /** App Store screenshot in /public/shots — falls back to a generated tile when absent. */
   shot?: string;
   /** Coarse grouping used by the work-section filter. */
   domain: Domain;
@@ -269,7 +269,7 @@ export const projects: Project[] = [
     name: "Ooredoo Qatar",
     domain: "Telecom",
     featured: true,
-    shot: "/shots/ooredoo-qatar.png",
+    shot: "/shots/ooredoo-qatar.webp",
     category: "Telecom",
     blurb: "Flagship consumer telecom app for Ooredoo Qatar — account management, recharge, bundles, and self-service across iOS and Android.",
     metric: "2.5M+ users",
@@ -295,7 +295,7 @@ export const projects: Project[] = [
     name: "Homzmart",
     domain: "Commerce",
     featured: true,
-    shot: "/shots/homzmart.png",
+    shot: "/shots/homzmart.webp",
     category: "E-commerce",
     blurb: "Omni-channel furniture & home marketplace built from scratch and scaled across iOS, Android, and Huawei AppGallery.",
     metric: "2,000,000+ users",
@@ -310,7 +310,7 @@ export const projects: Project[] = [
     name: "Musaned",
     domain: "Platforms",
     featured: true,
-    shot: "/shots/musaned.png",
+    shot: "/shots/musaned.webp",
     category: "GovTech / Workforce",
     blurb: "Nationwide workforce & compliance mobile experience for Tamkeen, scaled ~300% while holding 99.5% crash-free.",
     metric: "200,000+ downloads",
@@ -324,7 +324,7 @@ export const projects: Project[] = [
     name: "Calo",
     domain: "Health",
     featured: true,
-    shot: "/shots/calo.png",
+    shot: "/shots/calo.webp",
     category: "Health / Food",
     blurb: "Healthy meal-subscription platform serving the GCC, kept at a 4.7★ rating with sub-second key flows.",
     metric: "500,000+ MAU",
@@ -338,7 +338,7 @@ export const projects: Project[] = [
     name: "TokenEyes",
     domain: "Fintech",
     featured: true,
-    shot: "/shots/tokeneyes.png",
+    shot: "/shots/tokeneyes.webp",
     category: "Fintech / Crypto",
     blurb: "Crypto onboarding & on-chain intelligence app for Blockchain Intelligence Group, with address-hash validation and IAP.",
     metric: "50K+ daily interactions",
@@ -366,7 +366,7 @@ export const projects: Project[] = [
     name: "Vodafone Oman",
     domain: "Telecom",
     featured: true,
-    shot: "/shots/vodafone-oman.png",
+    shot: "/shots/vodafone-oman.webp",
     category: "Telecom",
     blurb: "Live native→React Native migration with a new marketplace hub, Supabase-backed engagement tooling, and EAS OTA.",
     metric: "National telco app",

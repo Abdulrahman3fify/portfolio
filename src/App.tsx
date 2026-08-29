@@ -436,11 +436,9 @@ function Shot({
   const hasImage = Boolean(project.shot) && !failed;
   return (
     <div
-      className={`relative overflow-hidden rounded-[1.5rem] border border-line bg-ink-2 shadow-lg ${className}`}
+      className={`relative overflow-hidden rounded-xl border border-line bg-ink-2 shadow-lg ${className}`}
       {...rest}
     >
-      {/* device notch */}
-      <span className="absolute left-1/2 top-2 z-10 h-1.5 w-10 -translate-x-1/2 rounded-full bg-black/25" />
       {hasImage ? (
         <img
           src={project.shot}
@@ -519,7 +517,7 @@ function Projects() {
             key={p.name}
             className="reveal group flex gap-5 rounded-2xl border border-line bg-card/60 p-6 transition-all hover:-translate-y-1 hover:border-accent/50 hover:shadow-xl hover:shadow-accent/5"
           >
-            <Shot project={p} className="hidden aspect-[9/17] w-28 shrink-0 self-start sm:block" data-print-hide />
+            <Shot project={p} className="hidden aspect-[9/16] w-32 shrink-0 self-start sm:block" data-print-hide />
             <div className="flex min-w-0 flex-1 flex-col">
               <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
                 <span className="rounded-full bg-accent/10 px-2.5 py-1 text-[11px] font-medium text-accent">
