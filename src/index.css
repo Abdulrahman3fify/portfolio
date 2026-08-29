@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+/* The impeccable skill tooling committed at the repo root contains Tailwind
+   class names in its docs and scripts. Without this, Tailwind scans it and
+   ships dead rules (animate-bounce, animate-ping, ...) in the bundle. */
+@source not "../.claude";
+@source not "../.cursor";
+
 @theme {
   /* Dark palette = defaults */
   --color-ink: #0a0a0f;
@@ -21,10 +27,14 @@ html.light {
   --color-ink: #f6f7fb;
   --color-ink-2: #ffffff;
   --color-card: #ffffff;
+  /* Darker accents: #ff2d55 only reaches 3.6:1 on light, below AA for the
+     11-12px category pills and stack tags. These clear 5:1. */
+  --color-accent: #d61f43;
+  --color-accent-2: #c2521c;
   --color-heading: #0b0b12;
   --color-body: #3f3f46;
   --color-muted: #52525b;
-  --color-faint: #71717a;
+  --color-faint: #64646d;
   --color-line: rgba(10, 10, 20, 0.1);
   --color-surface: rgba(10, 10, 20, 0.045);
 }
@@ -43,8 +53,12 @@ html.light {
   }
   html.light body {
     background-image:
-      radial-gradient(60rem 60rem at 80% -10%, rgba(255, 45, 85, 0.1), transparent 60%),
-      radial-gradient(50rem 50rem at -10% 20%, rgba(255, 106, 61, 0.08), transparent 55%);
+      radial-gradient(60rem 60rem at 80% -10%, rgba(255, 45, 85, 0.055), transparent 60%),
+      radial-gradient(50rem 50rem at -10% 20%, rgba(255, 106, 61, 0.045), transparent 55%);
+  }
+  /* Fixed nav is ~72px; keep anchored headings clear of it. */
+  section[id] {
+    scroll-margin-top: 6rem;
   }
   ::selection {
     @apply bg-accent/30 text-white;
@@ -60,8 +74,20 @@ html.light {
     transform: translateY(24px);
     transition: opacity 0.7s ease, transform 0.7s ease;
   }
-  .reveal.in {
+  .reveal.in,
+  .reveal[data-in] {
     opacity: 1;
     transform: none;
   }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
 }
+
