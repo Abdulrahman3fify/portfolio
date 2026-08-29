@@ -55,9 +55,17 @@ export const skills: { group: string; items: string[] }[] = [
   },
 ];
 
+export type EmploymentType =
+  | "Full-time"
+  | "Part-time"
+  | "Contract"
+  | "Freelance"
+  | "Founder · CTO";
+
 export type Experience = {
   company: string;
   role: string;
+  type: EmploymentType;
   period: string;
   location: string;
   highlights: string[];
@@ -67,6 +75,7 @@ export type Experience = {
 export const experience: Experience[] = [
   {
     company: "Al-Manarh",
+    type: "Founder · CTO",
     role: "Chief Technology Officer (CTO)",
     period: "Jun 2024 – Present",
     location: "Remote",
@@ -79,6 +88,7 @@ export const experience: Experience[] = [
   },
   {
     company: "Vodafone Oman",
+    type: "Full-time",
     role: "Senior Mobile Engineer",
     period: "Jun 2025 – Present",
     location: "Muscat, Oman · On-site",
@@ -91,6 +101,7 @@ export const experience: Experience[] = [
   },
   {
     company: "iHorizons (Ooredoo Qatar)",
+    type: "Contract",
     role: "Senior Mobile Engineer",
     period: "Jun 2024 – Jul 2025",
     location: "Qatar · Remote",
@@ -118,6 +129,7 @@ export const experience: Experience[] = [
   },
   {
     company: "Blockchain Intelligence Group",
+    type: "Contract",
     role: "Senior Mobile Engineer",
     period: "Jun 2022 – Mar 2025",
     location: "Canada · Remote",
@@ -131,7 +143,8 @@ export const experience: Experience[] = [
   },
   {
     company: "Tamkeen Technology",
-    role: "Mobile Architect (Part-time)",
+    type: "Part-time",
+    role: "Mobile Architect",
     period: "Jan 2023 – Present",
     location: "Saudi Arabia · Remote",
     highlights: [
@@ -142,6 +155,7 @@ export const experience: Experience[] = [
   },
   {
     company: "Calo Inc",
+    type: "Contract",
     role: "Senior Mobile Engineer",
     period: "Jun 2022 – Nov 2022",
     location: "Bahrain · Remote",
@@ -153,6 +167,7 @@ export const experience: Experience[] = [
   },
   {
     company: "Homzmart",
+    type: "Full-time",
     role: "Mobile Team Lead",
     period: "Jun 2020 – Jan 2023",
     location: "Cairo, Egypt · On-site",
@@ -165,7 +180,8 @@ export const experience: Experience[] = [
   },
   {
     company: "Faheem",
-    role: "Mobile Team Lead (Part-time)",
+    type: "Part-time",
+    role: "Mobile Team Lead",
     period: "Jul 2021 – Apr 2022",
     location: "Saudi Arabia · Remote",
     highlights: [
@@ -176,7 +192,8 @@ export const experience: Experience[] = [
   },
   {
     company: "Proxify",
-    role: "Mobile Engineer (Freelance)",
+    type: "Freelance",
+    role: "Mobile Engineer",
     period: "Dec 2019 – Aug 2025",
     location: "Remote",
     highlights: [
@@ -187,6 +204,7 @@ export const experience: Experience[] = [
   },
   {
     company: "UpperMedic",
+    type: "Full-time",
     role: "React Native Developer",
     period: "Oct 2019 – Jun 2020",
     location: "Cairo, Egypt · On-site",
@@ -197,6 +215,7 @@ export const experience: Experience[] = [
   },
   {
     company: "Sahl Solution",
+    type: "Full-time",
     role: "React Native Developer",
     period: "Jan 2019 – Dec 2019",
     location: "Cairo, Egypt · On-site",
@@ -207,6 +226,7 @@ export const experience: Experience[] = [
   },
   {
     company: "RedApp",
+    type: "Full-time",
     role: "MERN Stack Developer",
     period: "Sep 2017 – Dec 2018",
     location: "Bahrain · Remote",
@@ -218,9 +238,26 @@ export const experience: Experience[] = [
   },
 ];
 
+export const domains = [
+  "Telecom",
+  "Commerce",
+  "Fintech",
+  "Health",
+  "Mobility",
+  "Platforms",
+] as const;
+
+export type Domain = (typeof domains)[number];
+
 export type Project = {
   name: string;
   category: string;
+  /** Highlighted at the top of the work section. */
+  featured?: boolean;
+  /** Screenshot in /public/shots — falls back to a generated tile when absent. */
+  shot?: string;
+  /** Coarse grouping used by the work-section filter. */
+  domain: Domain;
   blurb: string;
   metric: string;
   tags: string[];
@@ -230,6 +267,9 @@ export type Project = {
 export const projects: Project[] = [
   {
     name: "Ooredoo Qatar",
+    domain: "Telecom",
+    featured: true,
+    shot: "/shots/ooredoo-qatar.png",
     category: "Telecom",
     blurb: "Flagship consumer telecom app for Ooredoo Qatar — account management, recharge, bundles, and self-service across iOS and Android.",
     metric: "2.5M+ users",
@@ -241,6 +281,7 @@ export const projects: Project[] = [
   },
   {
     name: "Ooredoo Business",
+    domain: "Telecom",
     category: "Telecom / Enterprise",
     blurb: "Enterprise telco & workforce workflows for the Qatar market, hardened auth and 35% performance gains.",
     metric: "10,000+ enterprise users",
@@ -252,6 +293,9 @@ export const projects: Project[] = [
   },
   {
     name: "Homzmart",
+    domain: "Commerce",
+    featured: true,
+    shot: "/shots/homzmart.png",
     category: "E-commerce",
     blurb: "Omni-channel furniture & home marketplace built from scratch and scaled across iOS, Android, and Huawei AppGallery.",
     metric: "2,000,000+ users",
@@ -264,6 +308,9 @@ export const projects: Project[] = [
   },
   {
     name: "Musaned",
+    domain: "Platforms",
+    featured: true,
+    shot: "/shots/musaned.png",
     category: "GovTech / Workforce",
     blurb: "Nationwide workforce & compliance mobile experience for Tamkeen, scaled ~300% while holding 99.5% crash-free.",
     metric: "200,000+ downloads",
@@ -275,6 +322,9 @@ export const projects: Project[] = [
   },
   {
     name: "Calo",
+    domain: "Health",
+    featured: true,
+    shot: "/shots/calo.png",
     category: "Health / Food",
     blurb: "Healthy meal-subscription platform serving the GCC, kept at a 4.7★ rating with sub-second key flows.",
     metric: "500,000+ MAU",
@@ -286,6 +336,9 @@ export const projects: Project[] = [
   },
   {
     name: "TokenEyes",
+    domain: "Fintech",
+    featured: true,
+    shot: "/shots/tokeneyes.png",
     category: "Fintech / Crypto",
     blurb: "Crypto onboarding & on-chain intelligence app for Blockchain Intelligence Group, with address-hash validation and IAP.",
     metric: "50K+ daily interactions",
@@ -298,6 +351,7 @@ export const projects: Project[] = [
   },
   {
     name: "Faheem",
+    domain: "Platforms",
     category: "SMB Platform",
     blurb: "SMB platform rollout across mobile and web, led as team lead with a measurable jump in delivery quality.",
     metric: "8 releases / 10 months",
@@ -310,6 +364,9 @@ export const projects: Project[] = [
   },
   {
     name: "Vodafone Oman",
+    domain: "Telecom",
+    featured: true,
+    shot: "/shots/vodafone-oman.png",
     category: "Telecom",
     blurb: "Live native→React Native migration with a new marketplace hub, Supabase-backed engagement tooling, and EAS OTA.",
     metric: "National telco app",
@@ -317,6 +374,7 @@ export const projects: Project[] = [
   },
   {
     name: "SoloGusto",
+    domain: "Health",
     category: "Al-Manarh · Food / Delivery",
     blurb: "Restaurant & food-delivery platform with live maps, geolocation, and in-app payments — built end-to-end (mobile app + ops dashboard) as CTO at Al-Manarh.",
     metric: "Own product",
@@ -324,6 +382,7 @@ export const projects: Project[] = [
   },
   {
     name: "CarVentru",
+    domain: "Fintech",
     category: "Al-Manarh · Fintech",
     blurb: "Car-investment platform pairing a React Native app with a web dashboard — Supabase auth, secure keychain storage, and OTP onboarding.",
     metric: "Own product",
@@ -331,6 +390,7 @@ export const projects: Project[] = [
   },
   {
     name: "Azeer",
+    domain: "Platforms",
     category: "Al-Manarh · Twerlo (client)",
     blurb: "Azeer mobile app delivered for Twerlo, a client of Al-Manarh — engineering resources provided and managed as CTO.",
     metric: "Client (Twerlo)",
@@ -341,6 +401,7 @@ export const projects: Project[] = [
   },
   {
     name: "Wujhat",
+    domain: "Platforms",
     category: "Al-Manarh · Ra3d (client)",
     blurb: "Services & booking app with appointment calendars, in-app payments, and analytics — delivered for Ra3d, a client of Al-Manarh.",
     metric: "Client (Ra3d)",
@@ -352,6 +413,7 @@ export const projects: Project[] = [
   },
   {
     name: "Jewelers",
+    domain: "Commerce",
     category: "Al-Manarh · Ra3d (client)",
     blurb: "Jewelry marketplace app with Google sign-in, push notifications, card validation, and location-aware browsing — delivered for Ra3d, a client of Al-Manarh.",
     metric: "Client (Ra3d)",
@@ -363,6 +425,7 @@ export const projects: Project[] = [
   },
   {
     name: "Canoo",
+    domain: "Mobility",
     category: "Freelance · Automotive",
     blurb: "Consumer app for the Canoo EV ecosystem, delivered as a freelance engagement.",
     metric: "4.8★ avg rating",
@@ -374,6 +437,7 @@ export const projects: Project[] = [
   },
   {
     name: "TrustYou",
+    domain: "Platforms",
     category: "Freelance · Digital Parenting",
     blurb: "Proactive digital-parenting platform — a React Native (Expo) app using Apple FamilyControls, a Firebase backend with AI cloud functions (Vertex AI / Gemini), and an admin dashboard.",
     metric: "AI-powered safety",
@@ -381,6 +445,7 @@ export const projects: Project[] = [
   },
   {
     name: "Speetar Health",
+    domain: "Health",
     category: "Freelance · Healthcare",
     blurb: "Telehealth platform connecting patients with physicians, built for a global client base.",
     metric: "Cross-border telehealth",
@@ -392,6 +457,7 @@ export const projects: Project[] = [
   },
   {
     name: "Tawal (Sufara)",
+    domain: "Telecom",
     category: "Freelance · Telecom",
     blurb: "Field & partner portal experience for TAWAL — work recognized with the Best Employee Award (2023).",
     metric: "Best Employee Award",
@@ -403,6 +469,7 @@ export const projects: Project[] = [
   },
   {
     name: "PikaDo",
+    domain: "Platforms",
     category: "Freelance · EdTech",
     blurb: "Education-focused mobile product shipped end-to-end as a freelance engagement.",
     metric: "Global client reach",
@@ -414,6 +481,7 @@ export const projects: Project[] = [
   },
   {
     name: "Alfaris Rent A Car",
+    domain: "Mobility",
     category: "Freelance · Mobility",
     blurb: "Car-rental booking app for the UAE market, delivered ahead of projected timelines.",
     metric: "UAE car rental",
@@ -424,6 +492,7 @@ export const projects: Project[] = [
   },
   {
     name: "Naqla",
+    domain: "Mobility",
     category: "Logistics",
     blurb: "Request-a-truck logistics platform with offline-first design, shipped at Sahl Solution.",
     metric: "-68% API failure rate",

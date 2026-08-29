@@ -9,10 +9,36 @@
       content="Abdulrahman Afify — Senior Mobile Engineer. React Native, React, TypeScript. 9+ years building high-performance apps scaled to 2M+ users."
     />
     <title>Abdulrahman Afify — Senior Mobile Engineer</title>
+    <link rel="canonical" href="https://abdulrahman-afify-portfolio.vercel.app/" />
+    <meta name="theme-color" content="#0a0a0f" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="profile" />
+    <meta property="og:site_name" content="Abdulrahman Afify" />
+    <meta property="og:title" content="Abdulrahman Afify — Senior Mobile Engineer" />
+    <meta
+      property="og:description"
+      content="React Native · React · TypeScript. 9+ years shipping iOS and Android apps scaled to 2M+ users, at up to 99.5% crash-free sessions."
+    />
+    <meta property="og:url" content="https://abdulrahman-afify-portfolio.vercel.app/" />
+    <meta property="og:image" content="https://abdulrahman-afify-portfolio.vercel.app/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Abdulrahman Afify — Senior Mobile Engineer" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Abdulrahman Afify — Senior Mobile Engineer" />
+    <meta
+      name="twitter:description"
+      content="React Native · React · TypeScript. 9+ years shipping iOS and Android apps scaled to 2M+ users."
+    />
+    <meta name="twitter:image" content="https://abdulrahman-afify-portfolio.vercel.app/og.png" />
     <script>
       (function () {
         try {
-          var t = localStorage.getItem("theme");
+          var q = new URLSearchParams(location.search).get("theme");
+          var t = q === "light" || q === "dark" ? q : localStorage.getItem("theme");
           if (t !== "light" && t !== "dark") {
             t = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
           }
