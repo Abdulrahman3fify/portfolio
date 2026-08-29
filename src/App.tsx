@@ -1,32 +1,44 @@
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 import {
   profile,
   stats,
   skills,
   experience,
   projects,
+  domains,
   education,
   certifications,
   awards,
+  type Domain,
+  type Project,
 } from "./data";
 
 /* ---------- reveal-on-scroll hook ---------- */
 function useReveal() {
   useEffect(() => {
-    const els = document.querySelectorAll(".reveal");
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
           if (e.isIntersecting) {
-            e.target.classList.add("in");
+            e.target.setAttribute("data-in", "");
             io.unobserve(e.target);
           }
         });
       },
-      { threshold: 0.12 }
+      { threshold: 0.05, rootMargin: "0px 0px -40px 0px" }
     );
-    els.forEach((el) => io.observe(el));
-    return () => io.disconnect();
+    const observe = () =>
+      document
+        .querySelectorAll(".reveal:not(.in):not([data-in])")
+        .forEach((el) => io.observe(el));
+    observe();
+    // Re-observe nodes added by filtering / "show more" toggles.
+    const mo = new MutationObserver(observe);
+    mo.observe(document.body, { childList: true, subtree: true });
+    return () => {
+      io.disconnect();
+      mo.disconnect();
+    };
   }, []);
 }
 
@@ -74,6 +86,9 @@ const Icon = {
   calendar: (
     <path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1V3a1 1 0 0 1 1-1Zm13 7H4v10h16V9ZM4 7h16V6H4v1Z" />
   ),
+  download: (
+    <path d="M12 3a1 1 0 0 1 1 1v9.59l3.3-3.3a1 1 0 1 1 1.4 1.42l-5 5a1 1 0 0 1-1.4 0l-5-5a1 1 0 1 1 1.4-1.42l3.3 3.3V4a1 1 0 0 1 1-1ZM4 19a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1Z" />
+  ),
   apple: (
     <path d="M17.05 12.04c-.03-2.6 2.12-3.84 2.22-3.9-1.21-1.78-3.09-2.02-3.76-2.05-1.6-.16-3.12.94-3.93.94-.81 0-2.06-.92-3.39-.89-1.74.02-3.35 1.01-4.25 2.57-1.81 3.14-.46 7.79 1.3 10.34.86 1.25 1.89 2.65 3.23 2.6 1.29-.05 1.78-.83 3.34-.83s2 .83 3.37.81c1.39-.03 2.27-1.27 3.12-2.53.98-1.45 1.39-2.85 1.41-2.92-.03-.01-2.7-1.04-2.73-4.13M14.5 4.6c.71-.86 1.19-2.06 1.06-3.25-1.02.04-2.26.68-2.99 1.54-.66.76-1.23 1.98-1.08 3.15 1.14.09 2.3-.58 3.01-1.44" />
   ),
@@ -103,7 +118,7 @@ const sections = [
   { id: "about", label: "About" },
   { id: "skills", label: "Skills" },
   { id: "experience", label: "Experience" },
-  { id: "projects", label: "Projects" },
+  { id: "projects", label: "Work" },
   { id: "contact", label: "Contact" },
 ];
 
@@ -159,37 +174,40 @@ function Nav() {
 
 /* ---------- Hero ---------- */
 function Hero() {
+  const headline = profile.summary.split(". ")[0] + ".";
   return (
-    <section id="top" className="relative mx-auto max-w-6xl px-6 pb-20 pt-36 sm:pt-44">
+    <section id="top" className="relative mx-auto max-w-6xl px-6 pb-16 pt-36 sm:pt-44">
       <div className="flex flex-col-reverse items-start gap-10 lg:flex-row lg:items-center lg:justify-between lg:gap-12">
         <div className="w-full lg:flex-1">
-      <p className="reveal in mb-4 inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1 text-xs text-muted">
-        <span className="h-2 w-2 rounded-full bg-green-400" /> Available for senior / lead mobile roles
-      </p>
-      <h1 className="reveal in max-w-3xl text-4xl font-extrabold leading-tight tracking-tight text-heading sm:text-6xl">
-        {profile.name}
-      </h1>
-      <p className="reveal in mt-4 text-xl font-medium sm:text-2xl">
-        <span className="gradient-text">{profile.title}</span>
-        <span className="text-faint"> · {profile.tagline}</span>
-      </p>
-      <p className="reveal in mt-6 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
-        {profile.summary}
-      </p>
-      <div className="reveal in mt-8 flex flex-wrap gap-3">
-        <a
-          href="#projects"
-          className="rounded-full bg-gradient-to-r from-accent to-accent-2 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-accent/20 transition-transform hover:-translate-y-0.5"
-        >
-          View selected work
-        </a>
-        <a
-          href={`mailto:${profile.email}`}
-          className="rounded-full border border-line px-6 py-3 text-sm font-semibold text-heading transition-colors hover:border-accent hover:bg-accent/10"
-        >
-          Get in touch
-        </a>
-      </div>
+          <p className="reveal in mb-4 inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1 text-xs text-muted">
+            <span className="h-2 w-2 rounded-full bg-green-400" /> Available for senior / lead mobile
+            roles
+          </p>
+          <h1 className="reveal in max-w-3xl text-4xl font-extrabold leading-tight tracking-tight text-heading sm:text-6xl">
+            {profile.name}
+          </h1>
+          <p className="reveal in mt-4 text-xl font-medium sm:text-2xl">
+            <span className="gradient-text">{profile.title}</span>
+            <span className="text-faint"> · {profile.tagline}</span>
+          </p>
+          <p className="reveal in mt-6 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
+            {headline}
+          </p>
+          <div className="reveal in mt-8 flex flex-wrap gap-3">
+            <a
+              href="#projects"
+              className="rounded-full bg-gradient-to-r from-accent to-accent-2 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-accent/20 transition-transform hover:-translate-y-0.5"
+            >
+              View selected work
+            </a>
+            <ResumeButton />
+            <a
+              href={`mailto:${profile.email}`}
+              className="rounded-full border border-line px-6 py-3 text-sm font-semibold text-heading transition-colors hover:border-accent hover:bg-accent/10"
+            >
+              Get in touch
+            </a>
+          </div>
         </div>
         <div className="reveal in mx-auto w-44 shrink-0 sm:w-52 lg:mx-0">
           <div className="rounded-full bg-gradient-to-br from-accent to-accent-2 p-1.5 shadow-xl shadow-accent/20">
@@ -216,13 +234,104 @@ function Hero() {
   );
 }
 
+/* ---------- CV download (prints the page via the print stylesheet) ---------- */
+function ResumeButton() {
+  return (
+    <button
+      type="button"
+      onClick={() => window.print()}
+      data-print-hide
+      className="inline-flex items-center gap-2 rounded-full border border-line px-6 py-3 text-sm font-semibold text-heading transition-colors hover:border-accent hover:bg-accent/10"
+    >
+      <Svg className="h-4 w-4">{Icon.download}</Svg>
+      Download CV
+    </button>
+  );
+}
+
 /* ---------- Section heading ---------- */
-function Heading({ kicker, title }: { kicker: string; title: string }) {
+function Heading({ kicker, title, sub }: { kicker: string; title: string; sub?: string }) {
   return (
     <div className="reveal mb-10">
       <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-accent">{kicker}</p>
       <h2 className="text-3xl font-bold tracking-tight text-heading sm:text-4xl">{title}</h2>
+      {sub && <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted">{sub}</p>}
     </div>
+  );
+}
+
+/* ---------- Employment-type badge ---------- */
+function TypeBadge({ type }: { type: string }) {
+  const strong = type === "Full-time" || type === "Founder · CTO";
+  return (
+    <span
+      className={`rounded-full border px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider ${
+        strong ? "border-accent/40 bg-accent/10 text-accent" : "border-line bg-surface text-faint"
+      }`}
+    >
+      {type}
+    </span>
+  );
+}
+
+/* ---------- About ---------- */
+function About() {
+  const current = experience.filter((e) => e.period.includes("Present"));
+  // The hero already carries the first sentence; don't repeat it here.
+  const aboutBody = profile.summary.split(". ").slice(1).join(". ");
+  return (
+    <section id="about" className="mx-auto max-w-6xl px-6 py-20">
+      <Heading kicker="About" title="Senior mobile engineer, nine years in production" />
+      <div className="grid gap-5 lg:grid-cols-[1.35fr_1fr]">
+        <div className="reveal rounded-2xl border border-line bg-card/60 p-7">
+          <p className="text-base leading-relaxed text-body">{aboutBody}</p>
+          <dl className="mt-6 grid gap-4 border-t border-line pt-6 sm:grid-cols-2">
+            <div>
+              <dt className="text-[11px] uppercase tracking-wider text-faint">Based in</dt>
+              <dd className="mt-1 text-sm text-body">{profile.location}</dd>
+            </div>
+            <div>
+              <dt className="text-[11px] uppercase tracking-wider text-faint">Focus</dt>
+              <dd className="mt-1 text-sm text-body">
+                React Native · iOS &amp; Android · Team leadership
+              </dd>
+            </div>
+            <div>
+              <dt className="text-[11px] uppercase tracking-wider text-faint">Education</dt>
+              <dd className="mt-1 text-sm text-body">
+                {education.degree}, {education.school}
+              </dd>
+            </div>
+            <div>
+              <dt className="text-[11px] uppercase tracking-wider text-faint">Open to</dt>
+              <dd className="mt-1 text-sm text-body">
+                Senior / lead roles · selected freelance
+              </dd>
+            </div>
+          </dl>
+        </div>
+
+        <div className="reveal rounded-2xl border border-line bg-card/60 p-7">
+          <p className="mb-1 text-sm font-semibold text-heading">Currently</p>
+          <p className="mb-5 text-xs leading-relaxed text-faint">
+            Three concurrent engagements — one full-time, one company I lead, one part-time
+            advisory.
+          </p>
+          <ul className="space-y-4">
+            {current.map((e) => (
+              <li key={e.company} className="border-l-2 border-accent/40 pl-4">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="text-sm font-semibold text-heading">{e.company}</span>
+                  <TypeBadge type={e.type} />
+                </div>
+                <p className="mt-1 text-xs text-muted">{e.role}</p>
+                <p className="mt-0.5 text-xs text-faint">{e.period}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -256,17 +365,29 @@ function Skills() {
 }
 
 /* ---------- Experience timeline ---------- */
+const RECENT_ROLES = 5;
+
 function ExperienceSection() {
+  const [expanded, setExpanded] = useState(false);
+  const shown = expanded ? experience : experience.slice(0, RECENT_ROLES);
+  const hidden = experience.length - RECENT_ROLES;
   return (
     <section id="experience" className="mx-auto max-w-6xl px-6 py-20">
-      <Heading kicker="Journey" title="Where I've worked" />
+      <Heading
+        kicker="Journey"
+        title="Where I've worked"
+        sub="Several engagements run in parallel — full-time roles alongside part-time advisory and freelance work. Each is labelled below."
+      />
       <div className="relative border-l border-line pl-6 sm:pl-8">
-        {experience.map((e) => (
+        {shown.map((e) => (
           <div key={e.company + e.period} className="reveal relative mb-10 last:mb-0">
             <span className="absolute -left-[31px] top-1.5 h-3.5 w-3.5 rounded-full border-2 border-accent bg-ink sm:-left-[39px]" />
             <div className="rounded-2xl border border-line bg-card/60 p-6 transition-colors hover:border-accent/40">
               <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                <h3 className="text-lg font-semibold text-heading">{e.company}</h3>
+                <div className="flex flex-wrap items-center gap-2.5">
+                  <h3 className="text-lg font-semibold text-heading">{e.company}</h3>
+                  <TypeBadge type={e.type} />
+                </div>
                 <span className="text-xs font-medium text-accent">{e.period}</span>
               </div>
               <p className="mt-0.5 text-sm text-muted">
@@ -291,54 +412,197 @@ function ExperienceSection() {
           </div>
         ))}
       </div>
+      {!expanded && hidden > 0 && (
+        <button
+          type="button"
+          data-print-hide
+          onClick={() => setExpanded(true)}
+          className="mt-8 rounded-full border border-line px-5 py-2.5 text-sm font-medium text-heading transition-colors hover:border-accent hover:bg-accent/10"
+        >
+          Show {hidden} earlier roles
+        </button>
+      )}
     </section>
+  );
+}
+
+/* ---------- Project screenshot (falls back to a generated tile) ---------- */
+function Shot({
+  project,
+  className = "",
+  ...rest
+}: { project: Project; className?: string } & React.HTMLAttributes<HTMLDivElement>) {
+  const [failed, setFailed] = useState(false);
+  const hasImage = Boolean(project.shot) && !failed;
+  return (
+    <div
+      className={`relative overflow-hidden rounded-[1.5rem] border border-line bg-ink-2 shadow-lg ${className}`}
+      {...rest}
+    >
+      {/* device notch */}
+      <span className="absolute left-1/2 top-2 z-10 h-1.5 w-10 -translate-x-1/2 rounded-full bg-black/25" />
+      {hasImage ? (
+        <img
+          src={project.shot}
+          alt={`${project.name} app screenshot`}
+          loading="lazy"
+          onError={() => setFailed(true)}
+          className="h-full w-full object-cover"
+        />
+      ) : (
+        <div className="flex h-full w-full flex-col items-center justify-center gap-2 bg-gradient-to-br from-accent/20 via-accent-2/10 to-transparent">
+          <span className="text-3xl font-extrabold tracking-tight text-heading/80">
+            {project.name.charAt(0)}
+          </span>
+          <span className="px-2 text-center text-[10px] leading-tight text-faint">
+            {project.domain}
+          </span>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function StoreLinks({ project }: { project: Project }) {
+  if (!project.links) return null;
+  return (
+    <div className="mt-4 flex flex-wrap gap-2 border-t border-line pt-4" data-print-hide>
+      {project.links.map((l) => (
+        <a
+          key={l.label}
+          href={l.url}
+          target="_blank"
+          rel="noreferrer"
+          className="inline-flex items-center gap-1.5 rounded-lg border border-line bg-surface px-2.5 py-1.5 text-xs font-semibold text-body transition-all hover:-translate-y-0.5 hover:border-accent hover:bg-accent/10 hover:text-accent"
+        >
+          <Svg className="h-3.5 w-3.5">{platformIcon(l.label)}</Svg>
+          {l.label}
+        </a>
+      ))}
+    </div>
   );
 }
 
 /* ---------- Projects ---------- */
 function Projects() {
+  const [filter, setFilter] = useState<Domain | "All">("All");
+  const [showAll, setShowAll] = useState(false);
+
+  const featured = useMemo(() => projects.filter((p) => p.featured), []);
+  const rest = useMemo(() => projects.filter((p) => !p.featured), []);
+
+  const filtered = useMemo(
+    () => (filter === "All" ? rest : rest.filter((p) => p.domain === filter)),
+    [filter, rest]
+  );
+  const visible = showAll || filter !== "All" ? filtered : filtered.slice(0, 6);
+  const remaining = filtered.length - visible.length;
+
+  const counts = useMemo(() => {
+    const c: Record<string, number> = { All: rest.length };
+    rest.forEach((p) => (c[p.domain] = (c[p.domain] ?? 0) + 1));
+    return c;
+  }, [rest]);
+
   return (
     <section id="projects" className="mx-auto max-w-6xl px-6 py-20">
-      <Heading kicker="Selected work" title="Products I've shipped" />
-      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {projects.map((p) => (
+      <Heading
+        kicker="Selected work"
+        title="Products I've shipped"
+        sub={`${projects.length} shipped products across telecom, commerce, fintech, health, and mobility. The six below carry the most scale.`}
+      />
+
+      {/* Featured */}
+      <div className="grid gap-5 lg:grid-cols-2">
+        {featured.map((p) => (
           <article
             key={p.name}
-            className="reveal group flex flex-col rounded-2xl border border-line bg-card/60 p-6 transition-all hover:-translate-y-1 hover:border-accent/50 hover:shadow-xl hover:shadow-accent/5"
+            className="reveal group flex gap-5 rounded-2xl border border-line bg-card/60 p-6 transition-all hover:-translate-y-1 hover:border-accent/50 hover:shadow-xl hover:shadow-accent/5"
           >
-            <div className="mb-3 flex items-center justify-between">
-              <span className="rounded-full bg-accent/10 px-2.5 py-1 text-[11px] font-medium text-accent">
-                {p.category}
-              </span>
-              <span className="text-[11px] font-semibold text-faint">{p.metric}</span>
-            </div>
-            <h3 className="text-lg font-semibold text-heading">{p.name}</h3>
-            <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">{p.blurb}</p>
-            <div className="mt-4 flex flex-wrap gap-1.5">
-              {p.tags.map((t) => (
-                <span key={t} className="rounded-md bg-surface px-2 py-0.5 text-[11px] text-muted">
-                  {t}
+            <Shot project={p} className="hidden aspect-[9/17] w-28 shrink-0 self-start sm:block" data-print-hide />
+            <div className="flex min-w-0 flex-1 flex-col">
+              <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+                <span className="rounded-full bg-accent/10 px-2.5 py-1 text-[11px] font-medium text-accent">
+                  {p.category}
                 </span>
-              ))}
-            </div>
-            {p.links && (
-              <div className="mt-4 flex flex-wrap gap-2 border-t border-line pt-4">
-                {p.links.map((l) => (
-                  <a
-                    key={l.label}
-                    href={l.url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-1.5 rounded-lg border border-line bg-surface px-2.5 py-1.5 text-xs font-semibold text-body transition-all hover:-translate-y-0.5 hover:border-accent hover:bg-accent/10 hover:text-accent"
-                  >
-                    <Svg className="h-3.5 w-3.5">{platformIcon(l.label)}</Svg>
-                    {l.label}
-                  </a>
+                <span className="text-[11px] font-semibold text-faint">{p.metric}</span>
+              </div>
+              <h3 className="text-xl font-semibold text-heading">{p.name}</h3>
+              <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">{p.blurb}</p>
+              <div className="mt-4 flex flex-wrap gap-1.5">
+                {p.tags.map((t) => (
+                  <span key={t} className="rounded-md bg-surface px-2 py-0.5 text-[11px] text-muted">
+                    {t}
+                  </span>
                 ))}
               </div>
-            )}
+              <StoreLinks project={p} />
+            </div>
           </article>
         ))}
+      </div>
+
+      {/* Filter + the rest */}
+      <div className="mt-16">
+        <div className="reveal mb-6 flex flex-wrap items-center gap-2" data-print-hide>
+          <span className="mr-1 text-xs uppercase tracking-wider text-faint">More work</span>
+          {(["All", ...domains] as const).map((d) => (
+            <button
+              key={d}
+              type="button"
+              onClick={() => {
+                setFilter(d);
+                setShowAll(false);
+              }}
+              aria-pressed={filter === d}
+              className={`rounded-full border px-3.5 py-1.5 text-xs font-medium transition-colors ${
+                filter === d
+                  ? "border-accent bg-accent/10 text-accent"
+                  : "border-line text-muted hover:border-accent/50 hover:text-heading"
+              }`}
+            >
+              {d}
+              <span className="ml-1.5 text-[10px] opacity-60">{counts[d] ?? 0}</span>
+            </button>
+          ))}
+        </div>
+
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {visible.map((p) => (
+            <article
+              key={p.name}
+              className="reveal group flex flex-col rounded-2xl border border-line bg-card/60 p-6 transition-all hover:-translate-y-1 hover:border-accent/50 hover:shadow-xl hover:shadow-accent/5"
+            >
+              <div className="mb-3 flex items-center justify-between gap-2">
+                <span className="rounded-full bg-accent/10 px-2.5 py-1 text-[11px] font-medium text-accent">
+                  {p.category}
+                </span>
+                <span className="shrink-0 text-[11px] font-semibold text-faint">{p.metric}</span>
+              </div>
+              <h3 className="text-lg font-semibold text-heading">{p.name}</h3>
+              <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">{p.blurb}</p>
+              <div className="mt-4 flex flex-wrap gap-1.5">
+                {p.tags.map((t) => (
+                  <span key={t} className="rounded-md bg-surface px-2 py-0.5 text-[11px] text-muted">
+                    {t}
+                  </span>
+                ))}
+              </div>
+              <StoreLinks project={p} />
+            </article>
+          ))}
+        </div>
+
+        {remaining > 0 && (
+          <button
+            type="button"
+            data-print-hide
+            onClick={() => setShowAll(true)}
+            className="mt-8 rounded-full border border-line px-5 py-2.5 text-sm font-medium text-heading transition-colors hover:border-accent hover:bg-accent/10"
+          >
+            Show {remaining} more {remaining === 1 ? "project" : "projects"}
+          </button>
+        )}
       </div>
     </section>
   );
@@ -350,7 +614,9 @@ function Education() {
     <section className="mx-auto max-w-6xl px-6 py-20">
       <div className="grid gap-5 lg:grid-cols-3">
         <div className="reveal rounded-2xl border border-line bg-card/60 p-6">
-          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-accent">Education</p>
+          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-accent">
+            Education
+          </p>
           <h3 className="text-lg font-semibold text-heading">{education.school}</h3>
           <p className="mt-1 text-sm text-body">{education.degree}</p>
           <p className="mt-1 text-xs text-faint">
@@ -359,7 +625,9 @@ function Education() {
           <p className="mt-3 text-xs leading-relaxed text-muted">{education.coursework}</p>
         </div>
         <div className="reveal rounded-2xl border border-line bg-card/60 p-6">
-          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-accent">Certifications</p>
+          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-accent">
+            Certifications
+          </p>
           <ul className="space-y-2">
             {certifications.map((c) => (
               <li key={c} className="flex gap-2.5 text-sm text-body">
@@ -400,7 +668,8 @@ function Contact() {
           Let's build something <span className="gradient-text">great</span>.
         </h2>
         <p className="mx-auto mt-4 max-w-xl text-muted">
-          Open to senior and lead mobile engineering roles, and selected freelance work. Based in {profile.location}.
+          Open to senior and lead mobile engineering roles, and selected freelance work. Based in{" "}
+          {profile.location}.
         </p>
         <div className="mt-8">
           <a
@@ -443,6 +712,7 @@ export default function App() {
       <Nav />
       <main>
         <Hero />
+        <About />
         <Skills />
         <ExperienceSection />
         <Projects />
