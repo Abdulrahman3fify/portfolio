@@ -171,14 +171,14 @@ export const experience: Experience[] = [
     stack: ["React Native", "Expo", "React", "TypeScript", "Supabase", "Firebase", "Zustand", "TanStack Query", "MyFatoorah", "Amplitude"],
   },
   {
-    company: "Proxify",
+    company: "Independent",
     type: "Freelance",
     role: "Mobile Engineer · Project-based",
     period: "Dec 2019 – Present",
     location: "Remote",
     highlights: [
-      "15+ projects on React Native/TypeScript across global clients (300,000+ combined reach); avg. 4.8★ ratings; routinely 15%+ faster than projected timelines.",
-      "Representative engagements — Canoo, Speetar Health, Tawal (Sufara), PikaDo, Alfaris Rent A Car.",
+      "15+ projects on React Native/TypeScript across global clients (300,000+ combined reach); routinely 15%+ faster than projected timelines.",
+      "Engaged through Proxify since Sep 2023; direct client work before that. Representative engagements — Canoo, Speetar Health, Tawal (Sufara), PikaDo, Alfaris Rent A Car.",
     ],
     stack: ["React Native", "TypeScript", "Zustand", "GraphQL", "CodePush", "Contentful", "Firebase"],
   },
