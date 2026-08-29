@@ -1,18 +1,12 @@
 # App screenshots
 
-Drop a PNG here for each featured project, named to match the `shot` field in
-`src/data.ts`:
+One image per featured project, named to match the `shot` field in
+`src/data.ts`. Current files came from the App Store listings linked on each
+project (Apple's public lookup API), downscaled to 420px wide and saved as
+WebP — ~13-31KB each.
 
-    ooredoo-qatar.png
-    homzmart.png
-    vodafone-oman.png
-    musaned.png
-    calo.png
-    tokeneyes.png
+To replace one, drop in a file with the same name. Sources are all 9:16, which
+is what the card slot expects; anything else gets object-cover cropped.
 
-Format: portrait phone screenshot, ~9:19.5 (e.g. 1170×2532 from an iPhone
-simulator). They are displayed inside a device frame at ~112px wide, so
-anything above 600px wide is plenty — keep them under ~200KB each.
-
-Until a file exists the card renders a generated fallback tile, so missing
-screenshots never show a broken image.
+If a file is missing the card renders a generated fallback tile, so a bad path
+never shows a broken image.
