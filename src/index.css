@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+/* The impeccable skill tooling committed at the repo root contains Tailwind
+   class names in its docs and scripts. Without this, Tailwind scans it and
+   ships dead rules (animate-bounce, animate-ping, ...) in the bundle. */
+@source not "../.claude";
+@source not "../.cursor";
+
 @theme {
   /* Dark palette = defaults */
   --color-ink: #0a0a0f;
