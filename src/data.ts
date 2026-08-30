@@ -29,6 +29,7 @@ export const skills: { group: string; items: string[] }[] = [
     group: "Mobile & Web",
     items: [
       "React Native",
+      "Native modules (Swift/Kotlin bridging)",
       "React.js",
       "Redux / Toolkit",
       "MobX",
@@ -43,11 +44,11 @@ export const skills: { group: string; items: string[] }[] = [
   },
   {
     group: "Quality",
-    items: ["Jest", "Detox", "Sentry", "Instabug", "Performance profiling"],
+    items: ["Jest", "Detox", "Sentry", "Instabug", "Crashlytics", "Performance monitoring & profiling"],
   },
   {
-    group: "Growth & Ops",
-    items: ["CleverTap", "Segment", "AppsFlyer", "Adjust", "Datadog"],
+    group: "Mobile Analytics & Growth",
+    items: ["CleverTap", "Segment", "AppsFlyer", "Adjust", "Datadog", "Amplitude", "A/B testing & experimentation"],
   },
   {
     group: "AI-assisted dev",
