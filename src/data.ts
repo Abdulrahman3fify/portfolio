@@ -172,7 +172,7 @@ export const experience: Experience[] = [
     stack: ["React Native", "Expo", "React", "TypeScript", "Supabase", "Firebase", "Zustand", "TanStack Query", "MyFatoorah", "Amplitude"],
   },
   {
-    company: "Independent",
+    company: "Self-employed",
     type: "Freelance",
     role: "Mobile Engineer · Project-based",
     period: "Dec 2019 – Present",
