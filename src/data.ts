@@ -44,7 +44,7 @@ export const skills: { group: string; items: string[] }[] = [
   },
   {
     group: "Quality",
-    items: ["Jest", "Detox", "Sentry", "Instabug", "Crashlytics", "Performance monitoring & profiling"],
+    items: ["Unit testing (Jest)", "E2E testing (Detox)", "Sentry", "Instabug", "Crashlytics", "Performance monitoring & profiling"],
   },
   {
     group: "Mobile Analytics & Growth",
