@@ -6,7 +6,7 @@ export const profile = {
     "Senior Mobile Engineer with 9+ years building high-performance iOS and Android apps. Scaled products to 2M+ users, sustained up to 99.5% crash-free sessions, and shipped 50+ apps across fintech, e-commerce, healthcare, and telecom.",
   location: "Muscat, Oman (Al Khoudh)",
   nationality: "Egyptian",
-  email: "Abdelrahman3fify@gmail.com",
+  email: "Abdulrahman3fify@gmail.com",
   phone: "+968 9228 0742",
   linkedin: "https://linkedin.com/in/abdulrahman-a-764151162/",
   github: "https://github.com/Abdulrahman3fify",
@@ -29,6 +29,7 @@ export const skills: { group: string; items: string[] }[] = [
     group: "Mobile & Web",
     items: [
       "React Native",
+      "Native modules (Swift/Kotlin bridging)",
       "React.js",
       "Redux / Toolkit",
       "MobX",
@@ -43,11 +44,11 @@ export const skills: { group: string; items: string[] }[] = [
   },
   {
     group: "Quality",
-    items: ["Jest", "Detox", "Sentry", "Instabug", "Performance profiling"],
+    items: ["Unit testing (Jest)", "E2E testing (Detox)", "Sentry", "Instabug", "Crashlytics", "Performance monitoring & profiling"],
   },
   {
-    group: "Growth & Ops",
-    items: ["CleverTap", "Segment", "AppsFlyer", "Adjust", "Datadog"],
+    group: "Mobile Analytics & Growth",
+    items: ["CleverTap", "Segment", "AppsFlyer", "Adjust", "Datadog", "Amplitude", "A/B testing & experimentation"],
   },
   {
     group: "AI-assisted dev",
