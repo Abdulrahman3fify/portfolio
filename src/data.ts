@@ -331,8 +331,8 @@ export const projects: Project[] = [
   {
     name: "Faheem",
     domain: "Platforms",
-    category: "SMB Platform",
-    blurb: "SMB platform rollout across mobile and web, led as team lead with a measurable jump in delivery quality.",
+    category: "EdTech Marketplace",
+    blurb: "Two-sided tutoring marketplace pairing students with vetted private tutors from primary through university level, delivered across iOS, Android, and web. Led the mobile team and the release process.",
     metric: "8 releases / 10 months",
     tags: ["React Native", "Next.js", "Redux Toolkit", "Fastlane"],
     links: [
@@ -407,10 +407,10 @@ export const projects: Project[] = [
   },
   {
     name: "Canoo",
-    domain: "Mobility",
-    category: "Freelance · Automotive",
-    blurb: "Consumer app for the Canoo EV ecosystem, delivered as a freelance engagement.",
-    metric: "4.8★ avg rating",
+    domain: "Platforms",
+    category: "Freelance · Travel / Culture",
+    blurb: "Discovery app for the Institute for Canadian Citizenship's Canoo program — handpicked cultural and travel recommendations helping new Canadians explore the country, with saving and location-aware browsing.",
+    metric: "National cultural program",
     tags: ["React Native", "TypeScript", "REST"],
     links: [
       { label: "App Store", url: "https://apps.apple.com/eg/app/canoo/id1458141380" },
@@ -453,8 +453,8 @@ export const projects: Project[] = [
     name: "PikaDo",
     domain: "Platforms",
     category: "Freelance · EdTech",
-    blurb: "Education-focused mobile product shipped end-to-end as a freelance engagement.",
-    metric: "Global client reach",
+    blurb: "Conversational English practice for children aged 4–16 — daily exercises, stories, and AI-driven continuous assessment, shipped end-to-end.",
+    metric: "Ages 4–16",
     tags: ["React Native", "Zustand", "Firebase"],
     links: [
       { label: "App Store", url: "https://apps.apple.com/us/app/pikado/id1549450318" },
