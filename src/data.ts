@@ -407,15 +407,14 @@ export const projects: Project[] = [
   },
   {
     name: "Canoo",
-    domain: "Platforms",
-    category: "Freelance · Travel / Culture",
-    blurb: "Discovery app for the Institute for Canadian Citizenship's Canoo program — handpicked cultural and travel recommendations helping new Canadians explore the country, with saving and location-aware browsing.",
-    metric: "National cultural program",
+    domain: "Mobility",
+    category: "Freelance · Automotive",
+    blurb: "Consumer app for the Canoo EV ecosystem, delivered as a freelance engagement.",
+    metric: "EV ecosystem app",
     tags: ["React Native", "TypeScript", "REST"],
-    links: [
-      { label: "App Store", url: "https://apps.apple.com/eg/app/canoo/id1458141380" },
-      { label: "Google Play", url: "https://play.google.com/store/apps/details?id=com.icc.canoo" },
-    ],
+    // No store links: Canoo Inc. wound down in Jan 2025 and the app is
+    // delisted. The previous links pointed at an unrelated app of the same
+    // name (Institute for Canadian Citizenship), so they are not a fallback.
   },
   {
     name: "TrustYou",
