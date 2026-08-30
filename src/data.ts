@@ -22,13 +22,14 @@ export const stats = [
 
 export const skills: { group: string; items: string[] }[] = [
   {
-    group: "Languages",
+    group: "Programming Languages",
     items: ["TypeScript", "JavaScript (ES6+)", "Swift", "Kotlin", "SQL"],
   },
   {
     group: "Mobile & Web",
     items: [
       "React Native",
+      "Cross-platform iOS/Android development",
       "Native modules (Swift/Kotlin bridging)",
       "React.js",
       "Redux / Toolkit",
@@ -40,7 +41,7 @@ export const skills: { group: string; items: string[] }[] = [
   },
   {
     group: "Backend & Infra",
-    items: ["Node.js", "Firebase", "Supabase", "CI/CD", "GitHub Actions", "Fastlane", "EAS / CodePush"],
+    items: ["Node.js", "Firebase", "Supabase", "CI/CD", "GitHub Actions", "Fastlane", "EAS / CodePush", "App Store & Google Play releases"],
   },
   {
     group: "Quality",
@@ -172,7 +173,7 @@ export const experience: Experience[] = [
     stack: ["React Native", "Expo", "React", "TypeScript", "Supabase", "Firebase", "Zustand", "TanStack Query", "MyFatoorah", "Amplitude"],
   },
   {
-    company: "Independent",
+    company: "Self-employed",
     type: "Freelance",
     role: "Mobile Engineer · Project-based",
     period: "Dec 2019 – Present",
