@@ -29,6 +29,7 @@ export const skills: { group: string; items: string[] }[] = [
     group: "Mobile & Web",
     items: [
       "React Native",
+      "Cross-platform iOS/Android development",
       "Native modules (Swift/Kotlin bridging)",
       "React.js",
       "Redux / Toolkit",
