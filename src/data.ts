@@ -6,7 +6,7 @@ export const profile = {
     "Senior Mobile Engineer with 9+ years building high-performance iOS and Android apps. Scaled products to 2M+ users, sustained up to 99.5% crash-free sessions, and shipped 50+ apps across fintech, e-commerce, healthcare, and telecom.",
   location: "Muscat, Oman (Al Khoudh)",
   nationality: "Egyptian",
-  email: "Abdelrahman3fify@gmail.com",
+  email: "Abdulrahman3fify@gmail.com",
   phone: "+968 9228 0742",
   linkedin: "https://linkedin.com/in/abdulrahman-a-764151162/",
   github: "https://github.com/Abdulrahman3fify",
