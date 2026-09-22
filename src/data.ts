@@ -98,6 +98,18 @@ export const experience: Experience[] = [
     stack: ["React Native", "Expo", "TypeScript", "Zustand", "TanStack Query", "Supabase", "REST", "React Navigation", "React Hook Form", "Zod", "Expo Notifications", "EAS Build & Update"],
   },
   {
+    company: "Tamkeen Technology",
+    type: "Contract",
+    role: "Mobile Architect",
+    period: "Jan 2023 – Sep 2026",
+    location: "Saudi Arabia · Remote",
+    highlights: [
+      "Scaled Musaned from 50,000 to 200,000+ downloads (~300% growth) at 99.5% crash-free on React Native, TypeScript, and Redux Toolkit.",
+      "Led a 5-person pod; cut bug resolution time by 40% and improved cold start by 28% using App Center, CodePush OTA, and Firebase analytics/messaging.",
+    ],
+    stack: ["React Native", "TypeScript", "ES6", "REST", "Redux Toolkit", "CI/CD", "App Center", "CodePush", "Firebase Analytics", "FCM", "Crashlytics"],
+  },
+  {
     company: "Blockchain Intelligence Group",
     type: "Contract",
     role: "Senior Mobile Engineer",
@@ -146,18 +158,6 @@ export const experience: Experience[] = [
       "Elevated team quality score 65% → 88% and junior productivity +45% via Fastlane, CodePush, and App Center CI/CD.",
     ],
     stack: ["React Native", "React.js", "Next.js", "TypeScript", "Redux Toolkit", "REST", "Firebase", "CodePush", "CI/CD", "Fastlane", "AppsFlyer", "Adjust", "Datadog", "Agora", "App Center"],
-  },
-  {
-    company: "Tamkeen Technology",
-    type: "Contract",
-    role: "Mobile Architect",
-    period: "Jan 2023 – Sep 2026",
-    location: "Saudi Arabia · Remote",
-    highlights: [
-      "Scaled Musaned from 50,000 to 200,000+ downloads (~300% growth) at 99.5% crash-free on React Native, TypeScript, and Redux Toolkit.",
-      "Led a 5-person pod; cut bug resolution time by 40% and improved cold start by 28% using App Center, CodePush OTA, and Firebase analytics/messaging.",
-    ],
-    stack: ["React Native", "TypeScript", "ES6", "REST", "Redux Toolkit", "CI/CD", "App Center", "CodePush", "Firebase Analytics", "FCM", "Crashlytics"],
   },
   {
     company: "Al-Manarh",
