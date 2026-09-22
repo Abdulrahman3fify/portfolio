@@ -151,7 +151,7 @@ export const experience: Experience[] = [
     company: "Tamkeen Technology",
     type: "Contract",
     role: "Mobile Architect",
-    period: "Jan 2023 – Present",
+    period: "Jan 2023 – Sep 2026",
     location: "Saudi Arabia · Remote",
     highlights: [
       "Scaled Musaned from 50,000 to 200,000+ downloads (~300% growth) at 99.5% crash-free on React Native, TypeScript, and Redux Toolkit.",
