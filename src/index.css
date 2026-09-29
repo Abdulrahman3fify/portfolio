@@ -20,6 +20,30 @@
   --color-line: rgba(255, 255, 255, 0.1);
   --color-surface: rgba(255, 255, 255, 0.05);
   --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* Redesign (html.next): light is the base, dark overrides below */
+  --color-ground: #e9ebe9;
+  --color-paper: #f5f6f5;
+  --color-fg: #111312;
+  --color-dim: #4b504d;
+  --color-rule: rgba(17, 19, 18, 0.16);
+  --color-vf: #e60000;
+  --color-oo-field: #f6d8db;
+  --color-oo: #b0001a;
+  --font-display: "Schibsted Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "Martian Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --font-arabic: "Cairo", "Geeza Pro", "Noto Sans Arabic", sans-serif;
+}
+
+html.next.dark {
+  --color-ground: #121413;
+  --color-paper: #1b1e1c;
+  --color-fg: #eceeec;
+  --color-dim: #a6aca8;
+  --color-rule: rgba(236, 238, 236, 0.16);
+  --color-vf: #c30000;
+  --color-oo-field: #2b1115;
+  --color-oo: #ff7282;
 }
 
 /* Light palette — overrides the same custom properties at runtime */
@@ -43,7 +67,7 @@ html.light {
   html {
     scroll-behavior: smooth;
   }
-  body {
+  html:not(.next) body {
     @apply bg-ink text-body antialiased;
     background-image:
       radial-gradient(60rem 60rem at 80% -10%, rgba(255, 45, 85, 0.12), transparent 60%),
@@ -51,7 +75,32 @@ html.light {
     background-attachment: fixed;
     transition: background-color 0.3s ease, color 0.3s ease;
   }
-  html.light body {
+  html.next {
+    scrollbar-color: var(--color-dim) var(--color-ground);
+    accent-color: var(--color-fg);
+    caret-color: var(--color-fg);
+  }
+  html.next body {
+    background: var(--color-ground);
+    color: var(--color-fg);
+    font-family: var(--font-display);
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: "ss01";
+  }
+  html.next ::selection {
+    background: var(--color-fg);
+    color: var(--color-ground);
+  }
+  html.next #vodafone ::selection {
+    background: #fff;
+    color: var(--color-vf);
+  }
+  html.next :focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  html.light:not(.next) body {
     background-image:
       radial-gradient(60rem 60rem at 80% -10%, rgba(255, 45, 85, 0.055), transparent 60%),
       radial-gradient(50rem 50rem at -10% 20%, rgba(255, 106, 61, 0.045), transparent 55%);
@@ -60,7 +109,7 @@ html.light {
   section[id] {
     scroll-margin-top: 6rem;
   }
-  ::selection {
+  html:not(.next) ::selection {
     @apply bg-accent/30 text-white;
   }
 }
@@ -79,7 +128,24 @@ html.light {
     opacity: 1;
     transform: none;
   }
+  .link {
+    text-decoration-line: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.28em;
+    text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+    transition: text-decoration-color 0.2s ease;
+  }
+  .link:hover {
+    text-decoration-color: currentColor;
+  }
+  /* Vodafone case: each new screen wipes up over the last, like a pushed view */
+  .device-screen {
+    transition: clip-path 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  }
   @media (prefers-reduced-motion: reduce) {
+    .device-screen {
+      transition: none;
+    }
     html {
       scroll-behavior: auto;
     }

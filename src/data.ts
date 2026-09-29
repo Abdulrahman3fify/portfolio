@@ -93,9 +93,21 @@ export const experience: Experience[] = [
     location: "Muscat, Oman",
     highlights: [
       "Led the migration of Vodafone Oman's live iOS and Android application from native stacks to React Native and Expo, providing technical direction across architecture, implementation, code quality, and release delivery.",
-      "Built marketplace hub (categories, bundles, checkout) on TypeScript, Zustand, and TanStack Query; added Supabase auth, EAS OTA updates, Expo notifications, and cart-reminder flows.",
+      "Built marketplace hub (categories, bundles, checkout) on TypeScript, Zustand, and TanStack Query; added EAS OTA updates, Expo notifications, and cart-reminder flows.",
     ],
-    stack: ["React Native", "Expo", "TypeScript", "Zustand", "TanStack Query", "Supabase", "REST", "React Navigation", "React Hook Form", "Zod", "Expo Notifications", "EAS Build & Update"],
+    stack: ["React Native", "Expo", "TypeScript", "Zustand", "TanStack Query", "REST", "React Navigation", "React Hook Form", "Zod", "Expo Notifications", "EAS Build & Update"],
+  },
+  {
+    company: "Tamkeen Technology",
+    type: "Contract",
+    role: "Mobile Architect",
+    period: "Jan 2023 – Sep 2026",
+    location: "Saudi Arabia · Remote",
+    highlights: [
+      "Scaled Musaned from 50,000 to 200,000+ downloads (~300% growth) at 99.5% crash-free on React Native, TypeScript, and Redux Toolkit.",
+      "Led a 5-person pod; cut bug resolution time by 40% and improved cold start by 28% using App Center, CodePush OTA, and Firebase analytics/messaging.",
+    ],
+    stack: ["React Native", "TypeScript", "ES6", "REST", "Redux Toolkit", "CI/CD", "App Center", "CodePush", "Firebase Analytics", "FCM", "Crashlytics"],
   },
   {
     company: "Blockchain Intelligence Group",
@@ -146,18 +158,6 @@ export const experience: Experience[] = [
       "Elevated team quality score 65% → 88% and junior productivity +45% via Fastlane, CodePush, and App Center CI/CD.",
     ],
     stack: ["React Native", "React.js", "Next.js", "TypeScript", "Redux Toolkit", "REST", "Firebase", "CodePush", "CI/CD", "Fastlane", "AppsFlyer", "Adjust", "Datadog", "Agora", "App Center"],
-  },
-  {
-    company: "Tamkeen Technology",
-    type: "Contract",
-    role: "Mobile Architect",
-    period: "Jan 2023 – Present",
-    location: "Saudi Arabia · Remote",
-    highlights: [
-      "Scaled Musaned from 50,000 to 200,000+ downloads (~300% growth) at 99.5% crash-free on React Native, TypeScript, and Redux Toolkit.",
-      "Led a 5-person pod; cut bug resolution time by 40% and improved cold start by 28% using App Center, CodePush OTA, and Firebase analytics/messaging.",
-    ],
-    stack: ["React Native", "TypeScript", "ES6", "REST", "Redux Toolkit", "CI/CD", "App Center", "CodePush", "Firebase Analytics", "FCM", "Crashlytics"],
   },
   {
     company: "Al-Manarh",
@@ -349,12 +349,20 @@ export const projects: Project[] = [
     featured: true,
     shot: "/shots/vodafone-oman.webp",
     category: "Telecom",
-    blurb: "Led the migration of the live national telco app from native iOS/Android to React Native and Expo, with a new marketplace hub, Supabase-backed engagement tooling, and EAS OTA.",
+    blurb: "Led the migration of the live national telco app from native iOS/Android to React Native and Expo, with a new marketplace hub, engagement flows, and EAS OTA.",
     metric: "Native → React Native migration",
-    tags: ["React Native", "Expo", "Supabase", "EAS"],
+    tags: ["React Native", "Expo", "TanStack Query", "EAS"],
     links: [
       { label: "App Store", url: "https://apps.apple.com/om/app/my-vodafone-oman/id1589071343" },
     ],
+  },
+  {
+    name: "AutomationPro · Ops Platform",
+    domain: "Platforms",
+    category: "Operations management",
+    blurb: "Operations management frontend with project and work-order workflows, reusable dashboard UI, and an Electron desktop shell. Built with Next.js and TypeScript; currently uses demo data.",
+    metric: "Frontend implementation",
+    tags: ["Next.js", "React.js", "TypeScript", "Tailwind CSS", "Electron"],
   },
   {
     name: "SoloGusto",
@@ -421,11 +429,16 @@ export const projects: Project[] = [
   },
   {
     name: "TrustYou",
+    shot: "/shots/trustyou.webp",
     domain: "Platforms",
     category: "Freelance · Digital Parenting",
     blurb: "Proactive digital-parenting platform — a React Native (Expo) app using Apple FamilyControls, a Firebase backend with AI cloud functions (Vertex AI / Gemini), and an admin dashboard.",
     metric: "AI-powered safety",
     tags: ["React Native", "Expo", "Firebase", "FamilyControls", "Vertex AI"],
+    links: [
+      { label: "App Store", url: "https://apps.apple.com/se/app/trustyou-family/id6756218920" },
+      { label: "Google Play", url: "https://play.google.com/store/apps/details?id=com.trustyou.app" },
+    ],
   },
   {
     name: "Speetar Health",

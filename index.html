@@ -6,19 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Abdulrahman Afify — Senior Mobile Engineer. React Native, React, TypeScript. 9+ years building high-performance apps scaled to 2M+ users."
+      content="Abdulrahman Afify — Senior Software Engineer | Mobile & Web. React Native, React.js, Next.js, TypeScript. 9+ years in mobile engineering, plus web application experience."
     />
-    <title>Abdulrahman Afify — Senior Mobile Engineer</title>
+    <title>Abdulrahman Afify — Senior Software Engineer | Mobile & Web</title>
     <link rel="canonical" href="https://abdulrahman-afify-portfolio.vercel.app/" />
-    <meta name="theme-color" content="#0a0a0f" />
+    <meta name="theme-color" content="#172b49" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="profile" />
     <meta property="og:site_name" content="Abdulrahman Afify" />
-    <meta property="og:title" content="Abdulrahman Afify — Senior Mobile Engineer" />
+    <meta property="og:title" content="Abdulrahman Afify — Senior Software Engineer | Mobile & Web" />
     <meta
       property="og:description"
-      content="React Native · React · TypeScript. 9+ years shipping iOS and Android apps scaled to 2M+ users, at up to 99.5% crash-free sessions."
+      content="React Native · React.js · Next.js · TypeScript. Mobile engineering at scale, with web portals, marketplaces, and dashboards."
     />
     <meta property="og:url" content="https://abdulrahman-afify-portfolio.vercel.app/" />
     <meta property="og:image" content="https://abdulrahman-afify-portfolio.vercel.app/og.png" />
@@ -28,14 +28,30 @@
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Abdulrahman Afify — Senior Mobile Engineer" />
+    <meta name="twitter:title" content="Abdulrahman Afify — Senior Software Engineer | Mobile & Web" />
     <meta
       name="twitter:description"
-      content="React Native · React · TypeScript. 9+ years shipping iOS and Android apps scaled to 2M+ users."
+      content="React Native · React.js · Next.js · TypeScript. 9+ years in mobile engineering, plus web application experience."
     />
     <meta name="twitter:image" content="https://abdulrahman-afify-portfolio.vercel.app/og.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400..900&family=Martian+Mono:wdth,wght@87.5,400..600&family=Cairo:wght@500..700&display=swap"
+    />
     <script>
       (function () {
+        var params = new URLSearchParams(location.search);
+        if (params.has("vision")) {
+          document.documentElement.classList.add("vision");
+        } else if (params.has("classic")) {
+          // classic: neither vision nor next
+        } else if (params.has("next")) {
+          document.documentElement.classList.add("next");
+        } else {
+          document.documentElement.classList.add("vision");
+        }
         try {
           var q = new URLSearchParams(location.search).get("theme");
           var t = q === "light" || q === "dark" ? q : localStorage.getItem("theme");

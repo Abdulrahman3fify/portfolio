@@ -61,7 +61,7 @@ function useTheme() {
 }
 
 /* ---------- small inline icons ---------- */
-const Icon = {
+export const Icon = {
   mail: (
     <path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Zm1.4 2L12 12l7.6-5H4.4Z" />
   ),
@@ -103,7 +103,7 @@ function platformIcon(label: string) {
   return Icon.globe;
 }
 
-function Svg({ children, className = "" }: { children: ReactNode; className?: string }) {
+export function Svg({ children, className = "" }: { children: ReactNode; className?: string }) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
       {children}
